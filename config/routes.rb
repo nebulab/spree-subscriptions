@@ -1,5 +1,5 @@
 Spree::Core::Engine.routes.draw do
-  namespace :spree do resources :subscriptions end
-
-  # Add your extension routes here
+  namespace :admin do
+    resources :subscriptions
+  end
 end
