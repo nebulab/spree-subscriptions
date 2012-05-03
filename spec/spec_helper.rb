@@ -14,6 +14,12 @@ Dir[File.join(File.dirname(__FILE__), 'support/**/*.rb')].each { |f| require f }
 require 'spree/core/testing_support/factories'
 require 'spree/core/url_helpers'
 
+# include local factories
+Dir["#{File.dirname(__FILE__)}/factories/**/*.rb"].each do |f|
+  fp =  File.expand_path(f)
+  require fp
+end
+
 RSpec.configure do |config|
 
   # == URL Helpers
