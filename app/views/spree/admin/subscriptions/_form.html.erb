@@ -1,0 +1,41 @@
+<div class='toolbar order-links'>
+  <% %w{cancel expire}.sort.each do |event|
+    if @subscription.send("can_#{event}?") %>
+    <%= button_link_to(t(event), fire_admin_subscription_url(@subscription, :e => event),
+                       { :method => :put, :confirm => t("sub_sure_want_to", :event => t(event)) }) %>
+     <% end %>
+   <% end %>
+ </div>
+
+ <table width="545">
+   <tbody>
+     <tr>
+       <th width="100"><%= t('status') %></th>
+       <td><%= t(@subscription.state).titleize %></td>
+     </tr>
+     <tr>
+       <th width="100"><%= t('interval') %></th>        
+       <td><%= @subscription.duration %> <%= @subscription.interval %></td>
+     </tr>
+     <tr>
+       <th width="100"><%= t('start_date') %></th>        
+       <td><%= @subscription.start_date.nil? ? "-" : @subscription.start_date.to_date %></td>
+     </tr>
+     <tr>
+       <th width="100"><%= t('end_date') %></th>        
+       <td><%= @subscription.end_date.nil? ? "-" : @subscription.end_date.to_date %></td>
+     </tr>
+     <tr>
+       <th width="100"><%= t('total') %></th>        
+       <td><%= number_to_currency @subscription.variant.price %></td>
+     </tr>
+   </tr>
+ </tbody>
+</table>
+
+<% f.field_container :state do %>
+ <%= error_message_on :subscription, :state %>
+<% end %>
+
+
+

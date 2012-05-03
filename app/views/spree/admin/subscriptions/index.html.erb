@@ -1,0 +1,32 @@
+
+<%= render :partial => 'spree/admin/shared/order_sub_menu' %>
+
+<h1><%= t("listing_subscriptions") %></h1>
+
+<table class="index" id="listing_subscriptions">
+  <thead>
+    <tr>
+      <th><%= sort_link @search, :created_at, t(:created_at, :scope => 'activerecord.attributes.spree/subscription') %></th>
+      <th><%= sort_link @search, :id, t(:id, :scope => 'activerecord.attributes.spree/subscription') %></th>
+      <th><%= sort_link @search, :state, t(:state, :scope => 'activerecord.attributes.spree/subscription') %></th>
+      <th><%= sort_link @search, :user, t(:user, :scope => 'activerecord.attributes.spree/subscription') %></th>
+      <th><%= sort_link @search, :start_date, t(:start_date, :scope => 'activerecord.attributes.spree/subscription') %></th>
+      <th><%= sort_link @search, :end_date, t(:end_date, :scope => 'activerecord.attributes.spree/subscription') %></th>
+      <th><%= sort_link @search, :total, t(:total, :scope => 'activerecord.attributes.spree/subscription') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @subscriptions.each do |subscription| %>
+      <tr>
+        <td><%= subscription.created_at.to_date %></td>
+        <td><%= link_to subscription.id, edit_object_url(subscription) %></td>
+        <td><%= t(subscription.state.downcase) %></td>
+        <td><%= subscription.user.email %></td>
+        <td><%= subscription.start_date.nil? ? "-" : subscription.start_date.to_date  %></td>
+        <td><%= subscription.end_date.nil? ? "-" : subscription.end_date.to_date  %></td>
+        <td><%= number_to_currency subscription.variant.price %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @subscriptions %>

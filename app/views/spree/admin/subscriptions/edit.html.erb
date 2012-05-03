@@ -1,0 +1,7 @@
+<h1><%= t("editing_subscription") %></h1>
+<% form_for(:subscription, :url => object_url, :html => { :method => :put }) do |f| %>
+  <%= render :partial => "form", :locals => { :f => f } %>
+  <p class="form-buttons">
+  <%= button t("update") %> <%= link_to t('cancel'), collection_url %>
+  </p>
+<% end %>
