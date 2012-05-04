@@ -10,7 +10,7 @@ class Spree::Subscription < ActiveRecord::Base
     end
 
     event :activate do
-      transition :to => 'activated', :from => 'pending'
+      transition :to => 'active', :from => 'pending'
     end
   end
 

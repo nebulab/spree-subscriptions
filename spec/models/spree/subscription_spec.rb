@@ -39,7 +39,16 @@ describe Spree::Subscription do
         @subscription.state.should == "pending"
       end
 
-      it "should have active status if order is paid"
+      it "should have active status if order is paid" do
+        # Create a payment
+        @order.payments << Factory(:payment, :order => @order, :amount => @order.total)
+        # Capture payment
+        @order.payments.first.capture!
+        # Next state for subscription state machine
+        @subscription.activate!
+        @subscription.state.should == "active"
+      end
+
     end
 
     context "when order is already subscribed to variant" do
