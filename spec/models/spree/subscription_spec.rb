@@ -6,16 +6,22 @@ describe Spree::Subscription do
     @order = Factory(:order_with_subscription)
   end
 
-  # delete this
   it "order line_item is subscribable" do
     @order.line_items.first.variant.subscribable.should be_true
   end
 
-  it "should not be created after order completetion" do
+  it "should not be created before order completetion" do
     Spree::Subscription.find(:first, :conditions => {:variant_id => @order.line_items.first.variant }).should be_nil
   end
 
-  it "should be created on order completetion"
+  it "should be created on order completetion" do
+    # Field required to complete the order 
+    @order.bill_address = Factory(:address)
+    @order.ship_address = Factory(:address)
+    Factory(:inventory_unit, :order => @order, :state => 'shipped')
+    @order.finalize!
+    Spree::Subscription.find(:first, :conditions => {:variant_id => @order.line_items.first.variant }).should_not be_nil
+  end 
   
   it "should be created with pending status if payment is not completed" 
 

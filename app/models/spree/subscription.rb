@@ -1,5 +1,5 @@
 class Spree::Subscription < ActiveRecord::Base
-  # attr_accessible :title, :body
+  attr_accessible :subscribable, :user, :variant
   
   belongs_to :user
   belongs_to :variant
