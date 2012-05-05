@@ -5,7 +5,7 @@ module Spree
       InventoryUnit.assign_opening_inventory(self)
       # lock any optional adjustments (coupon promotions, etc.)
       adjustments.optional.each { |adjustment| adjustment.update_attribute('locked', true) }
-      # deliver_order_confirmation_email
+      OrderMailer.confirm_email(self).deliver
 
       self.state_changes.create({
         :previous_state => 'cart',
@@ -14,9 +14,12 @@ module Spree
         :user_id        => (User.respond_to?(:current) && User.current.try(:id)) || self.user_id
       }, :without_protection => true)
 
+      # Subscription logic
       line_items.each do |line_item|
         if line_item.variant.subscribable? 
-          Subscription.create(:user => self.user, :variant => line_item.variant)
+          if !Subscription.find(:first, :conditions => {:user_id => self.user.id, :variant_id => line_item.variant.id})
+            Subscription.create(:user => self.user, :variant => line_item.variant)
+          end
         end
       end
     end
