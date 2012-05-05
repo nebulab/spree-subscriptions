@@ -7,7 +7,7 @@ describe Spree::Subscription do
   end
 
   context "when order is not completed yet" do
-    it "order line_item is subscribable" do
+    it "is associated to an order line item" do
       @order.line_items.first.variant.subscribable.should be_true
     end
 
