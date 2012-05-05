@@ -22,6 +22,8 @@ end
 
 RSpec.configure do |config|
 
+  config.include FactoryGirl::Syntax::Methods
+
   # == URL Helpers
   #
   # Allows access to Spree's routes in specs:
