@@ -15,7 +15,6 @@ describe "Variants" do
       click_link "Variants"
       click_on "New Variant"
       page.has_checked_field?('variant_subscribable').should == true
-
     end
   end
 end
