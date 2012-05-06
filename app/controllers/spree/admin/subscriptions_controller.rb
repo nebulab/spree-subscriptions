@@ -1,6 +1,6 @@
 module Spree
   module Admin
-    class SubscriptionsController < Spree::Admin::BaseController
+    class SubscriptionsController < ResourceController
       respond_to :html
 
       def index 
