@@ -1,0 +1,15 @@
+<h3><%= t(:customer_details) %></h3>
+<h3><%= Spree::Address.model_name.human(:count => 1) %></h3>
+
+<%= f.fields_for :ship_address do |sa_form| %>
+  <%= render :partial => 'spree/admin/shared/subscription_address_form', :locals => { :f => sa_form, :name => t(:shipping_address) } %>
+<% end %>
+
+<p class="form-buttons" data-hook="buttons">
+<%= button t(:update) %>
+</p>
+
+<% content_for :head do %>
+  <%= javascript_include_tag states_url, 'admin/address_states.js' %>
+<% end %>
+

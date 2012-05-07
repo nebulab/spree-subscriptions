@@ -1,0 +1,19 @@
+<h1><%= t(:subscription) %> <%= @subscription.id %></h1>
+
+<% content_for :sidebar do %>
+  <div id="subscription_tab_summary" data-hook>
+    <h3 id="subscription_id" data-hook><%= t(:subscription) %> #<%= @subscription.id %></h3>
+    <h5 id="subscription_status" data-hook><%= t(:status) %>: <%= t(@subscription.state, :scope => :subscription_state) %></h5>
+    <br class="clear" />
+  </div>
+  <br class="clear" />
+
+  <ul class="sidebar" data-hook="admin_subscription_tabs">
+      <li<%== ' class="active"' if current == 'Subscription Details' %>>
+      <%= link_to t(:subscription_details), edit_admin_subscription_url(@subscription) %>
+      </li>
+      <li<%== ' class="active"' if current == 'Customer Details' %>>
+      <%= link_to t(:customer_details), admin_subscription_customer_url(@subscription) %>
+      </li>
+    </ul>
+<% end %>
