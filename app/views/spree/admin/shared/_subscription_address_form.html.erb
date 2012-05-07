@@ -1,1 +1,79 @@
-Address form here
+<table class="index">
+  <thead>
+    <tr data-hook="use_billing">
+      <th colspan="8">
+        <%= name %>
+      </th>
+    </tr>
+  </thead>
+  <tbody id="<%= name == t(:shipping_address) ? 'shipping' : 'billing' %>" data-hook="address_fields">
+    <tr class="<%= name == t(:shipping_address) ? 'shipping-row' : 'billing-row' %>">
+      <td class="lbl-col">
+        <%= f.label :firstname, t(:first_name) + ':' %>
+      </td>
+      <td class="val-col" colspan="3"><%= f.text_field :firstname %></td>
+      <td class="lbl-col">
+        <%= f.label :lastname, t(:last_name) + ':' %>
+      </td>
+      <td class="val-col" colspan="3"><%= f.text_field :lastname %></td>
+    </tr>
+    <% if Spree::Config[:company] %>
+      <tr class="<%= name == t(:company) ? 'shipping-row' : 'billing-row' %>">
+        <td class="lbl-col">  <%= f.label :company, t(:company) + ':' %> </td>
+        <td class=colspan="7"> <%= f.text_field :company %> </td>
+      </tr>
+    <% end %>
+    <tr class="<%= name == t(:shipping_address) ? 'shipping-row' : 'billing-row' %>">
+      <td class="lbl-col">
+        <%= f.label :address1, t(:street_address) + ':' %>
+      </td>
+      <td colspan="3"><%= f.text_field :address1, :class => "fullwidth" %></td>
+      <td class="lbl-col">
+        <%= f.label :address2, t(:street_address_2) + ':' %>
+      </td>
+      <td colspan="3"><%= f.text_field :address2, :class => "fullwidth" %></td>
+    </tr>
+    <tr class="<%= name == t(:shipping_address) ? 'shipping-row' : 'billing-row' %>">
+      <td class="lbl-col">
+        <%= f.label :city, t(:city) + ':' %>
+      </td>
+      <td colspan="3"><%= f.text_field :city %></td>
+      <td class="lbl-col">
+        <%= f.label :zipcode, t(:zip) + ':' %>
+      </td>
+      <td colspan="3"><%= f.text_field :zipcode, :style => 'width: 100px;' %></td>
+    </tr>
+    <tr class="<%= name == t(:shipping_address) ? 'shipping-row' : 'billing-row' %>">
+      <td class="lbl-col">
+        <%= f.label :state_id, t(:state) + ':' %>
+      </td>
+      <td colspan="3">
+        <span id="<%= name == t(:shipping_address) ? 's' : 'b' %>state">
+
+          <%# f.text_field :state_name, :style => "width:150px; display: #{f.object.country.states.empty? ? 'block' : 'none' };", :disabled => !f.object.country.states.empty? %>
+          <%# f.collection_select :state_id, f.object.country.states.sort, :id, :name, {:include_blank => true}, {:style => "width:150px; display: #{f.object.country.states.empty? ? 'none' : 'block' };", :disabled => f.object.country.states.empty?} %>
+        </span>
+      </td>
+      <td class="lbl-col">
+        <%# f.label :country_id, t(:country) + ':' %>
+      </td>
+      <td colspan="3">
+        <span id="<%= name == t(:shipping_address) ? 's' : 'b' %>country"><%= f.collection_select :country_id, available_countries, :id, :name, {}, {:style => 'width: 150px;'} %></span>
+      </td>
+    </tr>
+    <tr class="<%= name == t(:shipping_address) ? 'shipping-row' : 'billing-row' %>">
+      <td class="lbl-col">
+        <%= f.label :phone, t(:phone) + ':' %>
+      </td>
+      <td colspan="7"><%= f.text_field :phone %></td>
+    </tr>
+  </tbody>
+</table>
+
+<% content_for :head do %>
+  <%= javascript_tag do -%>
+    $(document).ready(function(){
+    $('span#<%= name == t(:shipping_address) ? 's' : 'b' %>country select').change(function() { update_state('<%= name == t(:shipping_address) ? 's' : 'b' %>'); });
+    });
+  <% end -%>
+<% end %>
