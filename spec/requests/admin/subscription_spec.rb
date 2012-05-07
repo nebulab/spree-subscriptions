@@ -17,10 +17,24 @@ describe "Subscription" do
     end
 
     context "create a new subscription" do
-      it "allow admin to go to the new subscription page" do
+      before(:each) do
+        create(:product, :name => 'magazine', :available_on => '2011-01-06 18:21:13:', :subscribable => true)
         click_link "Subscriptions"
         click_link "admin_new_subscription"
-        within('#new_subscription') { page.should have_content('Variant')}
+      end
+
+      it "allow admin to go to the new subscription page" do
+        within('#new_subscription') do  
+          page.should have_content('Variant')
+          page.should have_content('Start date')
+          page.should have_content('End date')
+        end
+      end
+
+      it "allow admin to create a new subscription" do
+        select "magazine", :from => "Variant"
+        click_button "Create"
+        page.should have_content("successfully created!")
       end
     end
   end

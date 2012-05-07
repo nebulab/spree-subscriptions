@@ -1,6 +1,17 @@
 <%= f.field_container :variant do %>
-  <%= f.label :variant %><br />
-  <%= f.select :variant, Spree::Variant.all %>
+  <%= f.label :variant_id, t(:variant) %><br />
+  <%= f.select :variant_id, @variants %>
   <%= f.error_message_on :variant %>
 <% end %>
 
+<%= f.field_container :start_date do %>
+  <%= f.label :start_date %><br />
+  <%= f.error_message_on :start_date %>
+  <%= f.text_field :start_date, :class => 'datepicker' %>
+<% end %>
+
+<%= f.field_container :end_date do %>
+  <%= f.label :end_date %><br />
+  <%= f.error_message_on :end_date %>
+  <%= f.text_field :end_date, :class => 'datepicker' %>
+<% end %>

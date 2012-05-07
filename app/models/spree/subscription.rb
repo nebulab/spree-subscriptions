@@ -1,5 +1,5 @@
 class Spree::Subscription < ActiveRecord::Base
-  attr_accessible :subscribable, :user, :variant
+  attr_accessible :start_date, :end_date, :user_id, :variant_id
   
   belongs_to :user
   belongs_to :variant
