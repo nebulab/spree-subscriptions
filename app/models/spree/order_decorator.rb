@@ -18,7 +18,7 @@ module Spree
       line_items.each do |line_item|
         if line_item.variant.subscribable? 
           if !Subscription.find(:first, :conditions => {:user_id => self.user.id, :variant_id => line_item.variant.id})
-            Subscription.create(:user => self.user, :variant => line_item.variant)
+            Subscription.create(:user_id => self.user.id, :variant_id => line_item.variant.id)
           end
         end
       end

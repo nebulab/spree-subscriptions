@@ -52,7 +52,7 @@ describe Spree::Subscription do
         # Create a subscription with same user and variant
         @user = @order.user
         @variant = @order.line_items.first.variant
-        Spree::Subscription.create(:user => @user, :variant => @variant)
+        Spree::Subscription.create(:user_id => @user.id, :variant_id => @variant.id)
         # Search for the subscription
         @subscription = Spree::Subscription.find(:first, :conditions => {:variant_id => @order.line_items.first.variant })
       end
