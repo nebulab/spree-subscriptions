@@ -11,7 +11,7 @@ module Spree
       protected
 
       def load_data
-        @variants = Variant.all.map { |variant| [variant.product.name, variant.id] }
+        @variants = Variant.subscribable.all.map { |variant| [variant.product.name, variant.id] }
       end
     end
   end

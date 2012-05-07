@@ -1,7 +1,17 @@
-<h1><%= t("editing_subscription") %></h1>
-<% form_for(:subscription, :url => object_url, :html => { :method => :put }) do |f| %>
-  <%= render :partial => "form", :locals => { :f => f } %>
-  <p class="form-buttons">
-  <%= button t("update") %> <%= link_to t('cancel'), collection_url %>
-  </p>
-<% end %>
+<%= csrf_meta_tags %>
+
+<div data-hook="admin_subscription_edit_header">
+  <h2><%= t("editing_subscription") %></h2>
+  <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @subscription } %>
+</div>
+
+<div data-hook="admin_subscription_edit_form">
+  <div id="subscription-form-wrapper">
+    <%= form_for [:admin, @subscription] do |f| %>
+      <%= render :partial => 'form', :locals => { :f => f } %>
+      <p class="form-buttons">
+        <%= button t("update") %> <%= link_to t('cancel'), collection_url %>
+      </p>
+    <% end %>
+  </div>
+</div>
