@@ -1,4 +1,0 @@
-Autotest.add_hook :run_command do
-  print "\n"*2 + '-'*80 + "\n"*2
-  print "\e[2J\e[f"   # clear the terminal
-end
