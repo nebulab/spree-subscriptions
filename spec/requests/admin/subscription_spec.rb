@@ -71,6 +71,48 @@ describe "Subscription" do
         find_field('Variant').find('option[selected]').text.should == "web magazine"
       end
 
+      context "editing customer details" do
+        before do
+          reset_spree_preferences do |config|
+            config.default_country_id = create(:country).id
+          end
+          create(:state, :country_id => 1)
+
+          within('table#listing_subscriptions tbody tr:nth-child(1)') { click_link("Edit") }
+          within('.sidebar') { click_link("Customer Details") }
+        end
+
+        it "should allow admin to go to subscription customer details page" do
+          page.should have_content("Address")
+        end
+
+        it "should allow admin to edit subscription customer details" do
+          within('#shipping') do
+            fill_in 'First Name', :with => "Johnny"
+            fill_in 'Last Name', :with => "Rocket"
+            fill_in 'Street Address', :with => "Stardust Street"
+            fill_in 'City', :with => "Omega"
+            fill_in 'Zip', :with => "66100"
+            fill_in 'Phone', :with => "0871540143"
+            select "United States of Foo", :from => "Country"
+            select "Alabama", :from => "State"
+          end
+          click_button "Update"
+          page.should have_content("The customer's details have been updated")
+          page.should have_content("Variant")
+          within('.sidebar') { click_link("Customer Details") }
+          within('#shipping') do
+            find_field("subscription_ship_address_attributes_firstname").value.should == "Johnny"
+            find_field("subscription_ship_address_attributes_lastname").value.should == "Rocket"
+            find_field("subscription_ship_address_attributes_address1").value.should == "Stardust Street"
+            find_field("subscription_ship_address_attributes_city").value.should == "Omega"
+            find_field("subscription_ship_address_attributes_zipcode").value.should == "66100"
+            find_field("subscription_ship_address_attributes_phone").value.should == "0871540143"
+            find_field("subscription_ship_address_attributes_state_id").find('option[selected]').text.should == "Alabama"
+            find_field("subscription_ship_address_attributes_country_id").find('option[selected]').text.should == "United States of Foo"
+          end
+        end
+      end
     end
   end
 end

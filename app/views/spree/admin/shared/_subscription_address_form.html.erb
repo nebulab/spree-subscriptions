@@ -49,13 +49,12 @@
       </td>
       <td colspan="3">
         <span id="<%= name == t(:shipping_address) ? 's' : 'b' %>state">
-
-          <%# f.text_field :state_name, :style => "width:150px; display: #{f.object.country.states.empty? ? 'block' : 'none' };", :disabled => !f.object.country.states.empty? %>
-          <%# f.collection_select :state_id, f.object.country.states.sort, :id, :name, {:include_blank => true}, {:style => "width:150px; display: #{f.object.country.states.empty? ? 'none' : 'block' };", :disabled => f.object.country.states.empty?} %>
+          <%= f.text_field :state_name, :style => "width:150px; display: #{f.object.country.states.empty? ? 'block' : 'none' };", :disabled => !f.object.country.states.empty? %>
+          <%= f.collection_select :state_id, f.object.country.states.sort, :id, :name, {:include_blank => true}, {:style => "width:150px; display: #{f.object.country.states.empty? ? 'none' : 'block' };", :disabled => f.object.country.states.empty?} %>
         </span>
       </td>
       <td class="lbl-col">
-        <%# f.label :country_id, t(:country) + ':' %>
+        <%= f.label :country_id, t(:country) + ':' %>
       </td>
       <td colspan="3">
         <span id="<%= name == t(:shipping_address) ? 's' : 'b' %>country"><%= f.collection_select :country_id, available_countries, :id, :name, {}, {:style => 'width: 150px;'} %></span>
