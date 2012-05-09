@@ -18,6 +18,10 @@ describe "Subscription" do
 
     context "create a new subscription" do
       before(:each) do
+        reset_spree_preferences do |config|
+          config.default_country_id = create(:country).id
+        end
+        create(:state, :country_id => 1)
         create(:product, :name => 'sport magazine', :available_on => '2011-01-06 18:21:13:', :subscribable => true)
         create(:product, :name => 'web magazine', :available_on => '2011-01-06 18:21:13:', :subscribable => true)
         create(:product, :name => 'the book', :available_on => '2011-01-06 18:21:13:')
@@ -43,7 +47,8 @@ describe "Subscription" do
         select "web magazine", :from => "Variant"
         click_button "Create"
         page.should have_content("successfully created!")
-        within('table#listing_subscriptions tbody tr:nth-child(1)') { click_link("Edit") } 
+        # within('table#listing_subscriptions tbody tr:nth-child(1)') { click_link("Edit") } 
+        within('.sidebar') { click_link("Subscription Details") }
         # hack. The following line does not work
         # page.has_select?('Variant', :selected => "sport magazine")
         find_field('Variant').find('option[selected]').text.should == "web magazine"
@@ -62,12 +67,11 @@ describe "Subscription" do
         within('table#listing_subscriptions tbody tr:nth-child(1)') { page.should have_content("Edit") } 
       end
 
-      it "should allow to change some fields" do
+      it "should allow to edit fields" do
         within('table#listing_subscriptions tbody tr:nth-child(1)') { click_link("Edit") }
         select "web magazine", :from => "Variant"
         click_button "Update"
         page.should have_content("successfully updated!")
-        within('table#listing_subscriptions tbody tr:nth-child(1)') { click_link("Edit") }
         find_field('Variant').find('option[selected]').text.should == "web magazine"
       end
 
@@ -77,7 +81,7 @@ describe "Subscription" do
             config.default_country_id = create(:country).id
           end
           create(:state, :country_id => 1)
-
+          # Go to customer details page
           within('table#listing_subscriptions tbody tr:nth-child(1)') { click_link("Edit") }
           within('.sidebar') { click_link("Customer Details") }
         end
