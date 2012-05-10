@@ -37,7 +37,7 @@ describe Spree::Subscription do
       end
 
       it "should have active status if order is paid" do
-        # Create a payment
+        # Create email t
         @order.payments << Factory(:payment, :order => @order, :amount => @order.total)
         # Capture payment
         @order.payments.first.capture!
@@ -52,7 +52,7 @@ describe Spree::Subscription do
         # Create a subscription with same user and variant
         @user = @order.user
         @variant = @order.line_items.first.variant
-        Spree::Subscription.create(:user_id => @user.id, :variant_id => @variant.id)
+        Spree::Subscription.create(:email => @user.email, :variant_id => @variant.id)
         # Search for the subscription
         @subscription = Spree::Subscription.find(:first, :conditions => {:variant_id => @order.line_items.first.variant })
       end

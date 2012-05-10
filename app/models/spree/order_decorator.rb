@@ -17,8 +17,8 @@ module Spree
       # Subscription logic
       line_items.each do |line_item|
         if line_item.variant.subscribable? 
-          if !Subscription.find(:first, :conditions => {:user_id => self.user.id, :variant_id => line_item.variant.id})
-            Subscription.create(:user_id => self.user.id, :variant_id => line_item.variant.id)
+          if !Subscription.find(:first, :conditions => {:email => self.user.email, :variant_id => line_item.variant.id})
+            Subscription.create(:email => self.user.email, :variant_id => line_item.variant.id)
           end
         end
       end

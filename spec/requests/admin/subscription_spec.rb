@@ -91,6 +91,7 @@ describe "Subscription" do
         end
 
         it "should allow admin to edit subscription customer details" do
+          fill_in "Email", :with => "johnnyrocket@stardustcompany.com"
           within('#shipping') do
             fill_in 'First Name', :with => "Johnny"
             fill_in 'Last Name', :with => "Rocket"
@@ -105,6 +106,7 @@ describe "Subscription" do
           page.should have_content("The customer's details have been updated")
           page.should have_content("Variant")
           within('.sidebar') { click_link("Customer Details") }
+          find_field("subscription_email").value.should == "johnnyrocket@stardustcompany.com"
           within('#shipping') do
             find_field("subscription_ship_address_attributes_firstname").value.should == "Johnny"
             find_field("subscription_ship_address_attributes_lastname").value.should == "Rocket"

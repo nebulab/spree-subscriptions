@@ -1,7 +1,8 @@
 class Spree::Subscription < ActiveRecord::Base
-  attr_accessible :start_date, :end_date, :user_id, :variant_id, :ship_address, :ship_address_attributes
+  attr_accessible :start_date, :end_date, :email, :variant_id, :ship_address, :ship_address_attributes
+
+  validates :variant_id, :presence => true
   
-  belongs_to :user
   belongs_to :variant
 
   belongs_to :ship_address, :foreign_key => 'ship_address_id', :class_name => 'Spree::Address'
