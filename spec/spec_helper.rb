@@ -21,6 +21,8 @@ Dir["#{File.dirname(__FILE__)}/factories/**/*.rb"].each do |f|
 end
 
 RSpec.configure do |config|
+  # Silence Warning
+  ::ActiveSupport::Deprecation.silenced = true
 
   config.include FactoryGirl::Syntax::Methods
 

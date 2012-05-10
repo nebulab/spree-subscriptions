@@ -16,7 +16,7 @@ describe "Subscription" do
       # search by some fields
     end
 
-    context "create a new subscription" do
+    context "creating a new subscription" do
       before(:each) do
         reset_spree_preferences do |config|
           config.default_country_id = create(:country).id
@@ -29,7 +29,7 @@ describe "Subscription" do
         click_link "admin_new_subscription"
       end
 
-      it "allow admin to go to the new subscription page" do
+      it "should be able to go to the new subscription page" do
         within('#new_subscription') do  
           page.should have_content('Variant')
           page.should have_content('Start date')
@@ -37,13 +37,13 @@ describe "Subscription" do
         end
       end
 
-      it "should allow admin to select subscribable variants only" do
+      it "should be able to select subscribable variants only" do
         # this is an hack. The following line does not work!!
         # page.has_no_select?('Variant', :with_options => ['the book'])
         page.should have_xpath("//*[@id='subscription_variant_id']/option", :count => 2)
       end
 
-      it "allow admin to create a new subscription" do
+      it "should be able to create a new subscription" do
         select "web magazine", :from => "Variant"
         click_button "Create"
         page.should have_content("successfully created!")
@@ -55,7 +55,7 @@ describe "Subscription" do
       end
     end
 
-    context "edit a subscription" do
+    context "editing a subscription" do
       before(:each) do
         create(:product, :name => 'sport magazine', :available_on => '2011-01-06 18:21:13:', :subscribable => true)
         create(:product, :name => 'web magazine', :available_on => '2011-01-06 18:21:13:', :subscribable => true)
@@ -63,11 +63,7 @@ describe "Subscription" do
         click_link "Subscriptions"
       end
 
-      it "should have a link to edit subscribtion" do
-        within('table#listing_subscriptions tbody tr:nth-child(1)') { page.should have_content("Edit") } 
-      end
-
-      it "should allow to edit fields" do
+      it "should be able to edit subscription" do
         within('table#listing_subscriptions tbody tr:nth-child(1)') { click_link("Edit") }
         select "web magazine", :from => "Variant"
         click_button "Update"
@@ -86,11 +82,7 @@ describe "Subscription" do
           within('.sidebar') { click_link("Customer Details") }
         end
 
-        it "should allow admin to go to subscription customer details page" do
-          page.should have_content("Address")
-        end
-
-        it "should allow admin to edit subscription customer details" do
+        it "should be able to edit subscription customer details" do
           fill_in "Email", :with => "johnnyrocket@stardustcompany.com"
           within('#shipping') do
             fill_in 'First Name', :with => "Johnny"
