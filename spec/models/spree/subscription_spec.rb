@@ -1,6 +1,19 @@
 require 'spec_helper'
 
 describe Spree::Subscription do
+
+  context "when adding a subscription" do
+    it "should be valid if variant is subscribable" do
+      subscription = Factory.build(:subscription, :variant => Factory(:subscribable_variant))
+      subscription.should be_valid
+    end
+    
+    it "should not be valid if variant is not subscribable" do
+      subscription = Factory.build(:subscription, :variant => Factory(:variant))
+      subscription.should_not be_valid
+    end
+  end
+
   before(:each) do
     @order = Factory(:order_with_subscription)
   end
@@ -80,8 +93,8 @@ describe Spree::Subscription do
         end
 
         context "when it is already active"
-          it "should not have pending state if subscribtion is already active"
-          it "should be renewed on payment completion if already exists"
+          #it "should not have pending state if subscribtion is already active"
+          #it "should be renewed on payment completion if already exists"
       end
     end
   end
