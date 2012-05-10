@@ -1,18 +1,15 @@
-def add_to_cart(name, id)
+def add_to_cart(name)
   visit spree.root_path
   click_link name
   # in the product page
-  within("#inside-product-cart-form") do
-    fill_in "variants_#{id}", :with => 1
-    click_button "add-to-cart-button"
-  end
+  click_button "add-to-cart-button"
 end
 
 def complete_checkout
   begin_checkout
   address_step
   delivery_step
-  page.should have_content("Payment")
+  payment_step
 end
 
 def begin_checkout
@@ -20,7 +17,7 @@ def begin_checkout
   click_link "Checkout"
 end
 
-def login(email, password)
+def login_step(email, password)
   within("#password-credentials") do
     fill_in "Email", :with => email 
     fill_in "Password", :with => password
@@ -37,6 +34,8 @@ def address_step
     fill_in "Phone", :with => "01010101"
     fill_in "Zip", :with => "1111"
     select "United States of Foo", :from => "Country"
+    sleep(1)
+    #select "Alabama", :from => "order_bill_address_attributes_state_id"
     fill_in "order_bill_address_attributes_state_name", :with => "Galaxy"
   end
   within("#shipping") do
@@ -48,4 +47,8 @@ end
 def delivery_step
   page.should have_content("Delivery")
   click_button "Save and Continue"
+end
+
+def payment_step
+  page.should have_content("Confirm")
 end
