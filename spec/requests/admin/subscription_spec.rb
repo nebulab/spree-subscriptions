@@ -42,8 +42,8 @@ describe "Subscription" do
 
       it "should be able to select subscribable variants only" do
         # this is an hack. The following line does not work!!
-        page.has_no_select?('Variant', :with_options => ['the book'])
-        # page.should have_xpath("//*[@id='subscription_variant_id']/option", :count => 2)
+        # page.has_select?('Variant', :with_options => ['the book'])
+        page.should have_xpath("//*[@id='subscription_variant_id']/option", :count => 2)
       end
 
       it "should be able to create a new subscription" do
@@ -53,8 +53,8 @@ describe "Subscription" do
         # within('table#listing_subscriptions tbody tr:nth-child(1)') { click_link("Edit") } 
         within('.sidebar') { click_link("Subscription Details") }
         # hack. The following line does not work
-        page.has_select?('Variant', :selected => "web magazine")
-        # find_field('Variant').find('option[selected]').text.should == "web magazine"
+        # page.has_select?('Variant', :selected => "web magazine")
+        find_field('Variant').find('option[selected]').text.should == "web magazine"
       end
     end
 
