@@ -27,14 +27,28 @@ describe "Subscription" do
         complete_checkout_with_login("johnny@rocket.com", "secret")
       end
 
-     context "visiting profile page" do
-       it "should find a subscription area" do
-         visit spree.account_path
-         page.should have_content "My Subscriptions"
-         page.should have_content "sport magazine"
-         page.should have_content "pending"
-       end
-     end
+      context "visiting profile page" do
+        it "should find a subscription area" do
+          visit spree.account_path
+          page.should have_content "My Subscriptions"
+        end
+
+        it "should find a pending subscription" do
+          visit spree.account_path
+          page.should have_content "sport magazine"
+          page.should have_content "pending"
+        end
+        
+        context "after order is paid" do
+          it "should find an active subscription" do
+            order = Spree::Order.find(:first, :conditions => { :user_id => Spree::User.find(:first, :conditions => { :email => "johnny@rocket.com"}).id })
+            order.payments.first.complete!
+            visit spree.account_path
+            page.should have_content "sport magazine"
+            page.should have_content "active"
+          end
+        end
+      end
     end
   end
 end
