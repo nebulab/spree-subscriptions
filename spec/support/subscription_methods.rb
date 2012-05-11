@@ -5,8 +5,9 @@ def add_to_cart(name)
   click_button "add-to-cart-button"
 end
 
-def complete_checkout
+def complete_checkout_with_login(email, password)
   begin_checkout
+  login_step(email, password)
   address_step
   delivery_step
   payment_step
@@ -50,5 +51,6 @@ def delivery_step
 end
 
 def payment_step
-  page.should have_content("Confirm")
+  page.should have_content("Payment Information")
+  click_button "Save and Continue"
 end
