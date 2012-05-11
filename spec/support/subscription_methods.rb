@@ -11,6 +11,7 @@ def complete_checkout_with_login(email, password)
   address_step
   delivery_step
   payment_step
+  confirm_step
 end
 
 def begin_checkout
@@ -46,11 +47,15 @@ def address_step
 end
 
 def delivery_step
-  page.should have_content("Delivery")
+  page.should have_content("Shipping Method")
   click_button "Save and Continue"
 end
 
 def payment_step
   page.should have_content("Payment Information")
   click_button "Save and Continue"
+end
+
+def confirm_step
+  page.should have_content("Your order has been processed successfully")
 end
