@@ -3,8 +3,6 @@ class CreateSpreeSubscriptions < ActiveRecord::Migration
     create_table :spree_subscriptions do |t|
       t.references :variant
       t.references :ship_address
-      t.date :start_date
-      t.date :end_date
       t.string :email
       t.string :state
       t.timestamps

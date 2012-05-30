@@ -16,9 +16,6 @@
       <th><%= sort_link @search, :id, t(:id, :scope => 'activerecord.attributes.spree/subscription') %></th>
       <th><%= sort_link @search, :state, t(:state, :scope => 'activerecord.attributes.spree/subscription') %></th>
       <th><%= sort_link @search, :email, t(:email, :scope => 'activerecord.attributes.spree/subscription') %></th>
-      <th><%= sort_link @search, :start_date, t(:start_date, :scope => 'activerecord.attributes.spree/subscription') %></th>
-      <th><%= sort_link @search, :end_date, t(:end_date, :scope => 'activerecord.attributes.spree/subscription') %></th>
-      <th><%= sort_link @search, :total, t(:total, :scope => 'activerecord.attributes.spree/subscription') %></th>
       <th data-hook="admin_subscriptions_index_header_actions"></th>
     </tr>
   </thead>
@@ -29,9 +26,6 @@
         <td><%= link_to subscription.id, edit_object_url(subscription) %></td>
         <td><%= t(subscription.state.downcase) %></td>
         <td><%= subscription.email %></td>
-        <td><%= subscription.start_date.nil? ? "-" : subscription.start_date.to_date  %></td>
-        <td><%= subscription.end_date.nil? ? "-" : subscription.end_date.to_date  %></td>
-        <td><%= number_to_currency subscription.variant.price %></td>
         <td class="actions" data-hook="admin_subscriptions_index_row_actions">
           <%= link_to_edit subscription, :class => 'edit'  %>
           &nbsp;

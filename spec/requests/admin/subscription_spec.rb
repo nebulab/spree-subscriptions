@@ -37,8 +37,6 @@ describe "Subscription" do
       it "should be able to go to the new subscription page" do
         within('#new_subscription') do  
           page.should have_content('Variant')
-          page.should have_content('Start date')
-          page.should have_content('End date')
         end
       end
 

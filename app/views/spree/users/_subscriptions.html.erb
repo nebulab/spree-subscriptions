@@ -6,8 +6,6 @@
       <thead>
         <tr>
           <th><%= t(:subscription) %></th>
-          <th><%= t(:start_date) %></th>
-          <th><%= t(:end_date) %></th>
           <th><%= t(:status) %></th>
         </tr>
       </thead>
@@ -15,7 +13,6 @@
         <% @subscriptions.each do |subscription| %>
           <tr class="<%= cycle('even', 'odd') %>">
             <td><%= subscription.variant.name %></td>
-            <td><%= l subscription.start_date.to_date if !subscription.start_date.nil? %></td>
             <td><%= t(subscription.state).titleize %></td>
           </tr>
         <% end %>
