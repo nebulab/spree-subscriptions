@@ -45,7 +45,7 @@ describe "Subscription" do
             order.payments.first.complete!
             visit spree.account_path
             page.should have_content "sport magazine"
-            page.should have_content "active"
+            page.should have_content "Active"
           end
         end
       end

@@ -1,5 +1,9 @@
 Spree::Payment.class_eval do
-  def after_complete(payment, transition)
-    payment.order.activate_subscriptions
+  state_machine :initial => 'checkout' do
+    after_transition :to => 'completed', :do => :activate_subscriptions!
+  end
+
+  def activate_subscriptions!
+    self.order.activate_subscriptions
   end
 end

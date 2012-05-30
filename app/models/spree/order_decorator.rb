@@ -31,7 +31,7 @@ module Spree
        line_items.each do |line_item|
         if line_item.variant.subscribable?
           subscription = Subscription.find(:first, :conditions => {:email => self.user.email, :variant_id => line_item.variant.id})
-          subscription.activate! if subscritpion && subscription.state == "pending"
+          subscription.activate! if subscription && subscription.state == "pending"
         end
       end
     end

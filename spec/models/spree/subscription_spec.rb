@@ -50,13 +50,10 @@ describe Spree::Subscription do
       end
 
       it "should have active status if order is paid" do
-        # Create email t
         @order.payments << Factory(:payment, :order => @order, :amount => @order.total)
         # Capture payment
         @order.payments.first.capture!
-        # Next state for subscription state machine
-        @subscription.activate!
-        @subscription.state.should == "active"
+        Spree::Subscription.find(:first, :conditions => {:email => @order.user.email, :variant_id => @order.line_items.first.variant.id}).state.should == "active"
       end
     end
 
@@ -93,7 +90,7 @@ describe Spree::Subscription do
         end
 
         context "when it is already active"
-          #it "should not have pending state if subscribtion is already active"
+          #it "should not have pending state if subscription is already active"
           #it "should be renewed on payment completion if already exists"
       end
     end
