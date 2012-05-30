@@ -14,6 +14,7 @@
     <tr>
       <th><%= sort_link @search, :created_at, t(:created_at, :scope => 'activerecord.attributes.spree/subscription') %></th>
       <th><%= sort_link @search, :id, t(:id, :scope => 'activerecord.attributes.spree/subscription') %></th>
+      <th><%= sort_link @search, :remaining_issues, t(:remaining_issues, :scope => 'activerecord.attributes.spree/subscription') %></th>
       <th><%= sort_link @search, :state, t(:state, :scope => 'activerecord.attributes.spree/subscription') %></th>
       <th><%= sort_link @search, :email, t(:email, :scope => 'activerecord.attributes.spree/subscription') %></th>
       <th data-hook="admin_subscriptions_index_header_actions"></th>
@@ -24,6 +25,7 @@
       <tr>
         <td><%= subscription.created_at.to_date %></td>
         <td><%= link_to subscription.id, edit_object_url(subscription) %></td>
+        <td><%= subscription.remaining_issues %></td>
         <td><%= t(subscription.state.downcase) %></td>
         <td><%= subscription.email %></td>
         <td class="actions" data-hook="admin_subscriptions_index_row_actions">

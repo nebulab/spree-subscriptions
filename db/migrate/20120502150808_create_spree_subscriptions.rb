@@ -5,6 +5,7 @@ class CreateSpreeSubscriptions < ActiveRecord::Migration
       t.references :ship_address
       t.string :email
       t.string :state
+      t.integer :remaining_issues
       t.timestamps
     end
   end
