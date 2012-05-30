@@ -8,7 +8,7 @@ This extension allow to handle subscribable products with numbers based subscrip
 Features
 --------
 
-- Admin can set the numer of issue that compose a subscription (default => 12)
+- Admin can set the number of issues that compose a subscription (default => 12)
 - Admin can mark products or variants as subscribable
 - Admin can create issues in each subscribable items (with ability to associate issue with existing products, useful to link issue with backlog products of the same magazine)
 - Admin can view (, print and mark as shipped) the list of subscribed users (which have to receive new issue)
