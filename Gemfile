@@ -12,3 +12,7 @@ group :test do
   gem 'database_cleaner'
   gem 'capybara-screenshot'
 end
+
+group :assets do
+  gem 'sass-rails', "~> 3.2"
+end
