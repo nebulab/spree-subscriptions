@@ -1,9 +1,9 @@
 <%= f.field_container :variant do %>
-  <%= f.label :variant_id, t(:variant) %><br />
-  <%= f.select :variant_id, @variants %>
+  <%= f.label :magazine_id, t(:variant) %><br />
+  <%= f.select :magazine_id, @variants %>
 
 
   <%= f.label :remaining_issues, t(:remaining_issues) %><br />
   <%= f.number_field :remaining_issues %>
-  <%= f.error_message_on :variant %>
+  <%= f.error_message_on :magazine %>
 <% end %>

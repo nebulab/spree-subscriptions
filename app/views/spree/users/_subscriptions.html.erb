@@ -13,7 +13,7 @@
       <tbody>
         <% @subscriptions.each do |subscription| %>
           <tr class="<%= cycle('even', 'odd') %>">
-            <td><%= subscription.variant.name %></td>
+            <td><%= subscription.magazine.name %></td>
             <td><%= subscription.remaining_issues %></td>
             <td><%= t(subscription.state).titleize %></td>
           </tr>

@@ -1,8 +1,8 @@
 class Spree::Subscription < ActiveRecord::Base
-  attr_accessible :email, :variant_id, :remaining_issues, :ship_address, :ship_address_attributes
+  attr_accessible :email, :magazine_id, :remaining_issues, :ship_address, :ship_address_attributes
 
-  belongs_to :variant
-  belongs_to :ship_address, :foreign_key => 'ship_address_id', :class_name => 'Spree::Address'
+  belongs_to :magazine, :class_name => 'Spree::Variant'
+  belongs_to :ship_address, :class_name => 'Spree::Address'
   has_many :shipped_issues
 
   alias_method :shipping_address, :ship_address

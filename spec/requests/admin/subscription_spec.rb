@@ -44,7 +44,7 @@ describe "Subscription" do
       it "should let choose only subscribable variant" do
         # this is an hack. The following line does not work!!
         # page.has_select?('Variant', :with_options => ['the book'])
-        page.should have_xpath("//*[@id='subscription_variant_id']/option", :count => 2)
+        page.should have_xpath("//*[@id='subscription_magazine_id']/option", :count => 2)
       end
 
       it "should be created correctly" do

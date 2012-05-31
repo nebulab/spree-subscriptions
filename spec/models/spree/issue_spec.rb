@@ -6,6 +6,11 @@ describe Spree::Issue do
     issue.should respond_to(:magazine)
   end
 
+  it "should have many shipped issues" do
+    issue = Factory.build(:issue)
+    issue.should respond_to(:shipped_issues)
+  end
+
   it "should be related to a variant which is the magazine" do
     issue = Factory.create(:issue)
     issue.magazine.should be_an_instance_of Spree::Variant

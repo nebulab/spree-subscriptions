@@ -9,12 +9,12 @@ describe Spree::Subscription do
 
   context "when adding a subscription" do
     it "should be valid if variant is subscribable" do
-      subscription = Factory.build(:subscription, :variant => Factory(:subscribable_variant))
+      subscription = Factory.build(:subscription, :magazine => Factory(:subscribable_variant))
       subscription.should be_valid
     end
     
     it "should not be valid if variant is not subscribable" do
-      subscription = Factory.build(:subscription, :variant => Factory(:variant))
+      subscription = Factory.build(:subscription, :magazine => Factory(:variant))
       subscription.should_not be_valid
     end
   end
@@ -29,7 +29,7 @@ describe Spree::Subscription do
     end
 
     it "should not be created before order completetion" do
-      Spree::Subscription.find(:first, :conditions => {:variant_id => @order.line_items.first.variant }).should be_nil
+      Spree::Subscription.find(:first, :conditions => {:magazine_id => @order.line_items.first.variant }).should be_nil
     end
   end
 
@@ -43,7 +43,7 @@ describe Spree::Subscription do
         # Finalize order
         @order.finalize!
         # Search for the subscription
-        @subscription = Spree::Subscription.find(:first, :conditions => {:variant_id => @order.line_items.first.variant })
+        @subscription = Spree::Subscription.find(:first, :conditions => {:magazine_id => @order.line_items.first.variant })
       end
 
       it "should be created on order completetion" do
@@ -58,7 +58,7 @@ describe Spree::Subscription do
         @order.payments << Factory(:payment, :order => @order, :amount => @order.total)
         # Capture payment
         @order.payments.first.capture!
-        Spree::Subscription.find(:first, :conditions => {:email => @order.user.email, :variant_id => @order.line_items.first.variant.id}).state.should == "active"
+        Spree::Subscription.find(:first, :conditions => {:email => @order.user.email, :magazine_id => @order.line_items.first.variant.id}).state.should == "active"
       end
     end
 
@@ -67,9 +67,9 @@ describe Spree::Subscription do
         # Create a subscription with same user and variant
         @user = @order.user
         @variant = @order.line_items.first.variant
-        Spree::Subscription.create(:email => @user.email, :variant_id => @variant.id)
+        Spree::Subscription.create(:email => @user.email, :magazine_id => @variant.id)
         # Search for the subscription
-        @subscription = Spree::Subscription.find(:first, :conditions => {:variant_id => @order.line_items.first.variant })
+        @subscription = Spree::Subscription.find(:first, :conditions => {:magazine_id => @order.line_items.first.variant })
       end
 
       context "before order completion" do
@@ -87,7 +87,7 @@ describe Spree::Subscription do
           # Finalize order
           @order.finalize!
           # Search for all the subscriptions with current user and variant
-          @subscriptions = Spree::Subscription.find(:all, :conditions => {:variant_id => @order.line_items.first.variant })
+          @subscriptions = Spree::Subscription.find(:all, :conditions => {:magazine_id => @order.line_items.first.variant })
         end
 
         it "should not have to be created as new" do
