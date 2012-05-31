@@ -30,6 +30,8 @@ describe "Products" do
       click_link "Products"
       within('table.index tr:nth-child(2)') { click_link "Edit" }
       page.should have_content("Issues")
+      click_link "Issues"
+      page.should have_content("Listing Issues")
     end
   end
 end
