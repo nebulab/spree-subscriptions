@@ -21,6 +21,12 @@ class Spree::Subscription < ActiveRecord::Base
     end
   end
 
+  def ship!(issue)
+    # TODO: add tests
+    remaining_issues -= 1
+    shipped_issues.create(:issue => issue, :subscription => self)
+  end
+
   def allow_cancel?
     self.state != 'canceled'
   end
