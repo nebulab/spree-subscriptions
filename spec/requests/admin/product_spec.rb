@@ -22,5 +22,14 @@ describe "Products" do
       page.should have_content("successfully updated!")
       page.has_checked_field?('product_subscribable').should == true
     end
+
+    it "should let add an issue to a subscribable product" do
+      product = create(:subscribable_variant)
+
+      visit spree.admin_path
+      click_link "Products"
+      within('table.index tr:nth-child(2)') { click_link "Edit" }
+      page.should have_content("Issues")
+    end
   end
 end
