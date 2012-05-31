@@ -3,11 +3,11 @@ require 'spec_helper'
 describe "Variants" do
   context "setting a variant as subscribabale" do
     before do
-      user = create(:admin_user, :email => "c@example.com")
+      user = create(:admin_user, :email => "test@example.com")
       sign_in_as!(user)
     end
 
-    it "should allow a admin to create a new variant as subscribable" do
+    it "should be markable as subscribable by admin users" do
       product = create(:product_with_option_types, :subscribable => true)
 
       product.options.each do |option|
