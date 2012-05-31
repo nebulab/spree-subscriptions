@@ -23,8 +23,16 @@ describe "Products" do
       page.has_checked_field?('product_subscribable').should == true
     end
 
+    it "should not have issue tab if product is not subscribable" do
+      create(:simple_product)
+      visit spree.admin_path
+      click_link "Products"
+      within('table.index tr:nth-child(2)') { click_link "Edit" }
+      page.should_not have_content("Issues")
+    end 
+
     it "should let add an issue to a subscribable product" do
-      product = create(:subscribable_variant)
+      create(:simple_product, :subscribable => true)
 
       visit spree.admin_path
       click_link "Products"

@@ -1,3 +1,5 @@
-<li<%== ' class="active"' if current == "Issues" %>>
-  <%= link_to t("issues"), admin_magazine_issues_url(@product.master) %>
-</li>
+<% if @product.subscribable? %>
+  <li<%== ' class="active"' if current == "Issues" %>>
+    <%= link_to t("issues"), admin_magazine_issues_url(@product.master) %>
+  </li>
+<% end %>
