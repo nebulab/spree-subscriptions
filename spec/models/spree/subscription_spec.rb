@@ -2,6 +2,11 @@ require 'spec_helper'
 
 describe Spree::Subscription do
 
+  it "should have shipped issues" do
+    subscription = Factory.build(:subscription)
+    subscription.should respond_to(:shipped_issues)
+  end
+
   context "when adding a subscription" do
     it "should be valid if variant is subscribable" do
       subscription = Factory.build(:subscription, :variant => Factory(:subscribable_variant))
