@@ -8,6 +8,15 @@ module Spree
           @issues = Issue.where(:magazine_id => @magazine.id)
         end
 
+        def show
+          edit
+          render :action => :edit
+        end
+
+        def edit
+          @issue = Issue.find(params[:id])          
+        end
+
         private
 
         def load_magazine

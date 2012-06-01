@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "Subscription" do
   context "as_admin_user" do
     before do
-      user = create(:admin_user, :email => "c@example.com")
+      user = create(:admin_user, :email => "test@example.com")
       sign_in_as!(user)
       reset_spree_preferences do |config|
         config.default_country_id = create(:country).id
