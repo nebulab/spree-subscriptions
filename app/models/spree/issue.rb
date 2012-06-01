@@ -3,7 +3,7 @@ class Spree::Issue < ActiveRecord::Base
   belongs_to :magazine_issue, :class_name => "Spree::Variant"
   has_many :shipped_issues
 
-  attr_accessible :name, :published_at
+  attr_accessible :name, :published_at, :magazine
 
   delegate :subscriptions,:to => :magazine
 

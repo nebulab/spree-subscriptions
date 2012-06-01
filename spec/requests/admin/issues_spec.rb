@@ -56,6 +56,15 @@ describe "Issue" do
         within('table.index#listing_issues tbody tr:nth-child(1)') { click_link "Edit" }        
         find_field("variant_issues_attributes_0_name").value.should == @issue.name
       end
+
+      it "should let update an issue" do
+        within('table.index#listing_issues tbody tr:nth-child(1)') { click_link "Edit" }
+        fill_in "Name", :with => "Magazine issue number 4"
+        click_button "Update"
+        page.should have_content "issue_updated"
+        find_field("variant_issues_attributes_0_name").value.should == "Magazine issue number 4"
+      end
+
     end   
   end
 end

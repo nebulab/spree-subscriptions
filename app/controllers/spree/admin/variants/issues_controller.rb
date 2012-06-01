@@ -14,13 +14,22 @@ module Spree
         end
 
         def edit
-          @issue = Issue.find(params[:id])          
+          @issue = Issue.find(params[:id])
+        end
+
+        def update
+          if @magazine.update_attributes(params[:variant])          
+            flash[:notice] = t('issue_updated')
+            redirect_to edit_admin_magazine_issue_path(@magazine, Issue.find(params[:id]))
+          else
+            render :action => :edit
+          end
         end
 
         private
 
         def load_magazine
-          @magazine = Variant.find_by_id(params[:magazine_id])
+          @magazine = Variant.find(params[:magazine_id])
         end
       end
     end
