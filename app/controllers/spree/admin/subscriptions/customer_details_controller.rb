@@ -15,7 +15,6 @@ module Spree
         
         def update
           if @subscription.update_attributes(params[:subscription])
-            @subscription.save
             flash[:notice] = t('customer_details_updated')
             redirect_to edit_admin_subscription_path(@subscription)
           else
@@ -26,7 +25,7 @@ module Spree
         private
         
         def load_subscription
-          @subscription = Subscription.find_by_id(params[:subscription_id])
+          @subscription = Subscription.find(params[:subscription_id])
         end
       end
     end
