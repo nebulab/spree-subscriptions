@@ -48,9 +48,11 @@ describe "Products" do
 
         it "should let view product issues" do
           issue = create(:issue, :magazine => @magazine)
+          other_issue = create(:issue)
           click_link "Issues"
           page.should have_content("Listing Issues")
           page.should have_content(issue.name)
+          page.should_not have_content(other_issue.name)
         end
       end
     end
