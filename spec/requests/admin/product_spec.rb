@@ -23,23 +23,34 @@ describe "Products" do
       page.has_checked_field?('product_subscribable').should == true
     end
 
-    it "should not have issue tab if product is not subscribable" do
-      create(:simple_product)
-      visit spree.admin_path
-      click_link "Products"
-      within('table.index tr:nth-child(2)') { click_link "Edit" }
-      page.should_not have_content("Issues")
-    end 
+    context "accessing product issues" do
+      context "unsuscribable products" do
+        it "should not have issue tab" do
+          create(:simple_product)
+          visit spree.admin_path
+          click_link "Products"
+          within('table.index tr:nth-child(2)') { click_link "Edit" }
+          page.should_not have_content("Issues")
+        end
+      end
 
-    it "should let add an issue to a subscribable product" do
-      create(:simple_product, :subscribable => true)
+      context "subscribable products" do
+        before(:each) do
+          create(:simple_product, :subscribable => true)
+          visit spree.admin_path
+          click_link "Products"
+          within('table.index tr:nth-child(2)') { click_link "Edit" }
+        end
 
-      visit spree.admin_path
-      click_link "Products"
-      within('table.index tr:nth-child(2)') { click_link "Edit" }
-      page.should have_content("Issues")
-      click_link "Issues"
-      page.should have_content("Listing Issues")
+        it "should have issue tab" do
+          page.should have_content("Issues")
+        end
+
+        it "should let view product issues" do
+          click_link "Issues"
+          page.should have_content("Listing Issues")
+        end
+      end
     end
   end
 end
