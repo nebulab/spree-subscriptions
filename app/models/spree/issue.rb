@@ -5,6 +5,8 @@ class Spree::Issue < ActiveRecord::Base
 
   attr_accessible :name, :published_at
 
+  delegate :subscriptions,:to => :magazine
+
   validates :name, 
             :presence => true,
             :unless => "magazine_issue.present?"
@@ -14,9 +16,7 @@ class Spree::Issue < ActiveRecord::Base
   end
 
   def ship!
-    magazine.subscriptions.each do |sub|
-      self.shipped_issues.create(:subscription => sub)
-    end
+    subscriptions.each{ |s| s.ship!(self) }
   end
   
 end

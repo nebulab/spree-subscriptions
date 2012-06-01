@@ -21,8 +21,11 @@ class Spree::Subscription < ActiveRecord::Base
     end
   end
 
-  def shipped!
-    update_attribute(:remaining_issues, remaining_issues-1)
+  def ship!(issue)
+    transaction do
+      shipped_issues.create(:issue => issue)
+      update_attribute(:remaining_issues, remaining_issues-1)
+    end
   end
 
   def allow_cancel?
