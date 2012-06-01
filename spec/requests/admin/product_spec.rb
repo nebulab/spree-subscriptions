@@ -36,7 +36,7 @@ describe "Products" do
 
       context "subscribable products" do
         before(:each) do
-          create(:simple_product, :subscribable => true)
+          @magazine = create(:simple_product, :subscribable => true).master
           visit spree.admin_path
           click_link "Products"
           within('table.index tr:nth-child(2)') { click_link "Edit" }
@@ -47,8 +47,10 @@ describe "Products" do
         end
 
         it "should let view product issues" do
+          issue = create(:issue, :magazine => @magazine)
           click_link "Issues"
           page.should have_content("Listing Issues")
+          page.should have_content(issue.name)
         end
       end
     end
