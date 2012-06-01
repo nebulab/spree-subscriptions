@@ -1,7 +1,6 @@
 class Spree::Issue < ActiveRecord::Base
   belongs_to :magazine, :class_name => "Spree::Variant"
   belongs_to :magazine_issue, :class_name => "Spree::Variant"
-  has_many :subscriptions, :through => :magazine
   has_many :shipped_issues
 
   attr_accessible :name, :published_at
@@ -15,8 +14,9 @@ class Spree::Issue < ActiveRecord::Base
   end
 
   def ship!
-    # TODO: add tests
-    subscriptions.each{|sub| sub.ship!(self) }
+    magazine.subscriptions.each do |sub|
+      self.shipped_issues.create(:subscription => sub)
+    end
   end
   
 end
