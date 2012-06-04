@@ -3,26 +3,18 @@ module Spree
     module Variants
       class IssuesController < Spree::Admin::BaseController
         before_filter :load_magazine
+        before_filter :load_issue, :only => [:show, :edit, :update]
 
         def index 
           @issues = Issue.where(:magazine_id => @magazine.id)
         end
 
-        def show
-          edit
-          render :action => :edit
-        end
-
-        def edit
-          @issue = Issue.find(params[:id])
-        end
-
         def update
-          @issue = Issue.find(params[:id])
           if @issue.update_attributes(params[:issue])          
             flash[:notice] = t('issue_updated')
-            redirect_to edit_admin_magazine_issue_path(@magazine, @issue)
+            redirect_to admin_magazine_issue_path(@magazine, @issue)
           else
+            flash[:error] = t(:issue_not_updated)
             render :action => :edit
           end
         end
@@ -36,6 +28,7 @@ module Spree
             flash[:notice] = t('issue_created')
             redirect_to admin_magazine_issues_path(@magazine)
           else
+            flash[:error] = t(:issue_not_created)
             render :new
           end
         end
@@ -44,6 +37,10 @@ module Spree
 
         def load_magazine
           @magazine = Variant.find(params[:magazine_id])
+        end
+
+        def load_issue
+          @issue = Issue.find(params[:id])
         end
       end
     end
