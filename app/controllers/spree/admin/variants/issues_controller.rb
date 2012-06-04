@@ -28,12 +28,11 @@ module Spree
         end
 
         def new
-          @issue = Issue.new
+          @issue = @magazine.issues.build
         end
 
         def create
-          params[:issue][:magazine] ||= @magazine
-          if Issue.create(params[:issue])
+          if @magazine.issues.create(params[:issue])
             flash[:notice] = t('issue_created')
             redirect_to admin_magazine_issues_path(@magazine)
           else
