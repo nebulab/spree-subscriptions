@@ -18,20 +18,22 @@ module Spree
         end
 
         def update
-          if @magazine.update_attributes(params[:variant])          
+          @issue = Issue.find(params[:id])
+          if @issue.update_attributes(params[:issue])          
             flash[:notice] = t('issue_updated')
-            redirect_to edit_admin_magazine_issue_path(@magazine, Issue.find(params[:id]))
+            redirect_to edit_admin_magazine_issue_path(@magazine, @issue)
           else
             render :action => :edit
           end
         end
 
         def new
-          @magazine.issues.build
+          @issue = Issue.new
         end
 
         def create
-          if @magazine.update_attributes(params[:variant])
+          params[:issue][:magazine] ||= @magazine
+          if Issue.create(params[:issue])
             flash[:notice] = t('issue_created')
             redirect_to admin_magazine_issues_path(@magazine)
           else
