@@ -37,6 +37,7 @@ module Spree
 
         def load_magazine
           @magazine = Variant.find(params[:magazine_id])
+          @product = @magazine.product # useful to display product_tab menu
         end
 
         def load_issue
