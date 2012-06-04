@@ -7,7 +7,7 @@ describe "Issue" do
       sign_in_as!(user)      
     end
 
-    before(:each) do      
+    before do      
       visit spree.admin_path
     end
 
@@ -43,28 +43,47 @@ describe "Issue" do
       end
     end
 
-    context "editing a product issue" do
-      before do        
-        magazine = create(:simple_product, :subscribable => true).master
-        @issue = create(:issue, :magazine => magazine)
+    context "managing an issue" do
+      before do
+        @magazine = create(:simple_product, :subscribable => true).master
         click_link "Products"
         within('table.index tr:nth-child(2)') { click_link "Edit" }
-        click_link "Issues"
       end
 
-      it "shoud let access the edit issue page" do
-        within('table.index#listing_issues tbody tr:nth-child(1)') { click_link "Edit" }        
-        find_field("variant_issues_attributes_0_name").value.should == @issue.name
+      context "creating an issue" do
+        it "should let access the new issue page" do
+          click_link "Issues"
+          click_link "New Issue"
+        end
+
+        it "should create a new issue" do
+          click_link "Issue"
+          click_link "New Issue"
+          fill_in "Name", :with => "Magazine issue number 4"
+          click_button "Create"
+          within('table.index#listing_issues tbody') { page.should have_content "Magazine issue number 4" }
+        end
       end
 
-      it "should let update an issue" do
-        within('table.index#listing_issues tbody tr:nth-child(1)') { click_link "Edit" }
-        fill_in "Name", :with => "Magazine issue number 4"
-        click_button "Update"
-        page.should have_content "issue_updated"
-        find_field("variant_issues_attributes_0_name").value.should == "Magazine issue number 4"
-      end
+      context "editing a product issue" do
+        before do        
+          @issue = create(:issue, :magazine => @magazine)
+          click_link "Issues"
+        end
 
-    end   
+        it "shoud let access the edit issue page" do
+          within('table.index#listing_issues tbody tr:nth-child(1)') { click_link "Edit" }        
+          find_field("variant_issues_attributes_0_name").value.should == @issue.name
+        end
+
+        it "should let update an issue" do
+          within('table.index#listing_issues tbody tr:nth-child(1)') { click_link "Edit" }
+          fill_in "Name", :with => "Magazine issue number 4"
+          click_button "Update"
+          page.should have_content "issue_updated"
+          find_field("variant_issues_attributes_0_name").value.should == "Magazine issue number 4"
+        end
+      end   
+    end
   end
 end

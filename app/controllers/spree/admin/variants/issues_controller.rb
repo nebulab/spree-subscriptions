@@ -26,6 +26,19 @@ module Spree
           end
         end
 
+        def new
+          @magazine.issues.build
+        end
+
+        def create
+          if @magazine.update_attributes(params[:variant])
+            flash[:notice] = t('issue_created')
+            redirect_to admin_magazine_issues_path(@magazine)
+          else
+            render :new
+          end
+        end
+
         private
 
         def load_magazine
