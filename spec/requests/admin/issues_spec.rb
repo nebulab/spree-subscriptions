@@ -57,11 +57,11 @@ describe "Issue" do
         end
 
         it "should create a new issue" do
-          click_link "Issue"
+          click_link "Issues"
           click_link "New Issue"
           fill_in "Name", :with => "Magazine issue number 4"
           click_button "Create"
-          within('table.index#listing_issues tbody') { page.should have_content "Magazine issue number 4" }
+          within('table.index#listing_issues tbody') { page.should have_content "Magazine issue number 4" }          
         end
       end
 
