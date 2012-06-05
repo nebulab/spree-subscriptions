@@ -56,12 +56,22 @@ describe "Issue" do
           click_link "New Issue"
         end
 
-        it "should create a new issue" do
+        it "should create a new issue without associated product" do
           click_link "Issues"
           click_link "New Issue"
           fill_in "Name", :with => "Magazine issue number 4"
           click_button "Create"
-          within('table.index#listing_issues tbody') { page.should have_content "Magazine issue number 4" }          
+          within('table.index#listing_issues tbody') { page.should have_content "Magazine issue number 4" }
+        end
+
+        it "should create a new issue with an associated product" do
+          @product_issue = create(:simple_product, :name => "Issue number 4") 
+          click_link "Issues"
+          click_link "New Issue"
+          select "Issue number 4", :from => "Product"
+          click_button "Create"
+          within('table.index#listing_issues tbody tr:nth-child(1)') { click_link "Edit" }  
+          find_field('Product').find('option[selected]').text.should == "Issue number 4"
         end
       end
 

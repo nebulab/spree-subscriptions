@@ -1,4 +1,7 @@
  <fieldset>
   <%= f.label :name %>
   <%= f.text_field :name %>
+
+  <%= f.label :magazine_issue_id, t(:product) %>
+  <%= f.select :magazine_issue_id, @products, :include_blank => true %>
 </fieldset>

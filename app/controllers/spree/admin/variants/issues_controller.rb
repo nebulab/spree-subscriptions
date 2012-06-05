@@ -4,6 +4,7 @@ module Spree
       class IssuesController < Spree::Admin::BaseController
         before_filter :load_magazine
         before_filter :load_issue, :only => [:show, :edit, :update]
+        before_filter :load_products, :except => [:show, :index]
 
         def index 
           @issues = Issue.where(:magazine_id => @magazine.id)
@@ -23,7 +24,7 @@ module Spree
           @issue = @magazine.issues.build
         end
 
-        def create
+        def create          
           if @magazine.issues.create(params[:issue])
             flash[:notice] = t('issue_created')
             redirect_to admin_magazine_issues_path(@magazine)
@@ -42,6 +43,10 @@ module Spree
 
         def load_issue
           @issue = Issue.find(params[:id])
+        end
+
+        def load_products
+          @products = Variant.all.map { |variant| [variant.product.name, variant.id] }
         end
       end
     end
