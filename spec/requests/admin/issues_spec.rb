@@ -73,6 +73,13 @@ describe "Issue" do
           within('table.index#listing_issues tbody tr:nth-child(1)') { click_link "Edit" }  
           find_field('Product').find('option[selected]').text.should == "Issue number 4"
         end
+
+        it "should not let select subscribable product as associated product" do
+          @product_issue = create(:simple_product, :name => "Issue number 4")
+          click_link "Issues"
+          click_link "New Issue"
+          page.should have_xpath("//*[@id='issue_magazine_issue_id']/option", :count => 2)          
+        end
       end
 
       context "editing a product issue" do

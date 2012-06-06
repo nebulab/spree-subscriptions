@@ -8,6 +8,7 @@ module Spree
     accepts_nested_attributes_for :issues
     
     scope :subscribable, where(:subscribable => true)
+    scope :unsubscribable, where(:subscribable => false)
 
   end
 end

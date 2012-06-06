@@ -46,7 +46,7 @@ module Spree
         end
 
         def load_products
-          @products = Variant.all.map { |variant| [variant.product.name, variant.id] }
+          @products = Variant.unsubscribable.map { |variant| [variant.product.name, variant.id] }
         end
       end
     end
