@@ -2,4 +2,49 @@
 
 <%= render :partial => 'spree/admin/shared/product_tabs', :locals => { :current => 'Issues' } %>
 
-<%= @issue.name %>
+<div data-hook="admin_variant_issue_header">
+  <h2><%= @issue.name %></h2>
+</div>
+
+<% if @issue.magazine_issue %>
+  <%= render 'magazine_issue', :product => @issue.magazine_issue %>
+<% end %>
+
+<div class="toolbar" data-hook="admin_issue_show_buttons">
+  <%= button_link_to t(:ship), "#", :icon => 'accept', :confirm => t(:are_you_sure) %>
+  <%= button_link_to t(:print), "#", :icon => 'pdf', :confirm => t(:are_you_sure) %>
+</div>
+<br class="clear">
+<br>
+
+<h1><%= t(:subscribed) %></h1>
+
+<table class="index" id="subscriptions_listing">
+  <thead data-hook="admin_subscriptions_index_headers">
+    <th><%= t(:email) %></th>
+    <th><%= t(:first_name) %></th>
+    <th><%= t(:last_name) %></th>
+    <th><%= t(:street_address) %></th>
+    <th><%= t(:zip) %></th>
+    <th><%= t(:city) %></th>
+    <th><%= t(:state) %></th>
+    <th><%= t(:phone) %></th>
+  </thead>
+  <tbody>
+    <% @product.master.subscriptions.each do |subscription|%>
+      <tr id="<%= spree_dom_id subscription %>" data-hook="admin_subscriptions_index_rows">
+        <td><%= subscription.email %></td>
+        <td><%= subscription.ship_address.firstname %></td>
+        <td><%= subscription.ship_address.lastname %></td>
+        <td>
+          <%= subscription.ship_address.address1 %>
+          <%= raw("</br>#{subscription.ship_address.address2}") if subscription.ship_address.address2.present? %>
+        </td>
+        <td><%= subscription.ship_address.zipcode %></td>
+        <td><%= subscription.ship_address.city %></td>
+        <td><%= subscription.ship_address.state_name %></td>
+        <td><%= subscription.ship_address.phone %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

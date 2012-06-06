@@ -101,6 +101,20 @@ describe "Issue" do
           page.should have_content "Magazine issue number 4"
         end
       end   
+
+      context "showing a product issue" do
+        before do        
+          @issue = create(:issue, :magazine => @magazine)
+          @subscription = create(:subscription, :magazine => @magazine)
+          click_link "Issues"
+          within('table.index#listing_issues tbody tr:nth-child(1)') { click_link @issue.name }
+        end
+
+        it "should display the list of subscribers" do
+          page.should have_content @subscription.email
+        end
+
+      end
     end
   end
 end

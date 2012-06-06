@@ -2,6 +2,7 @@ FactoryGirl.define do
   factory :subscription, :class => Spree::Subscription do
     # associations:
     magazine { FactoryGirl.create(:variant, :subscribable => true) }
+    ship_address { FactoryGirl.create(:address) }
     remaining_issues 0
   end
 
