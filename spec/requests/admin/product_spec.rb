@@ -21,6 +21,27 @@ describe "Products" do
       click_button "Update"
       page.should have_content("successfully updated!")
       page.has_checked_field?('product_subscribable').should == true
-    end    
+    end
+
+    it "should not let choose issues number for unsuscribable product" do
+      product = create(:simple_product)
+
+      visit spree.admin_path
+      click_link "Products"
+      within('table.index tr:nth-child(2)') { click_link "Edit" }
+      page.should_not have_content "Issues number"
+    end
+
+    it "should let choose the issues number" do
+      product = create(:simple_product, :subscribable => true)
+
+      visit spree.admin_path
+      click_link "Products"
+      within('table.index tr:nth-child(2)') { click_link "Edit" }
+      fill_in "Issues number", :with => "4"
+      click_button "Update"
+      page.should have_content("successfully updated!")
+      find_field("Issues number").value.should == "4"
+    end
   end
 end

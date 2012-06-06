@@ -12,4 +12,8 @@ describe Spree::Variant do
   it "should be subscribable" do
     @variant.subscribable.should == true
   end
+
+  it "should respond to issues_number" do
+    @variant.should respond_to :issues_number
+  end
 end
