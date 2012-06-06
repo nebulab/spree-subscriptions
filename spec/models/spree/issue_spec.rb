@@ -11,9 +11,9 @@ describe Spree::Issue do
     issue.should respond_to(:shipped_issues)
   end
 
-  it "should be related to a variant which is the magazine" do
+  it "should be related to a product which is the magazine" do
     issue = Factory.create(:issue)
-    issue.magazine.should be_an_instance_of Spree::Variant
+    issue.magazine.should be_an_instance_of Spree::Product
   end
 
   it "should not be valid if no magazine issue and no name is specified" do
@@ -22,8 +22,8 @@ describe Spree::Issue do
   end
 
   it "should have a name like the name of the magazine issue" do
-    issue = Factory.create(:issue, :magazine_issue => Factory.create(:variant))
-    issue.name.should equal(issue.magazine_issue.product.name)
+    issue = Factory.create(:issue, :magazine_issue => Factory.create(:simple_product))
+    issue.name.should equal(issue.magazine_issue.name)
   end
 
   it "should have the name attribute if no magazine issue is present" do

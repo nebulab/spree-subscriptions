@@ -4,8 +4,5 @@
 <% end %>
 
 <% if @product.subscribable? %>
-  <%= f.field_container :issues_number do %>
-    <%= f.label :issues_number %><br />
-    <%= f.text_field :issues_number %>
-  <% end %>
+  <%= render :partial => 'spree/admin/product/subscription_fields', :locals => "f" => f %>  
 <% end %>
