@@ -33,7 +33,7 @@ module Spree
       protected
 
       def load_data
-        @variants = Variant.subscribable.all.map { |variant| [variant.product.name, variant.id] }
+        @products = Product.subscribable.all.map { |product| [product.name, product.id] }
       end
     end
   end
