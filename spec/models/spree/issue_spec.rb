@@ -34,6 +34,6 @@ describe Spree::Issue do
   it "should create a shipped issue when shipping issue" do
     subscription = Factory.create(:paid_subscription)
     issue = Factory.create(:issue, :magazine => subscription.magazine)
-    lambda{ issue.ship! }.should change(issue.shipped_issues, :count).by(1)
+    expect{ issue.ship! }.to change(issue.shipped_issues, :count).by(1)
   end
 end

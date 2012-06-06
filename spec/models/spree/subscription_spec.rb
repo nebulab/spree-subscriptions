@@ -18,7 +18,7 @@ describe Spree::Subscription do
 
     it "should not reship an issue already shipped" do
       subscription.ship!(issue)
-      lambda{ subscription.ship!(issue) }.should_not change(subscription.shipped_issues, :count)
+      expect{ subscription.ship!(issue) }.not_to change(subscription.shipped_issues, :count)
     end
 
     it "should have a method to know if it has been shipped" do
@@ -37,16 +37,16 @@ describe Spree::Subscription do
     end
 
     it "should send an email when the subscription is left with one issue" do
-      lambda{ subscription.ship!(issue) }.should change(ActionMailer::Base.deliveries, :count).by(1)
+      expect{ subscription.ship!(issue) }.to change(ActionMailer::Base.deliveries, :count).by(1)
     end
 
     it "should send an email when the subscription is left with zero issues" do
-      lambda{ subscription.ship!(issue) }.should change(ActionMailer::Base.deliveries, :count).by(1)
+      expect{ subscription.ship!(issue) }.to change(ActionMailer::Base.deliveries, :count).by(1)
     end
 
     it "should not resend email when the subscription is already at zero issues" do
       subscription.stub(:shipped?).and_return(true)
-      lambda{ subscription.ship!(issue) }.should_not change(ActionMailer::Base.deliveries, :count)
+      expect{ subscription.ship!(issue) }.not_to change(ActionMailer::Base.deliveries, :count)
     end
   end
 
