@@ -28,6 +28,10 @@ class Spree::Subscription < ActiveRecord::Base
     end
   end
 
+  def shipped?(issue)
+    !shipped_issues.where(:id => issue.id).empty?
+  end
+
   def allow_cancel?
     self.state != 'canceled'
   end

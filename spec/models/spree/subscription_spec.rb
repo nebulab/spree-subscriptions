@@ -14,6 +14,14 @@ describe Spree::Subscription do
     subscription.ship!(issue)
   end
 
+  it "should have a method to know if it has been shipped" do
+    subscription = Factory.create(:paid_subscription)
+    issue = Factory.create(:issue, :magazine => subscription.magazine)
+    subscription.shipped?(issue).should be_false
+    subscription.ship!(issue)
+    subscription.shipped?(issue).should be_true
+  end
+
   context "when adding a subscription" do
     it "should be valid if variant is subscribable" do
       subscription = Factory.build(:subscription, :magazine => Factory(:subscribable_variant))
