@@ -4,6 +4,12 @@ module SpreeSubscriptions
 
     config.autoload_paths += %W(#{config.root}/lib)
 
+    initializer "spree.subscriptions.preferences", :after => "spree.environment" do |app|
+      module Spree::Subscriptions
+        Config = Spree::SubscriptionsConfiguration.new
+      end
+    end
+
     # use rspec for tests
     config.generators do |g|
       g.test_framework :rspec
