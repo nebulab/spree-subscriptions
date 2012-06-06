@@ -28,6 +28,28 @@ describe Spree::Subscription do
     end
   end
 
+  context "when a subscription is ending" do
+    let(:subscription) { Factory.create(:ending_subscription) }
+    let(:issue) { Factory.create(:issue, :magazine => subscription.magazine) }
+
+    before(:each) do
+      ActionMailer::Base.deliveries = []
+    end
+
+    it "should send an email when the subscription is left with one issue" do
+      lambda{ subscription.ship!(issue) }.should change(ActionMailer::Base.deliveries, :count).by(1)
+    end
+
+    it "should send an email when the subscription is left with zero issues" do
+      lambda{ subscription.ship!(issue) }.should change(ActionMailer::Base.deliveries, :count).by(1)
+    end
+
+    it "should not resend email when the subscription is already at zero issues" do
+      subscription.stub(:shipped?).and_return(true)
+      lambda{ subscription.ship!(issue) }.should_not change(ActionMailer::Base.deliveries, :count)
+    end
+  end
+
   context "when adding a subscription" do
     it "should be valid if variant is subscribable" do
       subscription = Factory.build(:subscription, :magazine => Factory(:subscribable_variant))

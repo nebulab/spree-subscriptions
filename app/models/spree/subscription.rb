@@ -21,11 +21,30 @@ class Spree::Subscription < ActiveRecord::Base
     end
   end
 
+  def ended?
+    remaining_issues == 0
+  end
+
+  def ending?
+    remaining_issues == 1
+  end
+
+  def notify_ended!
+    Spree::SubscriptionMailer.subscription_ended_email(self).deliver
+  end
+
+  def notify_ending!
+    Spree::SubscriptionMailer.subscription_ending_email(self).deliver
+  end
+
   def ship!(issue)
     unless shipped?(issue)
       transaction do
         shipped_issues.create(:issue => issue)
         update_attribute(:remaining_issues, remaining_issues-1)
+
+        notify_ending! if ending?
+        notify_ended! if ended?
       end
     end
   end

@@ -9,4 +9,8 @@ FactoryGirl.define do
   factory :paid_subscription, :parent => :subscription do
     remaining_issues 5
   end
+
+  factory :ending_subscription, :parent => :subscription do
+    remaining_issues 2
+  end
 end
