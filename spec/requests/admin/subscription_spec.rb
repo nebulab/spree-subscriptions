@@ -36,26 +36,26 @@ describe "Subscription" do
 
       it "should have the correct fields" do
         within('#new_subscription') do  
-          page.should have_content('Variant')
+          page.should have_content('Product')
           page.should have_content('Remaining Issues')
         end
       end
 
-      it "should let choose only subscribable variant" do
+      it "should let choose only subscribable product" do
         # this is an hack. The following line does not work!!
-        # page.has_select?('Variant', :with_options => ['the book'])
+        # page.has_select?('Product', :with_options => ['the book'])
         page.should have_xpath("//*[@id='subscription_magazine_id']/option", :count => 2)
       end
 
       it "should be created correctly" do
-        select "web magazine", :from => "Variant"
+        select "web magazine", :from => "Product"
         click_button "Create"
         page.should have_content("successfully created!")
         # within('table#listing_subscriptions tbody tr:nth-child(1)') { click_link("Edit") } 
         within('.sidebar') { click_link("Subscription Details") }
         # hack. The following line does not work
-        # page.has_select?('Variant', :selected => "web magazine")
-        find_field('Variant').find('option[selected]').text.should == "web magazine"
+        # page.has_select?('Product', :selected => "web magazine")
+        find_field('Product').find('option[selected]').text.should == "web magazine"
       end
     end
 
@@ -69,10 +69,10 @@ describe "Subscription" do
 
       it "should be edited correctly" do
         within('table#listing_subscriptions tbody tr:nth-child(1)') { click_link("Edit") }
-        select "web magazine", :from => "Variant"
+        select "web magazine", :from => "Product"
         click_button "Update"
         page.should have_content("successfully updated!")
-        find_field('Variant').find('option[selected]').text.should == "web magazine"
+        find_field('Product').find('option[selected]').text.should == "web magazine"
       end
 
       context "editing customer details" do
@@ -96,7 +96,7 @@ describe "Subscription" do
           end
           click_button "Update"
           page.should have_content("The customer's details have been updated")
-          page.should have_content("Variant")
+          page.should have_content("Product")
           within('.sidebar') { click_link("Customer Details") }
           find_field("subscription_email").value.should == "johnnyrocket@stardustcompany.com"
           within('#shipping') do
