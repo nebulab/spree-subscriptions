@@ -14,6 +14,13 @@ describe Spree::Subscription do
     subscription.ship!(issue)
   end
 
+  it "should not reship an issue already shipped" do
+    subscription = Factory.create(:paid_subscription)
+    issue = Factory.create(:issue, :magazine => subscription.magazine)
+    subscription.ship!(issue)
+    lambda{ subscription.ship!(issue) }.should_not change(subscription.shipped_issues, :count)
+  end
+
   it "should have a method to know if it has been shipped" do
     subscription = Factory.create(:paid_subscription)
     issue = Factory.create(:issue, :magazine => subscription.magazine)

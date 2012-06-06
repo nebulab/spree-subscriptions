@@ -22,9 +22,11 @@ class Spree::Subscription < ActiveRecord::Base
   end
 
   def ship!(issue)
-    transaction do
-      shipped_issues.create(:issue => issue)
-      update_attribute(:remaining_issues, remaining_issues-1)
+    unless shipped?(issue)
+      transaction do
+        shipped_issues.create(:issue => issue)
+        update_attribute(:remaining_issues, remaining_issues-1)
+      end
     end
   end
 
