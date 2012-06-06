@@ -7,26 +7,25 @@ describe Spree::Subscription do
     subscription.should respond_to(:shipped_issues)
   end
 
-  it "should ship issues inside a transaction" do
-    subscription = Factory.create(:paid_subscription)
-    issue = Factory.create(:issue, :magazine => subscription.magazine)
-    subscription.should_receive :transaction
-    subscription.ship!(issue)
-  end
+  context "when shipping subscriptions" do
+    let(:subscription) { Factory.create(:paid_subscription) }
+    let(:issue) { Factory.create(:issue, :magazine => subscription.magazine) }
 
-  it "should not reship an issue already shipped" do
-    subscription = Factory.create(:paid_subscription)
-    issue = Factory.create(:issue, :magazine => subscription.magazine)
-    subscription.ship!(issue)
-    lambda{ subscription.ship!(issue) }.should_not change(subscription.shipped_issues, :count)
-  end
+    it "should ship issues inside a transaction" do
+      subscription.should_receive :transaction
+      subscription.ship!(issue)
+    end
 
-  it "should have a method to know if it has been shipped" do
-    subscription = Factory.create(:paid_subscription)
-    issue = Factory.create(:issue, :magazine => subscription.magazine)
-    subscription.shipped?(issue).should be_false
-    subscription.ship!(issue)
-    subscription.shipped?(issue).should be_true
+    it "should not reship an issue already shipped" do
+      subscription.ship!(issue)
+      lambda{ subscription.ship!(issue) }.should_not change(subscription.shipped_issues, :count)
+    end
+
+    it "should have a method to know if it has been shipped" do
+      subscription.shipped?(issue).should be_false
+      subscription.ship!(issue)
+      subscription.shipped?(issue).should be_true
+    end
   end
 
   context "when adding a subscription" do
