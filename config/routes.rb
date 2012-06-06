@@ -3,8 +3,8 @@ Spree::Core::Engine.routes.prepend do
     resources :subscriptions do
       resource :customer, :controller => "subscriptions/customer_details"
     end
-    resources :variants, :as => :magazines do
-      resources :issues, :controller => "variants/issues"
+    resources :products, :as => :magazines do
+      resources :issues, :controller => "products/issues"
     end
   end
 end

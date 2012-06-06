@@ -1,6 +1,6 @@
 module Spree
   module Admin
-    module Variants
+    module Products
       class IssuesController < Spree::Admin::BaseController
         before_filter :load_magazine
         before_filter :load_issue, :only => [:show, :edit, :update]
@@ -37,8 +37,8 @@ module Spree
         private
 
         def load_magazine
-          @magazine = Variant.find(params[:magazine_id])
-          @product = @magazine.product # useful to display product_tab menu
+          @magazine = Product.find_by_permalink(params[:magazine_id])
+          @product = @magazine # useful to display product_tab menu
         end
 
         def load_issue
@@ -46,7 +46,7 @@ module Spree
         end
 
         def load_products
-          @products = Variant.unsubscribable.map { |variant| [variant.product.name, variant.id] }
+          @products = Product.unsubscribable.map { |product| [product.name, product.id] }
         end
       end
     end
