@@ -4,19 +4,19 @@
 
 <%= csrf_meta_tags %>
 
-<div data-hook="admin_variant_issue_new_header">
-  <h2><%= t("creating_issue") %></h2>
+<div data-hook="admin_product_issue_edit_header">
+  <h2><%= t("editing_issue") %></h2>
   <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @magazine } %>
 </div>
 
-<div data-hook="admin_variant_issue_new_form">
+<div data-hook="admin_product_issue_edit_form">
   <div id="issue-form-wrapper">
-    <%= form_for [@magazine, @issue], :url => admin_magazine_issues_path(@magazine), :method => :post do |f| %>
+    <%= form_for [@magazine, @issue], :url => admin_magazine_issue_url(@magazine, @issue) do |f| %>
       <%= render 'form', :f => f  %>
 
       <p class="form-buttons" data-hook="buttons">
-        <%= button t(:create) %>
-		  </p>
+     	  <%= button t(:update) %>
+      </p>
     <% end %>
   </div>
 </div>

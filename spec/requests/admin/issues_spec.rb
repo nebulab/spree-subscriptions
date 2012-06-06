@@ -23,7 +23,7 @@ describe "Issue" do
 
       context "subscribable products" do
         before(:each) do
-          @magazine = create(:simple_product, :subscribable => true).master
+          @magazine = create(:subscribable_product)
           click_link "Products"
           within('table.index tr:nth-child(2)') { click_link "Edit" }
         end
@@ -45,7 +45,7 @@ describe "Issue" do
 
     context "managing an issue" do
       before do
-        @magazine = create(:simple_product, :subscribable => true).master
+        @magazine = create(:subscribable_product)
         click_link "Products"
         within('table.index tr:nth-child(2)') { click_link "Edit" }
       end
