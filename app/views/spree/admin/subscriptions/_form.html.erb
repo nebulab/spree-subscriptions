@@ -1,7 +1,6 @@
-<%= f.field_container :variant do %>
-  <%= f.label :magazine_id, t(:variant) %><br />
-  <%= f.select :magazine_id, @variants %>
-
+<%= f.field_container :product do %>
+  <%= f.label :magazine_id, t(:product) %><br />
+  <%= f.select :magazine_id, @products %>
 
   <%= f.label :remaining_issues, t(:remaining_issues) %><br />
   <%= f.number_field :remaining_issues %>
