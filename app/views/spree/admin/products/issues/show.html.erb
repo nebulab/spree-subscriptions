@@ -2,7 +2,7 @@
 
 <%= render :partial => 'spree/admin/shared/product_tabs', :locals => { :current => 'Issues' } %>
 
-<div data-hook="admin_variant_issue_header">
+<div data-hook="admin_product_issue_header">
   <h2><%= @issue.name %></h2>
 </div>
 
@@ -31,7 +31,7 @@
     <th><%= t(:phone) %></th>
   </thead>
   <tbody>
-    <% @product.master.subscriptions.each do |subscription|%>
+    <% @product.subscriptions.each do |subscription|%>
       <tr id="<%= spree_dom_id subscription %>" data-hook="admin_subscriptions_index_rows">
         <td><%= subscription.email %></td>
         <td><%= subscription.ship_address.firstname %></td>
