@@ -30,11 +30,19 @@ class Spree::Subscription < ActiveRecord::Base
   end
 
   def notify_ended!
-    Spree::SubscriptionMailer.subscription_ended_email(self).deliver
+    if Spree::Subscriptions::Config.use_delayed_job
+      Spree::SubscriptionMailer.delay.subscription_ended_email(self).deliver
+    else
+      Spree::SubscriptionMailer.subscription_ended_email(self).deliver
+    end
   end
 
   def notify_ending!
-    Spree::SubscriptionMailer.subscription_ending_email(self).deliver
+    if Spree::Subscriptions::Config.use_delayed_job
+      Spree::SubscriptionMailer.delay.subscription_ending_email(self).deliver
+    else
+      Spree::SubscriptionMailer.subscription_ending_email(self).deliver
+    end
   end
 
   def ship!(issue)

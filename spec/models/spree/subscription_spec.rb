@@ -32,21 +32,40 @@ describe Spree::Subscription do
     let(:subscription) { Factory.create(:ending_subscription) }
     let(:issue) { Factory.create(:issue, :magazine => subscription.magazine) }
 
-    before(:each) do
-      ActionMailer::Base.deliveries = []
+    context "without delayed_job" do
+      before(:all) do
+        Spree::Subscriptions::Config.use_delayed_job = false
+      end
+
+      before(:each) do
+        ActionMailer::Base.deliveries = []
+      end
+
+      it "should send an email when the subscription is left with one issue" do
+        expect{ subscription.ship!(issue) }.to change(ActionMailer::Base.deliveries, :count).by(1)
+      end
+
+      it "should send an email when the subscription is left with zero issues" do
+        expect{ subscription.ship!(issue) }.to change(ActionMailer::Base.deliveries, :count).by(1)
+      end
+
+      it "should not resend email when the subscription is already at zero issues" do
+        subscription.stub(:shipped?).and_return(true)
+        expect{ subscription.ship!(issue) }.not_to change(ActionMailer::Base.deliveries, :count)
+      end
     end
 
-    it "should send an email when the subscription is left with one issue" do
-      expect{ subscription.ship!(issue) }.to change(ActionMailer::Base.deliveries, :count).by(1)
-    end
+    context "with delayed_job" do
+      before(:all) do
+        Spree::Subscriptions::Config.use_delayed_job = true
+        Spree::SubscriptionMailer.stub(:delay).and_return(Spree::SubscriptionMailer)
+      end
 
-    it "should send an email when the subscription is left with zero issues" do
-      expect{ subscription.ship!(issue) }.to change(ActionMailer::Base.deliveries, :count).by(1)
-    end
-
-    it "should not resend email when the subscription is already at zero issues" do
-      subscription.stub(:shipped?).and_return(true)
-      expect{ subscription.ship!(issue) }.not_to change(ActionMailer::Base.deliveries, :count)
+      it "should use delay when sending emails" do
+        Spree::SubscriptionMailer.should_receive(:delay).twice
+        subscription.notify_ended!
+        subscription.notify_ending!
+      end
     end
   end
 
