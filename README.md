@@ -8,9 +8,9 @@ This extension allow to handle subscribable products with numbers based subscrip
 Features
 --------
 
-- Admin can set the number of issues that compose a subscription (default => 12)
-- Admin can mark products or variants as subscribable
-- Admin can create issues in each subscribable items (with ability to associate issue with existing products, useful to link issue with backlog products of the same magazine)
+- Admin can mark products as subscribable 
+- Admin can set the number of issues that compose a subscription for each product (default => 12)
+- Admin can create issues in each subscribable item (with ability to associate issue with existing products, useful to link issue with backlog products of the same magazine)
 - Admin can view (, print and mark as shipped) the list of subscribed users (which have to receive new issue)
 - Keep track of shipped issues for each user subscription
 - Send user mail notification when it remains an issue only to be shipped
@@ -38,6 +38,15 @@ rails g spree_subscription:install
 rake db:migrate
 ```
 
+Configure default issues number for subscriptions
+-------------------------------------------------
+
+TODO: write this section
+
+Use delayed job for email notifications
+---------------------------------------
+
+TODO: write this section
 
 Testing
 -------
