@@ -1,5 +1,7 @@
-SpreeSubscriptions
+SpreeSubscriptions 
 ==================
+
+[![Build Status](https://secure.travis-ci.org/nebulab/spree-subscriptions.png?branch=master)](http://travis-ci.org/nebulab/spree-subscriptions)
 
 This stuff is work in progress. Please, do not use it unless you don't want to contribute :) .
 
