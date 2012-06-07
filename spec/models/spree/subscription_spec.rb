@@ -82,17 +82,15 @@ describe Spree::Subscription do
   end
 
   context "during an order" do
-    before(:each) do
-      @order = Factory(:order_with_subscription)
-    end
-
+    let(:order) { Factory(:order_with_subscription) }
+    
     context "when order is not completed yet" do
       it "should be associated to an order line item" do
-        @order.line_items.first.variant.product.subscribable.should be_true
+        order.line_items.first.variant.product.subscribable.should be_true
       end
 
       it "should not be created before order completetion" do
-        Spree::Subscription.find(:first, :conditions => {:magazine_id => @order.line_items.first.variant.product }).should be_nil
+        Spree::Subscription.find(:first, :conditions => {:magazine_id => order.line_items.first.variant.product }).should be_nil
       end
     end
 
@@ -100,61 +98,61 @@ describe Spree::Subscription do
       context "when user is not already subscribed" do
         before do
           # Field required to complete the order 
-          @order.bill_address = Factory(:address)
-          @order.ship_address = Factory(:address)
-          Factory(:inventory_unit, :order => @order, :state => 'shipped')
+          order.bill_address = Factory(:address)
+          order.ship_address = Factory(:address)
+          Factory(:inventory_unit, :order => order, :state => 'shipped')
           # Finalize order
-          @order.finalize!
-          # Search for the subscription
-          @subscription = Spree::Subscription.find(:first, :conditions => {:magazine_id => @order.line_items.first.variant.product })
+          order.finalize!          
         end
 
+        let(:subscription) { Spree::Subscription.find(:first, :conditions => {:magazine_id => order.line_items.first.variant.product }) }
+
         it "should be created on order completetion" do
-          @subscription.should_not be_nil
+          subscription.should_not be_nil
         end 
 
         it "should be created with pending status if payment is not completed" do
-          @subscription.state.should == "pending"
+          subscription.state.should == "pending"
         end
 
         it "should have active status if order is paid" do
-          @order.payments << Factory(:payment, :order => @order, :amount => @order.total)
+          order.payments << Factory(:payment, :order => order, :amount => order.total)
           # Capture payment
-          @order.payments.first.capture!
-          Spree::Subscription.find(:first, :conditions => {:email => @order.user.email, :magazine_id => @order.line_items.first.variant.product.id}).state.should == "active"
+          order.payments.first.capture!
+          Spree::Subscription.find(:first, :conditions => {:email => order.user.email, :magazine_id => order.line_items.first.variant.product.id}).state.should == "active"
         end
       end
 
       context "when user is already subscribed" do
         before do
-          # Create a subscription with same user and variant
-          @user = @order.user
-          @product = @order.line_items.first.variant.product
-          Spree::Subscription.create(:email => @user.email, :magazine_id => @product)
-          # Search for the subscription
-          @subscription = Spree::Subscription.find(:first, :conditions => {:magazine_id => @order.line_items.first.variant.product })
+          # Create a subscription with same user and prooduct
+          user = order.user
+          product = order.line_items.first.variant.product
+          Spree::Subscription.create(:email => user.email, :magazine_id => product)                    
         end
+
+        let(:subscription) { Spree::Subscription.find(:first, :conditions => {:magazine_id => order.line_items.first.variant.product }) }
 
         context "before order completion" do
           it "should already exists" do
-            @subscription.should_not be_nil
+            subscription.should_not be_nil
           end
         end
 
         context "after order completion" do
           before do
             # Field required to complete the order 
-            @order.bill_address = Factory(:address)
-            @order.ship_address = Factory(:address)
-            Factory(:inventory_unit, :order => @order, :state => 'shipped')
+            order.bill_address = Factory(:address)
+            order.ship_address = Factory(:address)
+            Factory(:inventory_unit, :order => order, :state => 'shipped')
             # Finalize order
-            @order.finalize!
-            # Search for all the subscriptions with current user and variant
-            @subscriptions = Spree::Subscription.find(:all, :conditions => {:magazine_id => @order.line_items.first.variant.product })
+            order.finalize!                        
           end
 
+          let(:subscriptions) { Spree::Subscription.find(:all, :conditions => {:magazine_id => order.line_items.first.variant.product }) }
+
           it "should not have to be created as new" do
-            @subscriptions.count.should == 1
+            subscriptions.count.should == 1
           end
 
           context "when it is already active"

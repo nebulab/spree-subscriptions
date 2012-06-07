@@ -1,11 +1,9 @@
 require 'spec_helper'
 
 describe Spree::Variant do
-  before(:each) do
-    @variant = Factory(:subscribable_variant)
-  end
+  let(:variant) { Factory(:subscribable_variant) }  
 
   it "should respond to issues_number" do
-    @variant.should respond_to :issues_number
+    variant.should respond_to :issues_number
   end
 end
