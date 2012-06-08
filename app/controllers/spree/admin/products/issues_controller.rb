@@ -6,6 +6,18 @@ module Spree
         before_filter :load_issue, :only => [:show, :edit, :update]
         before_filter :load_products, :except => [:show, :index]
 
+        def show
+          respond_to do |format|
+            format.html
+            format.pdf do
+              pdf = ::IssuePdf.new(@issue, view_context)
+              send_data pdf.render, filename: "Issue.pdf",
+                            type: "application/pdf",
+                            disposition: "inline"
+            end
+          end
+        end
+
         def index 
           @issues = Issue.where(:magazine_id => @magazine.id)
         end
