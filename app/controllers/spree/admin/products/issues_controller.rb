@@ -11,14 +11,13 @@ module Spree
             format.html
             format.pdf do
               addresses_list = @issue.magazine.subscriptions.map {|s| s.ship_address}
-
-              labels = ::Prawn::Labels.render(addresses_list, :type => "Avery5160") do |pdf, address|
+              labels = ::Prawn::Labels.new(addresses_list, :type => "Avery5160") do |pdf, address|
                 pdf.text "#{address.firstname} #{address.lastname}"
                 pdf.text address.address1
                 pdf.text address.address2 if address.address2.present?
                 pdf.text "#{address.city} (#{address.state_name}) #{address.zipcode}"
               end
-              send_data labels, :filename => "#{@issue.name}.pdf", :type => "application/pdf", disposition: "inline"
+              send_data labels.document.render, :filename => "#{@issue.name}.pdf", :type => "application/pdf", disposition: "inline"
             end
           end
         end
