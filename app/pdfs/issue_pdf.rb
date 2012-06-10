@@ -7,7 +7,7 @@ class IssuePdf < Prawn::Document
   end
   
   def address
-    print_page_labels 
+    print_page_labels
     start_new_page
     print_page_labels
   end  
@@ -32,5 +32,4 @@ class IssuePdf < Prawn::Document
       end
     end
   end
-
 end
