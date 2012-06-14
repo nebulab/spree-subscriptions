@@ -1,5 +1,16 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 en:
-  hello: "Hello world"
+  subscriptions: "subscriptions"
+
+  creating_subscription: "Create subscription"
+  new_subscription: "New subscription"
+  listing_subscriptions: "Available subscriptions"
+
+  activerecord:
+    attributes:
+      spree:
+        subscription:
+          created_at: "creato il"
+          email: "email"
+          id: "id"
+          remaining_issues: "rimanenti"
+          state: "stato"
