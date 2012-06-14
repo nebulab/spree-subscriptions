@@ -15,7 +15,7 @@ module Spree
       def create
         if @subscription.update_attributes(params[:subscription])
           redirect_to edit_admin_subscription_customer_path(@subscription)
-          flash.notice = t("subscription successfully created!")
+          flash.notice = t("subscription_successfully_created")
         else
           respond_with(@subscription)
         end
@@ -24,7 +24,7 @@ module Spree
       def update
         if @subscription.update_attributes(params[:subscription])
           redirect_to edit_admin_subscription_path(@subscription)
-          flash.notice = t("subscription successfully updated!")
+          flash.notice = t("subscription_successfully_updated")
         else
           respond_with(@subscription)
         end

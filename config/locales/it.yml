@@ -1,9 +1,19 @@
 it:
+  subscription: "abbonamento"
   subscriptions: "abbonamenti"
 
+  subscription_state:
+    active: "attivo"
+    canceled: "cancellato"
+    pending: "in attesa"
+
   creating_subscription: "Crea abbonamento"
+  editing_subscription: "Modifica abbonamento"
   listing_subscriptions: "Abbonamenti disponibili"
   new_subscription: "Nuovo abbonamento"
+  subscription_details: "Dettagli Abbonamento"
+  subscription_successfully_created: "Abbonamento creato con successo!"
+  subscription_successfully_updated: "Abbonamento aggiornato con successo!"
 
   activerecord:
     attributes:
@@ -11,5 +21,6 @@ it:
           created_at: "Creato il"
           email: "Email"
           id: "Id"
-          remaining_issues: "Rimanenti"
+          remaining_issues: "Edizioni Rimanenti"
           state: "Stato"
+          subscribable: "abbonamento"

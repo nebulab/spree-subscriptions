@@ -1,9 +1,19 @@
 en:
+  subscription: "subscription"
   subscriptions: "subscriptions"
 
+  subscription_state:
+    active: "active"
+    canceled: "canceled"
+    pending: "pending"
+
   creating_subscription: "Create subscription"
+  editing_subscription: "Edit subscription"
   new_subscription: "New subscription"
   listing_subscriptions: "Available subscriptions"
+  subscription_details: "Subscription Details"
+  subscription_successfully_created: "Subscription successfully created!"
+  subscription_successfully_updated: "Subscription successfully updated!"
 
   activerecord:
     attributes:
@@ -11,5 +21,6 @@ en:
         created_at: "Created at"
         email: "Email"
         id: "Id"
-        remaining_issues: "Remaining"
+        remaining_issues: "Remaining Issues"
         state: "Status"
+        subscribable: "subscription"
