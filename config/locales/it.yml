@@ -7,10 +7,9 @@ it:
 
   activerecord:
     attributes:
-      spree:
-        subscription:
-          created_at: "creato il"
-          email: "email"
-          id: "id"
-          remaining_issues: "rimanenti"
-          state: "stato"
+      spree/subscription:
+          created_at: "Creato il"
+          email: "Email"
+          id: "Id"
+          remaining_issues: "Rimanenti"
+          state: "Stato"
