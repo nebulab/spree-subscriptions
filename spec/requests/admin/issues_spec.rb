@@ -36,7 +36,7 @@ describe "Issue" do
           issue = create(:issue, :magazine => @magazine)
           other_issue = create(:issue)
           click_link "Issues"
-          page.should have_content("Listing Issues")
+          page.should have_content("Available issues")
           page.should have_content(issue.name)
           page.should_not have_content(other_issue.name)
         end
@@ -53,12 +53,12 @@ describe "Issue" do
       context "creating an issue" do
         it "should let access the new issue page" do
           click_link "Issues"
-          click_link "New Issue"
+          click_link "New issue"
         end
 
         it "should create a new issue without associated product" do
           click_link "Issues"
-          click_link "New Issue"
+          click_link "New issue"
           fill_in "Name", :with => "Magazine issue number 4"
           click_button "Create"
           within('table.index#listing_issues tbody') { page.should have_content "Magazine issue number 4" }
@@ -67,7 +67,7 @@ describe "Issue" do
         it "should create a new issue with an associated product" do
           @product_issue = create(:simple_product, :name => "Issue number 4") 
           click_link "Issues"
-          click_link "New Issue"
+          click_link "New issue"
           select "Issue number 4", :from => "Product"
           click_button "Create"
           within('table.index#listing_issues tbody tr:nth-child(1)') { click_link "Edit" }  
@@ -77,7 +77,7 @@ describe "Issue" do
         it "should not let select subscribable product as associated product" do
           @product_issue = create(:simple_product, :name => "Issue number 4")
           click_link "Issues"
-          click_link "New Issue"
+          click_link "New issue"
           page.should have_xpath("//*[@id='issue_magazine_issue_id']/option", :count => 2)          
         end
       end
@@ -97,7 +97,7 @@ describe "Issue" do
           within('table.index#listing_issues tbody tr:nth-child(1)') { click_link "Edit" }
           fill_in "Name", :with => "Magazine issue number 4"
           click_button "Update"
-          page.should have_content "issue_updated"
+          page.should have_content "Issue updated!"
           page.should have_content "Magazine issue number 4"
         end
       end   

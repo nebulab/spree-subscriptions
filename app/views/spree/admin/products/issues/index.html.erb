@@ -25,7 +25,7 @@
       <tr>
         <td><%= link_to issue.name, admin_magazine_issue_url(@magazine, issue) %></td>
         <td class="actions" data-hook="admin_issues_index_row_actions">
-          <%= link_to t("Edit"), edit_admin_magazine_issue_url(@magazine, issue), :class => 'edit' %>
+          <%= link_to t(:edit), edit_admin_magazine_issue_url(@magazine, issue), :class => 'edit' %>
         </td>
       </tr>
     <% end %>
