@@ -34,7 +34,7 @@ bundle
 Run the generator and migrate your db:
 
 ```bash
-rails g spree_subscription:install
+rails g spree_subscriptions:install
 rake db:migrate
 ```
 
