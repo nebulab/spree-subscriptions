@@ -20,7 +20,7 @@ module Spree
     def create_subscriptions
       line_items.each do |line_item|
         if line_item.variant.product.subscribable?
-          if !Subscription.find(:first, :conditions => {:email => self.user.email, :magazine_id => line_item.variant.product.id})
+          if !Subscription.where(:email => self.user.email, :magazine_id => line_item.variant.product.id).first
             Subscription.create(:email => self.user.email, :magazine_id => line_item.variant.product.id)
           end
         end
@@ -30,7 +30,7 @@ module Spree
     def activate_subscriptions
        line_items.each do |line_item|
         if line_item.variant.product.subscribable?
-          subscription = Subscription.find(:first, :conditions => {:email => self.user.email, :magazine_id => line_item.variant.product.id})
+          subscription = Subscription.where(:email => self.user.email, :magazine_id => line_item.variant.product.id).first
           subscription.activate! if subscription && subscription.state == "pending"
         end
       end

@@ -12,7 +12,7 @@
 
 <div class="toolbar" data-hook="admin_issue_show_buttons">
   <%= button_link_to t(:ship), "#", :icon => 'accept', :confirm => t(:are_you_sure) %>
-  <%= button_link_to t(:print), "#", :icon => 'pdf', :confirm => t(:are_you_sure) %>
+  <%= button_link_to t(:print), admin_magazine_issue_path(@product, @issue, :format => :pdf), :icon => 'pdf' %>
 </div>
 <br class="clear">
 <br>

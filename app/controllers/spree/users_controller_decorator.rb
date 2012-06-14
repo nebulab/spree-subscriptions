@@ -3,8 +3,9 @@ module Spree
     before_filter :include_user_subscriptions, :only => :show
 
     private
+
     def include_user_subscriptions
-      @subscriptions = Spree::Subscription.find(:all, :conditions => { :email => @user.email })
+      @subscriptions = Spree::Subscription.where(:email => @user.email)
     end
   end
 end
