@@ -1,0 +1,16 @@
+it:
+  subscriptions: "abbonamenti"
+
+  creating_subscription: "Crea abbonamento"
+  listing_subscriptions: "Abbonamenti disponibili"
+  new_subscription: "Nuovo abbonamento"
+
+  activerecord:
+    attributes:
+      spree:
+        subscription:
+          created_at: "creato il"
+          email: "email"
+          id: "id"
+          remaining_issues: "rimanenti"
+          state: "stato"
