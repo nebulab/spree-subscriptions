@@ -15,18 +15,27 @@ en:
   issues: "issues"
   issue_created: "Issue created!"
   issue_not_created: "Issue not created!"
+  issues_number: "Issues number"
   issue_updated: "Issue updated!"
   issue_not_updated: "Issue not updated!"
+  my_subscriptions: "My subscriptions"
   new_issue: "New issue"
   new_subscription: "New subscription"
   listing_issues: "Available issues"
   listing_subscriptions: "Available subscriptions"
   subscription_details: "Subscription Details"
+  subscription_ended: "Subscription ended"
+  subscription_ended_for: "Subscription for %{email} has ended!"
+  subscription_ending: "Subscription ending"
+  subscription_ending_for: "Subscription for %{email} is ending!"
   subscription_successfully_created: "Subscription successfully created!"
   subscription_successfully_updated: "Subscription successfully updated!"
+  you_have_no_subscriptions_yet: "You have not subscriptions yet"
 
   activerecord:
     attributes:
+      spree/issue:
+        name: "Name"
       spree/subscription:
         created_at: "Created at"
         email: "Email"

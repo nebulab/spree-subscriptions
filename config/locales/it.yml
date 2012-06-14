@@ -15,18 +15,27 @@ it:
   issues: "edizioni"
   issue_created: "Edizione creata!"
   issue_not_created: "Edizione non creata!"
+  issues_number: "Numero edizioni"
   issue_updated: "Edizione aggiornata!"
   issue_not_updated: "Edizione non aggiornata!"
+  my_subscriptions: "I miei abbonamenti"
   new_issue: "Nuova edizione"
   new_subscription: "Nuovo abbonamento"
   listing_issues: "Edizioni disponibili"
   listing_subscriptions: "Abbonamenti disponibili"
   subscription_details: "Dettagli Abbonamento"
+  subscription_ended: "Abbonamento esaurito"
+  subscription_ended_for: "L'abbonamento per %{email} è terminato!"
+  subscription_ending: "Abbonamento in esaurimento"
+  subscription_ending_for: "L'abbonamento per %{email} sta per terminare!"
   subscription_successfully_created: "Abbonamento creato con successo!"
   subscription_successfully_updated: "Abbonamento aggiornato con successo!"
+  you_have_no_subscriptions_yet: "Non hai ancora sottoscritto alcun abbonamento"
 
   activerecord:
     attributes:
+      spree/issue:
+        name: "Nome"
       spree/subscription:
         created_at: "Creato il"
         email: "Email"
