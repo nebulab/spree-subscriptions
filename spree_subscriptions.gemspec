@@ -3,8 +3,11 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_subscriptions'
   s.version     = '1.1.1'
-  s.summary     = 'TODO: Add gem summary here'
-  s.description = 'TODO: Add (optional) gem description here'
+  s.summary     = 'A spree extension to manage recurring subscriptions'
+  s.description = <<EOS
+      This spree extension lets an ecommerce owner manage subscriptions bought by 
+      users as a predetermined number of issues.
+  EOS
   s.required_ruby_version = '>= 1.8.7'
 
   s.author    = 'NebuLab s.n.c.'
