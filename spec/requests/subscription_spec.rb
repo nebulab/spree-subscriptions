@@ -30,7 +30,7 @@ describe "Subscription" do
       context "visiting profile page" do
         it "should find a subscription area" do
           visit spree.account_path
-          page.should have_content "My Subscriptions"
+          page.should have_content "My subscriptions"
         end
 
         it "should find a pending subscription" do
