@@ -26,7 +26,7 @@
         <td><%= subscription.created_at.to_date %></td>
         <td><%= link_to subscription.id, edit_object_url(subscription) %></td>
         <td><%= subscription.remaining_issues %></td>
-        <td><%= t(subscription.state.downcase) %></td>
+        <td><%= t(subscription.state, :scope => 'subscription_state').downcase %></td>
         <td><%= subscription.email %></td>
         <td class="actions" data-hook="admin_subscriptions_index_row_actions">
           <%= link_to_edit subscription, :class => 'edit'  %>

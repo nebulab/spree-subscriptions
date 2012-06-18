@@ -7,7 +7,7 @@
         <tr>
           <th><%= t(:subscription) %></th>
           <th><%= t(:remaining_issues, :scope => 'activerecord.attributes.spree/subscription') %></th>
-          <th><%= t(:status, :scope => 'subscription_state') %></th>
+          <th><%= t(:status) %></th>
         </tr>
       </thead>
       <tbody>
@@ -15,7 +15,7 @@
           <tr class="<%= cycle('even', 'odd') %>">
             <td><%= subscription.magazine.name %></td>
             <td><%= subscription.remaining_issues %></td>
-            <td><%= t(subscription.state).titleize %></td>
+            <td><%= t(subscription.state, :scope => 'subscription_state').titleize %></td>
           </tr>
         <% end %>
       </tbody>

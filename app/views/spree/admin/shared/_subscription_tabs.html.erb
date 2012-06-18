@@ -3,7 +3,7 @@
 <% content_for :sidebar do %>
   <div id="subscription_tab_summary" data-hook>
     <h3 id="subscription_id" data-hook><%= t(:subscription).titleize %> #<%= @subscription.id %></h3>
-    <h5 id="subscription_status" data-hook><%= t(:status, :scope => 'subscription_state') %>: <%= t(@subscription.state, :scope => :subscription_state) %></h5>
+    <h5 id="subscription_status" data-hook><%= t(:status) %>: <%= t(@subscription.state, :scope => :subscription_state) %></h5>
     <br class="clear" />
   </div>
   <br class="clear" />
