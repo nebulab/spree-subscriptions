@@ -23,6 +23,8 @@ it:
   new_subscription: "Nuovo abbonamento"
   listing_issues: "Edizioni disponibili"
   listing_subscriptions: "Abbonamenti disponibili"
+  print: "stampa"
+  subscribed: "Abbonati"
   subscription_details: "Dettagli Abbonamento"
   subscription_ended: "Abbonamento esaurito"
   subscription_ended_for: "L'abbonamento per %{email} è terminato!"

@@ -23,6 +23,8 @@ en:
   new_subscription: "New subscription"
   listing_issues: "Available issues"
   listing_subscriptions: "Available subscriptions"
+  print: "print"
+  subscribed: "Subscribed"
   subscription_details: "Subscription Details"
   subscription_ended: "Subscription ended"
   subscription_ended_for: "Subscription for %{email} has ended!"
