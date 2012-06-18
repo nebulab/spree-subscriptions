@@ -1,5 +1,5 @@
 <div class="clearfix magazine_issue">
-    <%= image_tag product.images.first.attachment.url(:product) %>
-    <h2><%= t(:description) %></h2>
-    <%= truncate(product.description, :length => 400) %>
+  <%= product_image(product) %>
+  <h2><%= t(:description) %></h2>
+  <%= truncate(product.description, :length => 400) %>
 </div>
