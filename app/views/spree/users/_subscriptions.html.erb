@@ -6,8 +6,8 @@
       <thead>
         <tr>
           <th><%= t(:subscription) %></th>
-          <th><%= t(:remaining_issues) %></th>
-          <th><%= t(:status) %></th>
+          <th><%= t(:remaining_issues, :scope => 'activerecord.attributes.spree/subscription') %></th>
+          <th><%= t(:status, :scope => 'subscription_state') %></th>
         </tr>
       </thead>
       <tbody>
