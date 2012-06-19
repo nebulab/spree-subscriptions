@@ -8,7 +8,7 @@ describe "Subscription" do
       end
       create(:free_shipping_method)
       create(:payment_method)
-      create(:product, :name => 'sport magazine', :available_on => '2011-01-06 18:21:13:', :subscribable => true)
+      create(:product, :name => 'sport magazine', :available_on => '2011-01-06 18:21:13:', :subscribable => true, :issues_number => 44)
       create(:user, :email => "johnny@rocket.com", :password => "secret", :password_confirmation => "secret")
     end
 
@@ -17,6 +17,9 @@ describe "Subscription" do
         visit spree.root_path
         add_to_cart("sport magazine")
         complete_checkout_with_login("johnny@rocket.com", "secret")
+        visit spree.account_path
+        page.should have_content "sport magazine"
+        page.should have_content "Pending"
       end
     end
 
@@ -37,6 +40,7 @@ describe "Subscription" do
           visit spree.account_path
           page.should have_content "sport magazine"
           page.should have_content "pending"
+          page.should have_content "44"
         end
         
         context "after order is paid" do

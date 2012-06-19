@@ -20,8 +20,8 @@ module Spree
     def create_subscriptions
       line_items.each do |line_item|
         if line_item.variant.product.subscribable?
-          if !Subscription.where(:email => self.user.email, :magazine_id => line_item.variant.product.id).first
-            Subscription.create(:email => self.user.email, :magazine_id => line_item.variant.product.id)
+          if !Subscription.where(:email => self.user.email, :magazine_id => line_item.variant.product.id).first            
+            Subscription.create(:email => self.user.email, :magazine_id => line_item.variant.product.id, :remaining_issues => line_item.variant.issues_number)
           end
         end
       end
