@@ -45,7 +45,7 @@ describe "Subscription" do
         
         context "after order is paid" do
           it "should find an active subscription" do
-            order = Spree::Order.find(:first, :conditions => { :user_id => Spree::User.find(:first, :conditions => { :email => "johnny@rocket.com"}).id })
+            order = Spree::Order.where(:user_id => Spree::User.where(:email => "johnny@rocket.com").first.id).first
             order.payments.first.complete!
             visit spree.account_path
             page.should have_content "sport magazine"
