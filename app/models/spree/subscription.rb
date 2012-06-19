@@ -1,5 +1,5 @@
 class Spree::Subscription < ActiveRecord::Base
-  attr_accessible :email, :magazine_id, :remaining_issues, :ship_address_attributes
+  attr_accessible :email, :magazine_id, :remaining_issues, :ship_address_attributes, :ship_address
 
   belongs_to :magazine, :class_name => 'Spree::Product'
   belongs_to :ship_address, :class_name => 'Spree::Address'

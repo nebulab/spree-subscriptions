@@ -41,6 +41,7 @@ describe "Subscription" do
           page.should have_content "sport magazine"
           page.should have_content "pending"
           page.should have_content "44"
+          page.should have_content "Johnny Rocket"
         end
         
         context "after order is paid" do

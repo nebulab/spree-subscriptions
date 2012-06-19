@@ -6,6 +6,7 @@
       <thead>
         <tr>
           <th><%= t(:subscription) %></th>
+          <th><%= t(:shipped_to) %></th>
           <th><%= t(:remaining_issues, :scope => 'activerecord.attributes.spree/subscription') %></th>
           <th><%= t(:status) %></th>
         </tr>
@@ -14,6 +15,7 @@
         <% @subscriptions.each do |subscription| %>
           <tr class="<%= cycle('even', 'odd') %>">
             <td><%= subscription.magazine.name %></td>
+            <td><%= subscription.ship_address.full_name %></td>
             <td><%= subscription.remaining_issues %></td>
             <td><%= t(subscription.state, :scope => 'subscription_state').titleize %></td>
           </tr>

@@ -24,6 +24,7 @@ it:
   listing_issues: "Edizioni disponibili"
   listing_subscriptions: "Abbonamenti disponibili"
   print: "stampa"
+  shipped_to: "Spedito a"
   subscribed: "Abbonati"
   subscription_details: "Dettagli Abbonamento"
   subscription_ended: "Abbonamento esaurito"
