@@ -14,6 +14,15 @@ def complete_checkout_with_login(email, password)
   confirm_step
 end
 
+def complete_checkout_with_guest(email)
+  begin_checkout
+  guest_step(email)
+  address_step
+  delivery_step
+  payment_step
+  confirm_step
+end
+
 def begin_checkout
   visit spree.cart_path
   click_link "Checkout"
@@ -25,6 +34,13 @@ def login_step(email, password)
     fill_in "Password", :with => password
   end
   click_button "Login" 
+end
+
+def guest_step(email)
+  within("#guest_checkout") do
+    fill_in "Email", :with => email 
+  end
+  click_button "Continue" 
 end
 
 def address_step
