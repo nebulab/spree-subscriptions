@@ -53,7 +53,6 @@ def address_step
     fill_in "Phone", :with => addr[:phone]
     fill_in "Zip", :with => addr[:zipcode]
     select FactoryGirl.attributes_for(:country)[:name], :from => "Country"
-    sleep(1)
     fill_in "order_bill_address_attributes_state_name", :with => addr[:state_name]
   end
   within("#shipping") do
