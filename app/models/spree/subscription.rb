@@ -25,6 +25,8 @@ class Spree::Subscription < ActiveRecord::Base
     if existing_magazine
       total_remaining_issues = existing_magazine.remaining_issues + opts[:remaining_issues].to_i
       existing_magazine.update_attribute(:remaining_issues, total_remaining_issues)
+      existing_magazine.update_attribute(:ship_address_id, opts[:ship_address].id)
+      existing_magazine
     else
       self.create(:email => opts[:email], 
         :magazine_id => opts[:magazine].id, 

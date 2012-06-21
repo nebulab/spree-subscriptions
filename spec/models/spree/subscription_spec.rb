@@ -81,6 +81,31 @@ describe Spree::Subscription do
     end
   end
 
+  context "when renewing a subscription" do
+    let(:subscription) { Factory.create(:paid_subscription) }
+
+    it "should update remaining issues" do
+      renewal = Spree::Subscription.create_for(
+        :email => subscription.email, 
+        :ship_address => subscription.ship_address,
+        :magazine => subscription.magazine,
+        :remaining_issues => 5
+      )
+      renewal.remaining_issues.should == 10
+    end
+
+    it "should update ship address with latest ship address" do
+      new_ship_address = Factory.create(:customer_address)
+      renewal = Spree::Subscription.create_for(
+        :email => subscription.email, 
+        :ship_address => new_ship_address,
+        :magazine => subscription.magazine,
+        :remaining_issues => 5
+      )
+      subscription.ship_address.id.should_not == renewal.ship_address.id
+    end
+  end
+
   context "during an order" do
     let(:order) { Factory(:order_with_subscription) }
     
