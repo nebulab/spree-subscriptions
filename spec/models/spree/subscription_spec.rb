@@ -154,10 +154,6 @@ describe Spree::Subscription do
           it "should not have to be created as new" do
             subscriptions.count.should == 1
           end
-
-          context "when it is already active"
-            #it "should not have pending state if subscription is already active"
-            #it "should be renewed on payment completion if already exists"
         end
       end
     end

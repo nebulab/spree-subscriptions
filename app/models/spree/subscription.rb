@@ -17,6 +17,23 @@ class Spree::Subscription < ActiveRecord::Base
     end
   end
 
+  def self.create_for(opts)
+    opts.to_options!.assert_valid_keys(:email, :ship_address, :magazine, :remaining_issues)
+
+    existing_magazine = self.where(:email => opts[:email], :magazine_id => opts[:magazine].id).first
+
+    if existing_magazine
+      total_remaining_issues = existing_magazine.remaining_issues + opts[:remaining_issues].to_i
+      existing_magazine.update_attribute(:remaining_issues, total_remaining_issues)
+    else
+      self.create(:email => opts[:email], 
+        :magazine_id => opts[:magazine].id, 
+        :remaining_issues => opts[:remaining_issues],
+        :ship_address => opts[:ship_address],
+      )
+    end
+  end
+
   def ended?
     remaining_issues == 0
   end

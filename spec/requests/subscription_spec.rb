@@ -8,7 +8,7 @@ describe "Subscription" do
       end
       create(:free_shipping_method)
       create(:payment_method)
-      create(:product, :name => 'sport magazine', :available_on => '2011-01-06 18:21:13:', :subscribable => true, :issues_number => 44)
+      @product = create(:product, :name => 'sport magazine', :available_on => '2011-01-06 18:21:13:', :subscribable => true, :issues_number => 44)
       @user = create(:user, :email => "johnny@rocket.com", :password => "secret", :password_confirmation => "secret")
     end
 
@@ -79,6 +79,20 @@ describe "Subscription" do
             page.should have_content "Active"
           end
         end
+      end
+    end
+
+    context "on susequent orders" do
+      it "should add issue numbers when renewing" do
+        create_existing_subscription_for("johnny@rocket.com", @product, 44)
+        visit spree.root_path
+        add_to_cart("sport magazine")
+        complete_checkout_with_login("johnny@rocket.com", "secret")
+        complete_payment
+        visit spree.account_path
+        page.should have_content "sport magazine"
+        page.should have_content "88"
+        page.should have_content "Active"
       end
     end
   end
