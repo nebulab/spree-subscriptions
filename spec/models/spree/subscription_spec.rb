@@ -109,13 +109,9 @@ describe Spree::Subscription do
 
         let(:subscription) { Spree::Subscription.where(:magazine_id => order.line_items.first.variant.product.id).first }
 
-        it "should be created on order completetion" do
-          subscription.should_not be_nil
+        it "should not be created on order completetion" do
+          subscription.should be_nil
         end 
-
-        it "should be created with pending status if payment is not completed" do
-          subscription.state.should == "pending"
-        end
 
         it "should have active status if order is paid" do
           order.payments << Factory(:payment, :order => order, :amount => order.total)

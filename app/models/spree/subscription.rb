@@ -11,13 +11,9 @@ class Spree::Subscription < ActiveRecord::Base
   
   validates_with SubscriptionValidator
   
-  state_machine :state, :initial => 'pending' do
+  state_machine :state, :initial => 'active' do
     event :cancel do
       transition :to => 'canceled', :if => :allow_cancel?
-    end
-
-    event :activate do
-      transition :to => 'active', :from => 'pending'
     end
   end
 

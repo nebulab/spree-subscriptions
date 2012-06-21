@@ -75,3 +75,12 @@ end
 def confirm_step
   page.should have_content("Your order has been processed successfully")
 end
+
+def complete_payment
+  order = Spree::Order.where(:user_id => Spree::User.where(:email => "johnny@rocket.com").first.id).first
+  order.payments.first.complete!
+end
+
+def complete_guest_payment
+  Spree::Order.last.payments.first.complete!
+end

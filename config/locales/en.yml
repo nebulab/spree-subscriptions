@@ -5,7 +5,6 @@ en:
   subscription_state:
     active: "active"
     canceled: "canceled"
-    pending: "pending"
 
   creating_issue: "Create issue"
   creating_subscription: "Create subscription"
