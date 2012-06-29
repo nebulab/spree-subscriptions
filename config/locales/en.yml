@@ -25,6 +25,7 @@ en:
   listing_subscriptions: "Available subscriptions"
   print: "print"
   shipped_to: "Shipped to"
+  subscribe_call_to_action: "Subscribe"
   subscribed: "Subscribed"
   subscription_details: "Subscription Details"
   subscription_ended: "Subscription ended"

@@ -25,6 +25,7 @@ it:
   listing_subscriptions: "Abbonamenti disponibili"
   print: "stampa"
   shipped_to: "Spedito a"
+  subscribe_call_to_action: "Abbonati"
   subscribed: "Abbonati"
   subscription_details: "Dettagli Abbonamento"
   subscription_ended: "Abbonamento esaurito"
