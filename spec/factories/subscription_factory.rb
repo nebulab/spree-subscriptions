@@ -13,4 +13,15 @@ FactoryGirl.define do
   factory :ending_subscription, :parent => :subscription do
     remaining_issues 2
   end
+
+  factory :customer_address, :class => Spree::Address do
+    firstname 'Johnny'
+    lastname 'Rocket'
+    address1 'Sturdust Street'
+    city 'Nebula'
+    phone '01010101'
+    zipcode 1111
+    state_name 'Galaxy'
+    country
+  end
 end

@@ -1,11 +1,11 @@
 module Spree
   Payment.class_eval do
     state_machine :initial => 'checkout' do
-      after_transition :to => 'completed', :do => :activate_subscriptions!
+      after_transition :to => 'completed', :do => :create_subscriptions!
     end
 
-    def activate_subscriptions!
-      self.order.activate_subscriptions
+    def create_subscriptions!
+      self.order.create_subscriptions
     end
   end
 end

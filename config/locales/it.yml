@@ -5,7 +5,6 @@ it:
   subscription_state:
     active: "attivo"
     canceled: "cancellato"
-    pending: "in attesa"
 
   creating_issue: "Crea edizione"
   creating_subscription: "Crea abbonamento"

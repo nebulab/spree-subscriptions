@@ -44,17 +44,16 @@ def guest_step(email)
 end
 
 def address_step
+  addr = FactoryGirl.attributes_for(:customer_address)
   within("#billing") do
-    fill_in "Name", :with => "Johnny"
-    fill_in "Last Name", :with => "Rocket"
-    fill_in "Address", :with => "Sturdust Street"
-    fill_in "City", :with => "Nebula"
-    fill_in "Phone", :with => "01010101"
-    fill_in "Zip", :with => "1111"
-    select "United States of Foo", :from => "Country"
-    sleep(1)
-    #select "Alabama", :from => "order_bill_address_attributes_state_id"
-    fill_in "order_bill_address_attributes_state_name", :with => "Galaxy"
+    fill_in "Name", :with => addr[:firstname]
+    fill_in "Last Name", :with => addr[:lastname]
+    fill_in "Address", :with => addr[:address1]
+    fill_in "City", :with => addr[:city]
+    fill_in "Phone", :with => addr[:phone]
+    fill_in "Zip", :with => addr[:zipcode]
+    select FactoryGirl.attributes_for(:country)[:name], :from => "Country"
+    fill_in "order_bill_address_attributes_state_name", :with => addr[:state_name]
   end
   within("#shipping") do
     check("Use Billing Address")
@@ -74,4 +73,22 @@ end
 
 def confirm_step
   page.should have_content("Your order has been processed successfully")
+end
+
+def complete_payment
+  order = Spree::Order.where(:user_id => Spree::User.where(:email => "johnny@rocket.com").first.id).first
+  order.payments.first.complete!
+end
+
+def complete_guest_payment
+  Spree::Order.last.payments.first.complete!
+end
+
+def create_existing_subscription_for(email, product, remaining)
+  FactoryGirl.create(:subscription, 
+    :email => email, 
+    :magazine => product, 
+    :ship_address => create(:customer_address),
+    :remaining_issues => remaining
+  )
 end

@@ -11,13 +11,28 @@ class Spree::Subscription < ActiveRecord::Base
   
   validates_with SubscriptionValidator
   
-  state_machine :state, :initial => 'pending' do
+  state_machine :state, :initial => 'active' do
     event :cancel do
       transition :to => 'canceled', :if => :allow_cancel?
     end
+  end
 
-    event :activate do
-      transition :to => 'active', :from => 'pending'
+  def self.create_for(opts)
+    opts.to_options!.assert_valid_keys(:email, :ship_address, :magazine, :remaining_issues)
+
+    existing_magazine = self.where(:email => opts[:email], :magazine_id => opts[:magazine].id).first
+
+    if existing_magazine
+      total_remaining_issues = existing_magazine.remaining_issues + opts[:remaining_issues].to_i
+      existing_magazine.update_attribute(:remaining_issues, total_remaining_issues)
+      existing_magazine.update_attribute(:ship_address_id, opts[:ship_address].id)
+      existing_magazine
+    else
+      self.create(:email => opts[:email], 
+        :magazine_id => opts[:magazine].id, 
+        :remaining_issues => opts[:remaining_issues],
+        :ship_address => opts[:ship_address],
+      )
     end
   end
 

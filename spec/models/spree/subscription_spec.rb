@@ -81,6 +81,31 @@ describe Spree::Subscription do
     end
   end
 
+  context "when renewing a subscription" do
+    let(:subscription) { Factory.create(:paid_subscription) }
+
+    it "should update remaining issues" do
+      renewal = Spree::Subscription.create_for(
+        :email => subscription.email, 
+        :ship_address => subscription.ship_address,
+        :magazine => subscription.magazine,
+        :remaining_issues => 5
+      )
+      renewal.remaining_issues.should == 10
+    end
+
+    it "should update ship address with latest ship address" do
+      new_ship_address = Factory.create(:customer_address)
+      renewal = Spree::Subscription.create_for(
+        :email => subscription.email, 
+        :ship_address => new_ship_address,
+        :magazine => subscription.magazine,
+        :remaining_issues => 5
+      )
+      subscription.ship_address.id.should_not == renewal.ship_address.id
+    end
+  end
+
   context "during an order" do
     let(:order) { Factory(:order_with_subscription) }
     
@@ -109,13 +134,9 @@ describe Spree::Subscription do
 
         let(:subscription) { Spree::Subscription.where(:magazine_id => order.line_items.first.variant.product.id).first }
 
-        it "should be created on order completetion" do
-          subscription.should_not be_nil
+        it "should not be created on order completetion" do
+          subscription.should be_nil
         end 
-
-        it "should be created with pending status if payment is not completed" do
-          subscription.state.should == "pending"
-        end
 
         it "should have active status if order is paid" do
           order.payments << Factory(:payment, :order => order, :amount => order.total)
@@ -158,10 +179,6 @@ describe Spree::Subscription do
           it "should not have to be created as new" do
             subscriptions.count.should == 1
           end
-
-          context "when it is already active"
-            #it "should not have pending state if subscription is already active"
-            #it "should be renewed on payment completion if already exists"
         end
       end
     end

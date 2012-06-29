@@ -8,7 +8,7 @@ describe "Subscription" do
       end
       create(:free_shipping_method)
       create(:payment_method)
-      create(:product, :name => 'sport magazine', :available_on => '2011-01-06 18:21:13:', :subscribable => true, :issues_number => 44)
+      @product = create(:product, :name => 'sport magazine', :available_on => '2011-01-06 18:21:13:', :subscribable => true, :issues_number => 44)
       @user = create(:user, :email => "johnny@rocket.com", :password => "secret", :password_confirmation => "secret")
     end
 
@@ -17,9 +17,11 @@ describe "Subscription" do
         visit spree.root_path
         add_to_cart("sport magazine")
         complete_checkout_with_login("johnny@rocket.com", "secret")
+        complete_payment
         visit spree.account_path
         page.should have_content "sport magazine"
-        page.should have_content "Pending"
+        page.should have_content "44"
+        page.should have_content "Active"
       end
     end
 
@@ -28,10 +30,12 @@ describe "Subscription" do
         visit spree.root_path
         add_to_cart("sport magazine")
         complete_checkout_with_guest("johnny@rocket.com")
+        complete_guest_payment
         sign_in_as!(@user)
         visit spree.account_path
         page.should have_content "sport magazine"
-        page.should have_content "Pending"
+        page.should have_content "44"
+        page.should have_content "Active"
       end
     end
 
@@ -48,23 +52,47 @@ describe "Subscription" do
           page.should have_content "My subscriptions"
         end
 
-        it "should find a pending subscription" do
+        it "should not find an active subscription if order is not paid" do
           visit spree.account_path
-          page.should have_content "sport magazine"
-          page.should have_content "pending"
-          page.should have_content "44"
-          page.should have_content "Johnny Rocket"
+          page.should_not have_content "sport magazine"
+          page.should_not have_content "44"
+          page.should_not have_content "Active"
+          page.should_not have_content "Johnny Rocket"
         end
         
         context "after order is paid" do
+          before do
+            complete_payment
+          end
+
+          it "should find a pending subscription" do
+            visit spree.account_path
+            page.should have_content "sport magazine"
+            page.should have_content "44"
+            page.should have_content "Active"
+            page.should have_content "Johnny Rocket"
+          end
+
           it "should find an active subscription" do
-            order = Spree::Order.where(:user_id => Spree::User.where(:email => "johnny@rocket.com").first.id).first
-            order.payments.first.complete!
             visit spree.account_path
             page.should have_content "sport magazine"
             page.should have_content "Active"
           end
         end
+      end
+    end
+
+    context "on susequent orders" do
+      it "should add issue numbers when renewing" do
+        create_existing_subscription_for("johnny@rocket.com", @product, 44)
+        visit spree.root_path
+        add_to_cart("sport magazine")
+        complete_checkout_with_login("johnny@rocket.com", "secret")
+        complete_payment
+        visit spree.account_path
+        page.should have_content "sport magazine"
+        page.should have_content "88"
+        page.should have_content "Active"
       end
     end
   end
