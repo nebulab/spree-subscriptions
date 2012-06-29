@@ -15,4 +15,9 @@ describe Spree::LineItem do
     line_item = Factory.build(:line_item, :quantity => 2)
     line_item.should be_valid
   end
+
+  it "can be destroyed setting quantity to 0" do
+    line_item = Factory.build(:subscribable_line_item, :quantity => 0)
+    line_item.should be_valid
+  end
 end
