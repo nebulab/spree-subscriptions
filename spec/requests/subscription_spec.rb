@@ -8,102 +8,86 @@ describe "Subscription" do
       end
       create(:free_shipping_method)
       create(:payment_method)
-      @product = create(:product, :name => 'sport magazine', :available_on => '2011-01-06 18:21:13:', :subscribable => true, :issues_number => 44)
+      @product = create(:product, :name => 'sport magazine', :available_on => '2011-01-06 18:21:13:', :subscribable => true, :issues_number => 12)
       @user = create(:user, :email => "johnny@rocket.com", :password => "secret", :password_confirmation => "secret")
     end
 
-    context "checking out a subscribable product" do
-      it "should be able to complete checkout with a magazine in the order" do
-        visit spree.root_path
-        add_to_cart("sport magazine")
-        complete_checkout_with_login("johnny@rocket.com", "secret")
-        complete_payment
-        visit spree.account_path
+    it "should be able to complete checkout with a magazine in the order" do
+      add_to_cart("sport magazine")
+      complete_checkout_with_login("johnny@rocket.com", "secret")
+      complete_payment
+      visit spree.account_path
+      within("table.subscription-summary") do
         page.should have_content "sport magazine"
-        page.should have_content "44"
+        page.should have_content "12"
         page.should have_content "Active"
       end
     end
 
-    context "checking out with guest checkout" do
-      it "should be able to complete checkout with a magazine in the order" do
-        visit spree.root_path
-        add_to_cart("sport magazine")
-        complete_checkout_with_guest("johnny@rocket.com")
-        complete_guest_payment
-        sign_in_as!(@user)
-        visit spree.account_path
+    it "should be able to complete checkout with a magazine in the order" do
+      add_to_cart("sport magazine")
+      complete_checkout_with_guest("johnny@rocket.com")
+      complete_guest_payment
+      sign_in_as!(@user)
+      visit spree.account_path
+      within("table.subscription-summary") do
         page.should have_content "sport magazine"
-        page.should have_content "44"
+        page.should have_content "12"
         page.should have_content "Active"
       end
     end
 
     context "after order completion" do
       before do
-        visit spree.root_path
         add_to_cart("sport magazine")
         complete_checkout_with_login("johnny@rocket.com", "secret")
       end
 
-      context "visiting profile page" do
-        it "should find a subscription area" do
-          visit spree.account_path
-          page.should have_content "My subscriptions"
-        end
+      it "should find a subscription area in account page" do
+        visit spree.account_path
+        page.should have_content "My subscriptions"
+      end
 
-        it "should not find an active subscription if order is not paid" do
-          visit spree.account_path
-          page.should_not have_content "sport magazine"
-          page.should_not have_content "44"
-          page.should_not have_content "Active"
-          page.should_not have_content "Johnny Rocket"
-        end
-        
-        context "after order is paid" do
-          before do
-            complete_payment
-          end
+      it "should not find an active subscription area in accont page if order is not paid" do
+        visit spree.account_path
+        page.should_not have_content "sport magazine"                     
+      end
 
-          it "should find a pending subscription" do
-            visit spree.account_path
-            page.should have_content "sport magazine"
-            page.should have_content "44"
-            page.should have_content "Active"
-            page.should have_content "Johnny Rocket"
-          end
-
-          it "should find an active subscription" do
-            visit spree.account_path
-            page.should have_content "sport magazine"
-            page.should have_content "Active"
-          end
+      it "should find an active subscription after order is paid" do
+        complete_payment
+        visit spree.account_path
+        within("table.subscription-summary") do
+          page.should have_content "sport magazine"
+          page.should have_content "12"
+          page.should have_content "Active"
+          page.should have_content "Johnny Rocket"
         end
       end
     end
 
     context "on susequent orders" do
       it "should add issue numbers when renewing" do
-        create_existing_subscription_for("johnny@rocket.com", @product, 44)
-        visit spree.root_path
+        create_existing_subscription_for("johnny@rocket.com", @product, 2)
         add_to_cart("sport magazine")
         complete_checkout_with_login("johnny@rocket.com", "secret")
         complete_payment
         visit spree.account_path
-        page.should have_content "sport magazine"
-        page.should have_content "88"
-        page.should have_content "Active"
+        within("table.subscription-summary") do
+          page.should have_content "sport magazine"
+          page.should have_content "14" # 2 (remaining) + 12 
+          page.should have_content "Active"
+        end
       end
     end
 
     context "checking out a subscribable product with variants" do
       before do
-        option_type = create(:option_type, :name => "numbers", :presentation => "Numbers")
-        product_option_type = create(:product_option_type, :product => @product)
+        option_type = create(:option_type, :name => "type", :presentation => "Duration")
+        product_option_type = create(:product_option_type, :product => @product, :option_type => option_type)
         annual_option_value = create(:option_value, :name => "annual", :presentation => "Annual", :option_type => option_type)
         biennal_option_value = create(:option_value, :name => "biennal", :presentation => "Biennal", :option_type => option_type)
-        @variant1 = create(:variant, :product => @product, :issues_number => 6, :option_values => [annual_option_value])
-        @variant2 = create(:variant, :product => @product, :issues_number => 44, :option_values => [biennal_option_value])
+        @variant1 = create(:variant, :product => @product, :issues_number => 12, :option_values => [annual_option_value])
+        @variant2 = create(:variant, :product => @product, :issues_number => 24, :option_values => [biennal_option_value])
       end
 
       it "should add variant issue number to subscription" do        
@@ -113,7 +97,7 @@ describe "Subscription" do
         visit spree.account_path
         within("table.subscription-summary") do
           page.should have_content "sport magazine"
-          page.should have_content "44"
+          page.should have_content "24"
           page.should have_content "Active"
         end
       end
@@ -126,7 +110,7 @@ describe "Subscription" do
         visit spree.account_path
         within("table.subscription-summary") do
           page.should have_content "sport magazine"
-          page.should have_content "50"
+          page.should have_content "30" # 6 (remaining) + 24
           page.should have_content "Active"
         end
       end
