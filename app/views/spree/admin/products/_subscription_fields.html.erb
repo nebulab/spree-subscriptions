@@ -3,6 +3,4 @@
   <%= f.check_box :subscribable %>
 <% end %>
 
-<% if @product.subscribable? %>
-  <%= render :partial => 'spree/admin/variants/subscription_fields', :locals => { :f => f } %>  
-<% end %>
+<%= render :partial => 'spree/admin/variants/subscription_fields', :locals => { :f => f } %>  
