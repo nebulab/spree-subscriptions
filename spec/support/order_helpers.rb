@@ -1,7 +1,8 @@
-def add_to_cart(name)
+def add_to_cart(name, variant=nil)
   visit spree.root_path
   click_link name
   # in the product page
+  choose variant if variant
   click_button "add-to-cart-button"
 end
 

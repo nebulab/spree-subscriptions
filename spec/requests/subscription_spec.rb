@@ -95,5 +95,41 @@ describe "Subscription" do
         page.should have_content "Active"
       end
     end
+
+    context "checking out a subscribable product with variants" do
+      before do
+        option_type = create(:option_type, :name => "numbers", :presentation => "Numbers")
+        product_option_type = create(:product_option_type, :product => @product)
+        annual_option_value = create(:option_value, :name => "annual", :presentation => "Annual", :option_type => option_type)
+        biennal_option_value = create(:option_value, :name => "biennal", :presentation => "Biennal", :option_type => option_type)
+        @variant1 = create(:variant, :product => @product, :issues_number => 6, :option_values => [annual_option_value])
+        @variant2 = create(:variant, :product => @product, :issues_number => 44, :option_values => [biennal_option_value])
+      end
+
+      it "should add variant issue number to subscription" do        
+        add_to_cart("sport magazine", @variant2.options_text)
+        complete_checkout_with_login("johnny@rocket.com", "secret")
+        complete_payment
+        visit spree.account_path
+        within("table.subscription-summary") do
+          page.should have_content "sport magazine"
+          page.should have_content "44"
+          page.should have_content "Active"
+        end
+      end
+
+      it "should add issue numbers when renewing with variants" do
+        create_existing_subscription_for("johnny@rocket.com", @product, 6)
+        add_to_cart("sport magazine", @variant2.options_text)
+        complete_checkout_with_login("johnny@rocket.com", "secret")
+        complete_payment
+        visit spree.account_path
+        within("table.subscription-summary") do
+          page.should have_content "sport magazine"
+          page.should have_content "50"
+          page.should have_content "Active"
+        end
+      end
+    end
   end
 end
