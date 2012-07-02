@@ -9,54 +9,7 @@ describe "Subscription" do
         config.default_country_id = create(:country).id
       end
       create(:state, :country_id => 1)
-    end
-
-    before(:each) do
       visit spree.admin_path
-    end
-
-    context "listing subscriptions" do
-      context "sorting" do
-        # sort by subscription fields
-      end
-    end
-
-    context "searching subscriptions" do
-      # search by some fields
-    end
-
-    context "creating a new subscription" do
-      before(:each) do
-        create(:product, :name => 'sport magazine', :available_on => '2011-01-06 18:21:13:', :subscribable => true)
-        create(:product, :name => 'web magazine', :available_on => '2011-01-06 18:21:13:', :subscribable => true)
-        create(:product, :name => 'the book', :available_on => '2011-01-06 18:21:13:')
-        click_link "Subscriptions"
-        click_link "admin_new_subscription"
-      end
-
-      it "should have the correct fields" do
-        within('#new_subscription') do  
-          page.should have_content('Product')
-          page.should have_content('Remaining Issues')
-        end
-      end
-
-      it "should let choose only subscribable product" do
-        # this is an hack. The following line does not work!!
-        # page.has_select?('Product', :with_options => ['the book'])
-        page.should have_xpath("//*[@id='subscription_magazine_id']/option", :count => 2)
-      end
-
-      it "should be created correctly" do
-        select "web magazine", :from => "Product"
-        click_button "Create"
-        page.should have_content("successfully created!")
-        # within('table#listing_subscriptions tbody tr:nth-child(1)') { click_link("Edit") } 
-        within('.sidebar') { click_link("Subscription Details") }
-        # hack. The following line does not work
-        # page.has_select?('Product', :selected => "web magazine")
-        find_field('Product').find('option[selected]').text.should == "web magazine"
-      end
     end
 
     context "editing a subscription" do
