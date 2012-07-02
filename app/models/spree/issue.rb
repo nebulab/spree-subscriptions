@@ -18,5 +18,9 @@ class Spree::Issue < ActiveRecord::Base
   def ship!
     subscriptions.each{ |s| s.ship!(self) }
   end
+
+  def shipped?
+    !shipped_issues.empty?
+  end
   
 end

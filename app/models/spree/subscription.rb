@@ -10,6 +10,8 @@ class Spree::Subscription < ActiveRecord::Base
   accepts_nested_attributes_for :ship_address
   
   validates_with SubscriptionValidator
+
+  scope :eligible_for_shipping, where("remaining_issues >= 1")
   
   state_machine :state, :initial => 'active' do
     event :cancel do

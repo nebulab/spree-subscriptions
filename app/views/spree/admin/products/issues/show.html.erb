@@ -31,7 +31,7 @@
     <th><%= t(:phone) %></th>
   </thead>
   <tbody>
-    <% @product.subscriptions.each do |subscription|%>
+    <% @product_subscriptions.each do |subscription|%>
       <tr id="<%= spree_dom_id subscription %>" data-hook="admin_subscriptions_index_rows">
         <td><%= subscription.email %></td>
         <td><%= subscription.ship_address.firstname %></td>

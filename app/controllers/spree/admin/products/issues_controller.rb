@@ -7,6 +7,11 @@ module Spree
         before_filter :load_products, :except => [:show, :index]
 
         def show
+          if @issue.shipped?
+            @product_subscriptions = @issue.shipped_issues.map { |shipped_issue| shipped_issue.subscription }
+          else
+            @product_subscriptions = Subscription.eligible_for_shipping.where(:magazine_id => @magazine.id)
+          end
           respond_to do |format|
             format.html
             format.pdf do
@@ -22,12 +27,12 @@ module Spree
           end
         end
 
-        def index 
+        def index
           @issues = Issue.where(:magazine_id => @magazine.id)
         end
 
         def update
-          if @issue.update_attributes(params[:issue])          
+          if @issue.update_attributes(params[:issue])
             flash[:notice] = t('issue_updated')
             redirect_to admin_magazine_issue_path(@magazine, @issue)
           else
