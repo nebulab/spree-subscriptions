@@ -43,7 +43,12 @@ rake db:migrate
 Configure default issues number for subscriptions
 -------------------------------------------------
 
-TODO: write this section
+For each subscribable product (and variants) you can choose the number of issues a user can subscribe to. Default value is 12. 
+To change it you can run from the rails console:
+
+```
+Spree::Subscriptions::Config.set(:default_issues_number, 24)
+``` 
 
 Use delayed job for email notifications
 ---------------------------------------
