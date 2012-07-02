@@ -140,7 +140,7 @@ describe "Issue" do
           it "should display the list of user that received the issue" do
             click_link "Issues"
             within('table.index#listing_issues tbody tr:nth-child(1)') { click_link @issue.name }
-            page.should have_selector("table#subscriptions_listing tbody tr", :count => 7) # @issue.shipped_issues.count)
+            page.should have_selector("table#subscriptions_listing tbody tr", :count =>  @issue.shipped_issues.count)
           end
         end
       end
