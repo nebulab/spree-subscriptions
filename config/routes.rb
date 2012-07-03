@@ -5,6 +5,7 @@ Spree::Core::Engine.routes.prepend do
     end
     resources :products, :as => :magazines do
       resources :issues, :controller => "products/issues"
+      match "issues/:id/ship", :to => "products/issues#ship", :via => :get, :as => :issue_ship
     end
   end
 end

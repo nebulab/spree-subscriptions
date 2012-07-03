@@ -11,13 +11,13 @@
 <% end %>
 
 <div class="toolbar" data-hook="admin_issue_show_buttons">
-  <%= button_link_to t(:ship), "#", :icon => 'accept', :confirm => t(:are_you_sure) %>
+  <%= button_link_to t(:ship), admin_magazine_issue_ship_path(@product, @issue), :icon => 'accept', :confirm => t(:are_you_sure) if !@issue.shipped? %>
   <%= button_link_to t(:print), admin_magazine_issue_path(@product, @issue, :format => :pdf), :icon => 'pdf' %>
 </div>
 <br class="clear">
 <br>
 
-<h1><%= t(:subscribed) %></h1>
+<h1><%= @issue.shipped? ? t(:shipped_to) : t(:subscribed) %></h1>
 
 <table class="index" id="subscriptions_listing">
   <thead data-hook="admin_subscriptions_index_headers">

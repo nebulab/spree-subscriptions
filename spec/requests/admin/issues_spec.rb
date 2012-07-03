@@ -129,18 +129,44 @@ describe "Issue" do
           page.should_not have_content @other_subscription.email
         end
 
-        context "after issue is shipped" do
+        context "shipping an issue" do
           before do
             Spree::Subscriptions::Config.use_delayed_job = false
             (0..5).each { |i| create(:ending_subscription, :magazine => @magazine) }
-            @issue.ship!
-            (0..5).each { |i| create(:ending_subscription, :magazine => @magazine) }
           end
           
-          it "should display the list of user that received the issue" do
+          it "should show listing as 'subscribed'" do
             click_link "Issues"
             within('table.index#listing_issues tbody tr:nth-child(1)') { click_link @issue.name }
-            page.should have_selector("table#subscriptions_listing tbody tr", :count =>  @issue.shipped_issues.count)
+            page.should have_content "Subscribed"
+          end
+
+          it "should be markable as shipped" do
+            click_link "Issues"
+            within('table.index#listing_issues tbody tr:nth-child(1)') { click_link @issue.name }
+            click_link "ship"
+            page.should have_content "successfully shipped"
+          end
+
+          context "after issue is shipped" do
+            before do
+              @issue.ship!
+              (0..5).each { |i| create(:ending_subscription, :magazine => @magazine) }
+              click_link "Issues"
+              within('table.index#listing_issues tbody tr:nth-child(1)') { click_link @issue.name }
+            end
+
+            it "should not see the ship button" do
+              page.should_not have_content "ship"
+            end
+
+            it "should show listing as 'shipped to'" do
+              page.should have_content "Shipped to"
+            end
+            
+            it "should display the list of user that received the issue" do
+              page.should have_selector("table#subscriptions_listing tbody tr", :count =>  @issue.shipped_issues.count)
+            end
           end
         end
       end

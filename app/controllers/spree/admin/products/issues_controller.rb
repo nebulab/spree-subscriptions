@@ -3,7 +3,7 @@ module Spree
     module Products
       class IssuesController < Spree::Admin::BaseController
         before_filter :load_magazine
-        before_filter :load_issue, :only => [:show, :edit, :update]
+        before_filter :load_issue, :only => [:show, :edit, :update, :ship]
         before_filter :load_products, :except => [:show, :index]
 
         def show
@@ -53,6 +53,16 @@ module Spree
             flash[:error] = t(:issue_not_created)
             render :new
           end
+        end
+
+        def ship
+          if @issue.shipped?
+            flash[:error]  = t('issue_not_shipped')
+          else
+            @issue.ship!
+            flash[:notice]  = t('issue_shipped')
+          end
+          redirect_to admin_magazine_issues_path(@magazine, @issue)
         end
 
         private
