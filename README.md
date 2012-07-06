@@ -3,20 +3,18 @@ SpreeSubscriptions
 
 [![Build Status](https://secure.travis-ci.org/nebulab/spree-subscriptions.png?branch=master)](http://travis-ci.org/nebulab/spree-subscriptions)
 
-This stuff is work in progress. Please, do not use it unless you don't want to contribute :) .
-
-This extension allow to handle subscribable products with numbers based subscription. This means that you can subscribe for N issues for a subscribable products (eg. magazine). Once a new issue is created and shipped, every subscriptions decrease his remaining issues number. When this number decrease to 1, associated user is notified via email that he has to renew his subscription. When it decrease to 0 subscription become inactive.
+This extension allows to handle subscribable products with numbers based subscription. This means that you can subscribe to N issues for a subscribable products (eg. magazine). Once a new issue is created and shipped, every subscriptions decrease his remaining issues number. When this number decrease to 1, associated user is notified via email that he has to renew his subscription. When it decrease to 0 subscription become inactive.
 
 Features
 --------
 
-- Admin can mark products as subscribable 
-- Admin can set the number of issues that compose a subscription for each product (default => 12)
+- Admin can mark products as subscribable
+- Admin can set the number of issues that compose a subscription for each product and variant (default => 12)
 - Admin can create issues in each subscribable item (with ability to associate issue with existing products, useful to link issue with backlog products of the same magazine)
-- Admin can view (, print and mark as shipped) the list of subscribed users (which have to receive new issue)
-- Keep track of shipped issues for each user subscription
-- Send user mail notification when it remains an issue only to be shipped
-- Send user mail when subscription expires (no remaining issues)
+- Admin can view, print and mark as shipped the list of subscribed users (which have to receive new issue)
+- Keep track of shipped issues for each subscription
+- Send mail notification when it remains an issue only to be shipped
+- Send mail notification when subscription expires (no remaining issues)
 
 Installation
 ============
@@ -33,7 +31,7 @@ Run bundle:
 bundle
 ```
 
-Run the generator and migrate your db:
+Run the generate and database migration:
 
 ```bash
 rails g spree_subscriptions:install
@@ -43,17 +41,22 @@ rake db:migrate
 Configure default issues number for subscriptions
 -------------------------------------------------
 
-For each subscribable product (and variants) you can choose the number of issues a user can subscribe to. Default value is 12. 
-To change it you can run from the rails console:
+For each subscribable product (and his variants) you can choose the number of issues a user can subscribe to. Default value is 12. 
+To change this default value you can run from the rails console:
 
-```
+```ruby
 Spree::Subscriptions::Config.set(:default_issues_number, 24)
 ``` 
 
 Use delayed job for email notifications
 ---------------------------------------
 
-TODO: write this section
+To use delyed_job to send notification mail just add delayed_job to your
+store Gemfile and run from rails console:
+
+```ruby
+Spree::Subscriptions::Config.set(:use_delayed_job, true)
+```
 
 Testing
 -------
