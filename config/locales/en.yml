@@ -41,6 +41,7 @@ en:
     attributes:
       spree/issue:
         name: "Name"
+        shipped_at: "Shipped at"
       spree/subscription:
         created_at: "Created at"
         email: "Email"

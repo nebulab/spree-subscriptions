@@ -13,7 +13,7 @@ it:
   issue: "edizione"
   issue_created: "Edizione creata!"
   issue_not_created: "Edizione non creata!"
-  issue_not_shipped: "Edizione  spedita"
+  issue_not_shipped: "Edizione non spedita"
   issue_not_updated: "Edizione non aggiornata!"
   issue_shipped: "Edizione spedita con successo"
   issue_updated: "Edizione aggiornata!"
@@ -41,6 +41,7 @@ it:
     attributes:
       spree/issue:
         name: "Nome"
+        shipped_at: "Spedita il"
       spree/subscription:
         created_at: "Creato il"
         email: "Email"
