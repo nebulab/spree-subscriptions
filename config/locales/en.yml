@@ -42,6 +42,8 @@ en:
       spree/issue:
         name: "Name"
         shipped_at: "Shipped at"
+      spree/product:
+        issues_number: "Issues number"
       spree/subscription:
         created_at: "Created at"
         email: "Email"
@@ -50,3 +52,5 @@ en:
         remaining_issues: "Remaining Issues"
         state: "Status"
         subscribable: "subscription"
+      spree/variant:
+        issues_number: "Issues number"

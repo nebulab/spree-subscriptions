@@ -42,6 +42,8 @@ it:
       spree/issue:
         name: "Nome"
         shipped_at: "Spedita il"
+      spree/product:
+        issues_number: "Numero di edizioni"
       spree/subscription:
         created_at: "Creato il"
         email: "Email"
@@ -50,3 +52,5 @@ it:
         remaining_issues: "Edizioni Rimanenti"
         state: "Stato"
         subscribable: "abbonamento"
+      spree/variant:
+        issues_number: "Numero di edizioni"
