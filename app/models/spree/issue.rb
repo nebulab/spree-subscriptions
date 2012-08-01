@@ -3,7 +3,7 @@ class Spree::Issue < ActiveRecord::Base
   belongs_to :magazine_issue, :class_name => "Spree::Product"
   has_many :shipped_issues
 
-  attr_accessible :name, :published_at, :magazine, :magazine_issue_id
+  attr_accessible :name, :published_at, :shipped_at, :magazine, :magazine_issue_id
 
   delegate :subscriptions,:to => :magazine
 
@@ -17,10 +17,11 @@ class Spree::Issue < ActiveRecord::Base
 
   def ship!
     subscriptions.each{ |s| s.ship!(self) }
+    update_attribute(:shipped_at, Time.now)
   end
 
   def shipped?
-    !shipped_issues.empty?
+    !shipped_at.nil?
   end
   
 end

@@ -36,4 +36,16 @@ describe Spree::Issue do
     issue = Factory.create(:issue, :magazine => subscription.magazine)
     expect{ issue.ship! }.to change(issue.shipped_issues, :count).by(1)
   end
+
+  it "should have shipped_at field to nil when not shipped" do
+    subscription = Factory.create(:paid_subscription)
+    issue = Factory.create(:issue, :magazine => subscription.magazine)
+    issue.shipped_at.should be_nil
+  end
+
+  it "should have shipped_at field not nil when shipped" do
+    subscription = Factory.create(:paid_subscription)
+    issue = Factory.create(:issue, :magazine => subscription.magazine)
+    expect{ issue.ship! }.to change{issue.shipped_at}  
+  end  
 end
