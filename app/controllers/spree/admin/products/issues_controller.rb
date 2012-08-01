@@ -46,9 +46,9 @@ module Spree
         end
 
         def create          
-          if @magazine.issues.create(params[:issue])
+          if (new_issue = @magazine.issues.create(params[:issue]))
             flash[:notice] = t('issue_created')
-            redirect_to admin_magazine_issues_path(@magazine)
+            redirect_to admin_magazine_issue_path(@magazine, new_issue)
           else
             flash[:error] = t(:issue_not_created)
             render :new

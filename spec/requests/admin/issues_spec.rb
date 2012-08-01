@@ -61,7 +61,7 @@ describe "Issue" do
           click_link "New issue"
           fill_in "Name", :with => "Magazine issue number 4"
           click_button "Create"
-          within('table.index#listing_issues tbody') { page.should have_content "Magazine issue number 4" }
+          within("[data-hook='admin_product_issue_header']") { page.should have_content "Magazine issue number 4" }
         end
 
         it "should create a new issue with an associated product" do
@@ -70,7 +70,8 @@ describe "Issue" do
           click_link "New issue"
           select "Issue number 4", :from => "Product"
           click_button "Create"
-          within('table.index#listing_issues tbody tr:nth-child(1)') { click_link "Edit" }  
+          click_link "Issues"
+          within('table.index#listing_issues tbody tr:nth-child(1)') { click_link "Edit" }
           find_field('Product').find('option[selected]').text.should == "Issue number 4"
         end
 
