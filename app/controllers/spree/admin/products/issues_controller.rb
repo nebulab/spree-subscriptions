@@ -20,7 +20,8 @@ module Spree
                 pdf.text "#{address.firstname} #{address.lastname}"
                 pdf.text address.address1
                 pdf.text address.address2 if address.address2.present?
-                pdf.text "#{address.city} (#{address.state_name}) #{address.zipcode}"
+                pdf.text "#{address.city} (#{address.state_id? ? address.state.abbr : address.state_name}) #{address.zipcode}"
+                pdf.text "#{address.country}"
               end
               send_data labels.document.render, :filename => "#{@issue.name}.pdf", :type => "application/pdf", disposition: "inline"
             end
