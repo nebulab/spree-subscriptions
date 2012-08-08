@@ -8,8 +8,9 @@ module Spree
       end
 
       def index
-        @search = Subscription.search()
-        @subscriptions = @search.result.page(params[:page]).per(10)
+        params[:q] ||= {}
+        @search = Subscription.search(params[:q])
+        @subscriptions = @search.result.page(params[:page]).per(15)
       end
 
       def create
