@@ -15,14 +15,8 @@ module Spree
           respond_to do |format|
             format.html
             format.pdf do
-              addresses_list = @issue.magazine.subscriptions.map {|s| s.ship_address}
-              labels = ::Prawn::Labels.new(addresses_list, :type => "Avery5160") do |pdf, address|
-                pdf.text "#{address.firstname} #{address.lastname}"
-                pdf.text address.address1
-                pdf.text address.address2 if address.address2.present?
-                pdf.text "#{address.city} (#{address.state_id? ? address.state.abbr : address.state_name}) #{address.zipcode}"
-                pdf.text "#{address.country}"
-              end
+              addresses_list = @issue.magazine.subscriptions.map { |s| s.ship_address }
+              labels = IssuePdf.new(addresses_list, view_context)
               send_data labels.document.render, :filename => "#{@issue.name}.pdf", :type => "application/pdf", disposition: "inline"
             end
           end
