@@ -14,27 +14,28 @@ module Spree
       end
 
       def create
-        if @subscription.update_attributes(params[:subscription])
-          redirect_to edit_admin_subscription_customer_path(@subscription)
-          flash.notice = t("subscription_successfully_created")
-        else
-          respond_with(@subscription)
-        end
+        create_or_update t("subscription_successfully_created")
       end
       
       def update
-        if @subscription.update_attributes(params[:subscription])
-          redirect_to edit_admin_subscription_path(@subscription)
-          flash.notice = t("subscription_successfully_updated")
-        else
-          respond_with(@subscription)
-        end
+        create_or_update t("subscription_successfully_updated")
       end
 
       protected
 
       def load_data
         @products = Product.subscribable.all.map { |product| [product.name, product.id] }
+      end
+
+      private
+
+      def create_or_update(flash_msg)
+        if @subscription.update_attributes(params[:subscription])
+          redirect_to edit_admin_subscription_path(@subscription)
+          flash.notice = flash_msg
+        else
+          respond_with(@subscription)
+        end
       end
     end
   end
