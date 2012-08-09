@@ -3,7 +3,7 @@ module Spree
     def create_subscriptions
       line_items.each do |line_item|
         if line_item.variant.subscribable?
-          Subscription.create_for(
+          Subscription.subscribe!(
             :email => self.email, 
             :ship_address => self.ship_address,
             :magazine => line_item.variant.product,

@@ -85,7 +85,7 @@ describe Spree::Subscription do
     let(:subscription) { Factory.create(:paid_subscription) }
 
     it "should update remaining issues" do
-      renewal = Spree::Subscription.create_for(
+      renewal = Spree::Subscription.subscribe!(
         :email => subscription.email, 
         :ship_address => subscription.ship_address,
         :magazine => subscription.magazine,
@@ -96,7 +96,7 @@ describe Spree::Subscription do
 
     it "should update ship address with latest ship address" do
       new_ship_address = Factory.create(:customer_address)
-      renewal = Spree::Subscription.create_for(
+      renewal = Spree::Subscription.subscribe!(
         :email => subscription.email, 
         :ship_address => new_ship_address,
         :magazine => subscription.magazine,
