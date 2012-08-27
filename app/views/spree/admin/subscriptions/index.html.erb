@@ -8,6 +8,8 @@
       <th><%= sort_link @search, :remaining_issues, t(:remaining_issues, :scope => 'activerecord.attributes.spree/subscription') %></th>
       <th><%= sort_link @search, :state, t(:state, :scope => 'activerecord.attributes.spree/subscription') %></th>
       <th><%= sort_link @search, :email, t(:email, :scope => 'activerecord.attributes.spree/subscription') %></th>
+      <th><%= t(:firstname, :scope => 'activerecord.attributes.spree/address') %></th>
+      <th><%= t(:lastname, :scope => 'activerecord.attributes.spree/address') %></th>
       <th data-hook="admin_subscriptions_index_header_actions"></th>
     </tr>
   </thead>
@@ -19,6 +21,8 @@
         <td><%= subscription.remaining_issues %></td>
         <td><%= t(subscription.state, :scope => 'subscription_state').downcase %></td>
         <td><%= subscription.email %></td>
+        <td><%= subscription.ship_address.firstname %></td>
+        <td><%= subscription.ship_address.lastname %></td>
         <td class="actions" data-hook="admin_subscriptions_index_row_actions">
           <%= link_to_edit subscription, :class => 'edit'  %>
           &nbsp;
@@ -29,3 +33,27 @@
   </tbody>
 </table>
 <%= paginate @subscriptions %>
+
+
+<% content_for :sidebar do %>
+  <div class="box" data-hook="admin_subscriptions_index_search">
+    <h3><%= t(:search) %></h3>
+    <%= search_form_for [:admin, @search] do |f| %>
+      <p>
+        <%= label_tag nil, t(:email) %><br />
+        <%= f.text_field :email_cont, :size => 25 %>
+      </p>
+      <p>
+        <%= label_tag nil, t(:first_name_begins_with) %><br />
+        <%= f.text_field :ship_address_firstname_start, :size => 25 %>
+      </p>
+      <p>
+        <%= label_tag nil, t(:last_name_begins_with) %><br />
+        <%= f.text_field :ship_address_lastname_start, :size => 25 %>
+      </p>      
+      <div data-hook="admin_orders_index_search_buttons">
+        <p><%= button t(:search) %></p>
+      </div>
+    <% end %>
+  </div>
+<% end %>
