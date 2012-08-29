@@ -15,7 +15,7 @@ module Spree
           respond_to do |format|
             format.html
             format.pdf do
-              addresses_list = @issue.magazine.subscriptions.map { |s| s.ship_address }
+              addresses_list = @product_subscriptions.map { |s| s.ship_address }
               labels = IssuePdf.new(addresses_list, view_context)
               send_data labels.document.render, :filename => "#{@issue.name}.pdf", :type => "application/pdf", disposition: "inline"
             end
