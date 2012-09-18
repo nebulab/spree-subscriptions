@@ -49,7 +49,7 @@ class Spree::Subscription < ActiveRecord::Base
 
   def notify_ending!
     if Spree::Subscriptions::Config.use_delayed_job
-      Spree::SubscriptionMailer.delay.subscription_ending_email(self).deliver
+      Spree::SubscriptionMailer.delay.subscription_ending_email(self)
     else
       Spree::SubscriptionMailer.subscription_ending_email(self).deliver
     end
