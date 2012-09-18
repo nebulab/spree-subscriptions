@@ -26,6 +26,15 @@ describe Spree::Subscription do
       subscription.ship!(issue)
       subscription.shipped?(issue).should be_true
     end
+
+    it "should decrease remaining issues if subscription sent" do
+      expect{ subscription.ship!(issue) }.to change(subscription, :remaining_issues).by(-1)
+    end
+
+    it "should not decrease remaining issues if subscription not sent" do
+      subscription.update_attribute(:remaining_issues, 0)
+      expect{ subscription.ship!(issue) }.not_to change(subscription, :remaining_issues)
+    end
   end
 
   context "when a subscription is ending" do

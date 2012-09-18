@@ -56,7 +56,7 @@ class Spree::Subscription < ActiveRecord::Base
   end
 
   def ship!(issue)
-    unless shipped?(issue)
+    if !ended? && !shipped?(issue)
       transaction do
         shipped_issues.create(:issue => issue)
         update_attribute(:remaining_issues, remaining_issues-1)
