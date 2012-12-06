@@ -8,7 +8,7 @@ module Spree
 
         def show
           if @issue.shipped?
-            @product_subscriptions = @issue.shipped_issues.map { |shipped_issue| shipped_issue.subscription }
+            @product_subscriptions = @issue.shipped_issues.map { |shipped_issue| shipped_issue.subscription }.compact
           else
             @product_subscriptions = Subscription.eligible_for_shipping.where(:magazine_id => @magazine.id)
           end
@@ -78,3 +78,4 @@ module Spree
     end
   end
 end
+
