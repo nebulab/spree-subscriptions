@@ -26,22 +26,22 @@ end
 
 def begin_checkout
   visit spree.cart_path
-  click_link "Checkout"
+  click_button "Checkout"
 end
 
 def login_step(email, password)
   within("#password-credentials") do
-    fill_in "Email", :with => email 
+    fill_in "Email", :with => email
     fill_in "Password", :with => password
   end
-  click_button "Login" 
+  click_button "Login"
 end
 
 def guest_step(email)
   within("#guest_checkout") do
-    fill_in "Email", :with => email 
+    fill_in "Email", :with => email
   end
-  click_button "Continue" 
+  click_button "Continue"
 end
 
 def address_step
@@ -77,7 +77,7 @@ def confirm_step
 end
 
 def complete_payment
-  order = Spree::Order.where(:user_id => Spree::User.where(:email => "johnny@rocket.com").first.id).first
+  order = Spree::Order.where(:user_id => Spree.user_class.where(:email => "johnny@rocket.com").first.id).first
   order.payments.first.complete!
 end
 
@@ -86,9 +86,9 @@ def complete_guest_payment
 end
 
 def create_existing_subscription_for(email, product, remaining)
-  FactoryGirl.create(:subscription, 
-    :email => email, 
-    :magazine => product, 
+  FactoryGirl.create(:subscription,
+    :email => email,
+    :magazine => product,
     :ship_address => create(:customer_address),
     :remaining_issues => remaining
   )

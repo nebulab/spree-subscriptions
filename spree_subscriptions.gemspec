@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.version     = '1.1.1'
   s.summary     = 'A spree extension to manage recurring subscriptions'
   s.description = """
-      This spree extension lets an ecommerce owner manage subscriptions bought by 
+      This spree extension lets an ecommerce owner manage subscriptions bought by
       users as a predetermined number of issues.
   """
   s.required_ruby_version = '>= 1.9.2'
@@ -19,14 +19,16 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'spree_core', '~> 1.1.2'
-  s.add_dependency 'spree_auth', '~> 1.1.2'
+  s.add_dependency 'spree_core', '~> 1.2.2'
   s.add_dependency 'prawn', '~> 0.12.0'
   s.add_dependency 'prawn-labels', '~> 0.11.3'
+  s.add_dependency 'spree_auth_devise', '~> 1.0.1'
 
   s.add_development_dependency 'capybara', '1.0.1'
   s.add_development_dependency 'factory_girl', '~> 3.5.0'
   s.add_development_dependency 'ffaker'
   s.add_development_dependency 'rspec-rails',  '~> 2.11.0'
   s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'sass-rails'
+  s.add_development_dependency 'coffee-rails'
 end
