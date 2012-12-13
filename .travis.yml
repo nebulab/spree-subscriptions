@@ -8,7 +8,7 @@ notifications:
     - mtylty@gmail.com
 branches:
   only:
-    - master
+    - 1-1-stable
 rvm:
   - 1.9.2
   - 1.9.3

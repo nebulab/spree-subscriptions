@@ -1,7 +1,7 @@
-SpreeSubscriptions 
+SpreeSubscriptions
 ==================
 
-[![Build Status](https://secure.travis-ci.org/nebulab/spree-subscriptions.png?branch=master)](http://travis-ci.org/nebulab/spree-subscriptions)
+[![Build Status](https://secure.travis-ci.org/nebulab/spree-subscriptions.png?branch=1-1-stable)](http://travis-ci.org/nebulab/spree-subscriptions)
 [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/nebulab/spree-subscriptions)
 
 This extension allows to handle subscribable products with numbers based subscription. This means that you can subscribe to N issues for a subscribable products (eg. magazine). Once a new issue is created and shipped, every subscriptions decrease his remaining issues number. When this number decrease to 1, associated user is notified via email that he has to renew his subscription. When it decrease to 0 subscription become inactive.
@@ -42,12 +42,12 @@ rake db:migrate
 Configure default issues number for subscriptions
 -------------------------------------------------
 
-For each subscribable product (and his variants) you can choose the number of issues a user can subscribe to. Default value is 12. 
+For each subscribable product (and his variants) you can choose the number of issues a user can subscribe to. Default value is 12.
 To change this default value you can run from the rails console:
 
 ```ruby
 Spree::Subscriptions::Config.set(:default_issues_number, 24)
-``` 
+```
 
 Use delayed job for email notifications
 ---------------------------------------
