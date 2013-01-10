@@ -1,4 +1,4 @@
-SpreeSubscriptions 
+SpreeSubscriptions
 ==================
 
 [![Build Status](https://secure.travis-ci.org/nebulab/spree-subscriptions.png?branch=master)](http://travis-ci.org/nebulab/spree-subscriptions)
@@ -42,12 +42,12 @@ rake db:migrate
 Configure default issues number for subscriptions
 -------------------------------------------------
 
-For each subscribable product (and his variants) you can choose the number of issues a user can subscribe to. Default value is 12. 
+For each subscribable product (and his variants) you can choose the number of issues a user can subscribe to. Default value is 12.
 To change this default value you can run from the rails console:
 
 ```ruby
 Spree::Subscriptions::Config.set(:default_issues_number, 24)
-``` 
+```
 
 Use delayed job for email notifications
 ---------------------------------------

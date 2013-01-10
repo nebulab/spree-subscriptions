@@ -16,7 +16,7 @@ describe "Issue" do
         it "should not have issue tab" do
           create(:simple_product)
           click_link "Products"
-          within('table.index tr:nth-child(2)') { click_link "Edit" }
+          within('table.index tbody tr:nth-child(1)') { click_link "Edit" }
           page.should_not have_content("Issues")
         end
       end
@@ -25,7 +25,7 @@ describe "Issue" do
         before(:each) do
           @magazine = create(:subscribable_product)
           click_link "Products"
-          within('table.index tr:nth-child(2)') { click_link "Edit" }
+          within('table.index tbody tr:nth-child(1)') { click_link "Edit" }
         end
 
         it "should have issue tab" do
@@ -47,7 +47,7 @@ describe "Issue" do
       before do
         @magazine = create(:subscribable_product)
         click_link "Products"
-        within('table.index tr:nth-child(2)') { click_link "Edit" }
+        within('table.index tbody tr:nth-child(1)') { click_link "Edit" }
       end
 
       context "creating an issue" do

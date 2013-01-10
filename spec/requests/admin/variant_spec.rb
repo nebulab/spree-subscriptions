@@ -12,12 +12,12 @@ describe "Variant" do
     it "should have issue number field if subscribable" do
       visit spree.admin_path
       click_link "Products"
-      within('table.index tr:nth-child(2)') { click_link "Edit" }
-      click_link "Variants"                
-      within('table.index tr:nth-child(2)') { click_link "Edit" }
+      within('table.index tbody tr:nth-child(1)') { click_link "Edit" }
+      click_link "Variants"
+      within('table.index tbody tr:nth-child(1)') { click_link "Edit" }
       fill_in "Issues number", :with => "24"
       click_button "Update"
-      page.should have_content "successfully updated"      
+      page.should have_content "successfully updated"
     end
 
     it "should not have issue number field if not subscribable" do
@@ -26,10 +26,10 @@ describe "Variant" do
       create(:variant, :product => product)
       visit spree.admin_path
       click_link "Products"
-      within('table.index tr:nth-child(3)') { click_link "Edit" }
-      click_link "Variants"                
-      within('table.index tr:nth-child(2)') { click_link "Edit" }
-      page.should_not have_content "Issues number" 
+      within('table.index tbody tr:nth-child(2)') { click_link "Edit" }
+      click_link "Variants"
+      within('table.index tbody tr:nth-child(1)') { click_link "Edit" }
+      page.should_not have_content "Issues number"
     end
   end
 end
