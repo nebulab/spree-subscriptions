@@ -10,7 +10,7 @@ en:
   creating_subscription: "Create subscription"
   editing_issue: "Edit issue"
   editing_subscription: "Edit subscription"
-  issue: "issue"  
+  issue: "issue"
   issue_created: "Issue created!"
   issue_not_created: "Issue not created!"
   issue_not_shipped: "This issue has already been shipped"
@@ -19,6 +19,11 @@ en:
   issue_updated: "Issue updated!"
   issues: "issues"
   issues_number: "Issues number"
+
+  # Hack due to this commit https://github.com/spree/spree_auth_devise/commit/ed5b04220dcf2cf9ff500f5a66a0bea7ae81d183
+  # still not pushed into a gem. remove when it's done (should be spree_auth_devise 1.2.1)
+  login: Login
+
   my_subscriptions: "My subscriptions"
   new_issue: "New issue"
   new_subscription: "New subscription"
