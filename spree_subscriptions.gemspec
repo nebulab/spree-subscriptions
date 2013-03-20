@@ -19,8 +19,8 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'spree_core', '~> 1.3.1'
-  s.add_dependency 'spree_auth_devise', '~> 1.3.1'
+  s.add_dependency 'spree_core', '~> 1.3'
+  s.add_dependency 'spree_auth_devise'
   s.add_dependency 'prawn', '~> 0.12.0'
   s.add_dependency 'prawn-labels', '~> 0.11.3'
 
