@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Spree::Subscription do
-
   it "should have shipped issues" do
     subscription = Factory.build(:subscription)
     subscription.should respond_to(:shipped_issues)
@@ -43,6 +42,7 @@ describe Spree::Subscription do
 
     context "without delayed_job" do
       before(:all) do
+        Factory.create(:mail_method)
         Spree::Subscriptions::Config.use_delayed_job = false
       end
 
