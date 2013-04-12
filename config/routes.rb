@@ -1,4 +1,4 @@
-Spree::Core::Engine.routes.prepend do
+Spree::Core::Engine.routes.append do
   namespace :admin do
     resources :subscriptions do
       resource :customer, :controller => "subscriptions/customer_details"
