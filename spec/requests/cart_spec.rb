@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe "Cart" do
   context "as_user" do
-    let(:product){ Factory(:product) }
-    let(:subscribable_product){ Factory(:subscribable_product, :name => "sport magazine") }
+    let(:product){ create(:product) }
+    let(:subscribable_product){ create(:subscribable_product, :name => "sport magazine") }
 
     it "has add to cart specific for subscribable products" do
       visit spree.product_path(subscribable_product)

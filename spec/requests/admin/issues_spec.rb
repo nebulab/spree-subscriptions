@@ -14,7 +14,7 @@ describe "Issue" do
     context "accessing product issues" do
       context "unsuscribable products" do
         it "should not have issue tab" do
-          create(:simple_product)
+          create(:base_product)
           click_link "Products"
           within('table.index tbody tr:nth-child(1)') { click_link "Edit" }
           page.should_not have_content("Issues")
@@ -65,7 +65,7 @@ describe "Issue" do
         end
 
         it "should create a new issue with an associated product" do
-          @product_issue = create(:simple_product, :name => "Issue number 4")
+          @product_issue = create(:base_product, :name => "Issue number 4")
           click_link "Issues"
           click_link "New issue"
           select "Issue number 4", :from => "Product"
@@ -76,7 +76,7 @@ describe "Issue" do
         end
 
         it "should not let select subscribable product as associated product" do
-          @product_issue = create(:simple_product, :name => "Issue number 4")
+          @product_issue = create(:base_product, :name => "Issue number 4")
           click_link "Issues"
           click_link "New issue"
           page.should have_xpath("//*[@id='issue_magazine_issue_id']/option", :count => 2)
@@ -151,8 +151,8 @@ describe "Issue" do
 
           context "after issue is shipped" do
             before do
-              Factory.create(:mail_method)
-              
+              create(:mail_method)
+
               @issue.ship!
               (0..5).each { |i| create(:ending_subscription, :magazine => @magazine) }
               click_link "Issues"
