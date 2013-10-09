@@ -4,6 +4,13 @@ describe Spree::SubscriptionMailer do
   let(:subscription) { mock_model(Spree::Subscription, :email => 'subsriber@fake.web') }
 
   context "subscription ended" do
+    before do
+      Spree::MailMethod.create!(
+        :environment => Rails.env,
+        :preferred_mails_from => "spree@example.com"
+      )
+    end
+
     let(:email) { Spree::SubscriptionMailer.subscription_ended_email(subscription) }
 
     it "should sent to subscription email" do

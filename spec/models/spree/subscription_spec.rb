@@ -11,6 +11,13 @@ describe Spree::Subscription do
     let(:subscription) { Factory.create(:paid_subscription) }
     let(:issue) { Factory.create(:issue, :magazine => subscription.magazine) }
 
+    before(:all) do
+      Spree::MailMethod.create!(
+        :environment => Rails.env,
+        :preferred_mails_from => "spree@example.com"
+      )
+    end
+
     it "should ship issues inside a transaction" do
       subscription.should_receive :transaction
       subscription.ship!(issue)
