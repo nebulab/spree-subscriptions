@@ -151,8 +151,6 @@ describe "Issue" do
 
           context "after issue is shipped" do
             before do
-              create(:mail_method)
-
               @issue.ship!
               (0..5).each { |i| create(:ending_subscription, :magazine => @magazine) }
               click_link "Issues"

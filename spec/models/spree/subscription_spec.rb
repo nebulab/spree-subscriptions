@@ -42,7 +42,6 @@ describe Spree::Subscription do
 
     context "without delayed_job" do
       before(:all) do
-        create(:mail_method)
         Spree::Subscriptions::Config.use_delayed_job = false
       end
 

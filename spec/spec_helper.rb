@@ -28,6 +28,8 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   config.include Capybara::DSL
 
+  ActionMailer::Base.perform_deliveries = true
+
   # == URL Helpers
   #
   # Allows access to Spree's routes in specs:
