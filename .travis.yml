@@ -10,5 +10,4 @@ branches:
   only:
     - 1-2-stable
 rvm:
-  - 1.9.2
   - 1.9.3
