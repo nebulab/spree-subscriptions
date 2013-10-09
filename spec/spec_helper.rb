@@ -26,6 +26,7 @@ RSpec.configure do |config|
   ::ActiveSupport::Deprecation.silenced = true
 
   config.include FactoryGirl::Syntax::Methods
+  config.include Capybara::DSL
 
   # == URL Helpers
   #
