@@ -6,6 +6,13 @@ describe Spree::SubscriptionMailer do
   context "subscription ended" do
     let(:email) { Spree::SubscriptionMailer.subscription_ended_email(subscription) }
 
+    before do
+      Spree::MailMethod.create!(
+        :environment => Rails.env,
+        :preferred_mails_from => "spree@example.com"
+      )
+    end
+
     it "should sent to subscription email" do
       email.to.should == [subscription.email]
     end
