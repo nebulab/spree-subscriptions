@@ -40,12 +40,13 @@ describe "Subscription" do
           within('#shipping') do
             fill_in 'First Name', :with => "Johnny"
             fill_in 'Last Name', :with => "Rocket"
-            fill_in 'Street Address', :with => "Stardust Street"
+            fill_in 'subscription_ship_address_attributes_address1', :with => "Stardust Street"
             fill_in 'City', :with => "Omega"
             fill_in 'Zip', :with => "66100"
             fill_in 'Phone', :with => "0871540143"
-            select "United States of Foo", :from => "Country"
-            select "Alabama", :from => "State"
+            select "United States of America", :from => "Country"
+
+            all('#subscription_ship_address_attributes_state_id option')[1].select_option
           end
           click_button "Update"
           page.should have_content("The customer's details have been updated")
@@ -60,7 +61,7 @@ describe "Subscription" do
             find_field("subscription_ship_address_attributes_zipcode").value.should == "66100"
             find_field("subscription_ship_address_attributes_phone").value.should == "0871540143"
             find_field("subscription_ship_address_attributes_state_id").find('option[selected]').text.should == "Alabama"
-            find_field("subscription_ship_address_attributes_country_id").find('option[selected]').text.should == "United States of Foo"
+            find_field("subscription_ship_address_attributes_country_id").find('option[selected]').text.should == "United States of America"
           end
         end
       end

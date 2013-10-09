@@ -50,7 +50,7 @@ describe "Subscription" do
 
       it "should not find an active subscription area in accont page if order is not paid" do
         visit spree.account_path
-        page.should_not have_content "sport magazine"                     
+        page.should_not have_content "sport magazine"
       end
 
       it "should find an active subscription after order is paid" do
@@ -74,7 +74,7 @@ describe "Subscription" do
         visit spree.account_path
         within("table.subscription-summary") do
           page.should have_content "sport magazine"
-          page.should have_content "14" # 2 (remaining) + 12 
+          page.should have_content "14" # 2 (remaining) + 12
           page.should have_content "Active"
         end
       end
@@ -85,7 +85,7 @@ describe "Subscription" do
         @variant1, @variant2 = create_variants_for(@product)
       end
 
-      it "should add variant issue number to subscription" do        
+      it "should add variant issue number to subscription" do
         add_to_cart("sport magazine", @variant2.options_text)
         complete_checkout_with_login("johnny@rocket.com", "secret")
         complete_payment
