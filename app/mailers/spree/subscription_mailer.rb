@@ -1,11 +1,13 @@
-class Spree::SubscriptionMailer < ActionMailer::Base
-  def subscription_ending_email(subscription)
-    @subscribed_by = subscription.email
-    mail(:to => @subscribed_by, :subject => t(:subscription_ending))
-  end
+module Spree
+  class SubscriptionMailer < BaseMailer
+    def subscription_ending_email(subscription)
+      @subscribed_by = subscription.email
+      mail(:to => @subscribed_by, :subject => t(:subscription_ending), :from => from_address)
+    end
 
-  def subscription_ended_email(subscription)
-    @subscribed_by = subscription.email
-    mail(:to => @subscribed_by, :subject => t(:subscription_ended))
+    def subscription_ended_email(subscription)
+      @subscribed_by = subscription.email
+      mail(:to => @subscribed_by, :subject => t(:subscription_ended), :from => from_address)
+    end
   end
 end
