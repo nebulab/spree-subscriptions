@@ -25,6 +25,8 @@ RSpec.configure do |config|
   # Silence Warning
   ::ActiveSupport::Deprecation.silenced = true
 
+  ActionMailer::Base.perform_deliveries = true
+
   config.include FactoryGirl::Syntax::Methods
 
   # == URL Helpers
