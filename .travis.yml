@@ -10,6 +10,6 @@ notifications:
     - mtylty@gmail.com
 branches:
   only:
-    - master
+    - 2-0-stable
 rvm:
   - 1.9.3
