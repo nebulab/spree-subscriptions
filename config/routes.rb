@@ -7,6 +7,5 @@ Spree::Core::Engine.routes.append do
       resources :issues, :controller => "products/issues"
       match "issues/:id/ship", :to => "products/issues#ship", :via => :get, :as => :issue_ship
     end
-    resources :users # Hack to make tests pass
   end
 end
