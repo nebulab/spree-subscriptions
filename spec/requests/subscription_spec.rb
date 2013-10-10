@@ -1,11 +1,15 @@
 require 'spec_helper'
 
 describe "Subscription" do
-  context "as_user" do
+  context "as_user", :js => true do
     before(:each) do
+
+      country = create(:country)
       reset_spree_preferences do |config|
-        config.default_country_id = create(:country).id
+        config.default_country_id = country.id
       end
+      create(:state, :country_id => country.id)
+
       create(:free_shipping_method)
       create(:payment_method)
       @product = create(:product, :name => 'sport magazine', :available_on => '2011-01-06 18:21:13:', :subscribable => true, :issues_number => 12)

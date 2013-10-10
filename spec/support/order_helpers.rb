@@ -46,15 +46,18 @@ end
 
 def address_step
   addr = FactoryGirl.attributes_for(:customer_address)
+  str_addr = "bill_address"
   within("#billing") do
-    fill_in "Name", :with => addr[:firstname]
-    fill_in "Last Name", :with => addr[:lastname]
-    fill_in "Address", :with => addr[:address1]
-    fill_in "City", :with => addr[:city]
-    fill_in "Phone", :with => addr[:phone]
-    fill_in "Zip", :with => addr[:zipcode]
-    select FactoryGirl.attributes_for(:country)[:name], :from => "Country"
-    fill_in "order_bill_address_attributes_state_name", :with => addr[:state_name]
+    fill_in "order_#{str_addr}_attributes_firstname", :with => addr[:firstname]
+    fill_in "order_#{str_addr}_attributes_lastname", :with => addr[:lastname]
+    fill_in "order_#{str_addr}_attributes_address1", :with => addr[:address1]
+    fill_in "order_#{str_addr}_attributes_city", :with => addr[:city]
+    fill_in "order_#{str_addr}_attributes_phone", :with => addr[:phone]
+    fill_in "order_#{str_addr}_attributes_zipcode", :with => addr[:zipcode]
+
+    all("#order_#{str_addr}_attributes_country_id option")[0].select_option
+    all("#order_#{str_addr}_attributes_state_id option")[1].select_option
+
   end
   within("#shipping") do
     check("Use Billing Address")
@@ -63,12 +66,12 @@ def address_step
 end
 
 def delivery_step
-  page.should have_content("Shipping Method")
+  page.should have_content("package from NY Warehouse".upcase)
   click_button "Save and Continue"
 end
 
 def payment_step
-  page.should have_content("Payment Information")
+  page.should have_content("Payment Information".upcase)
   click_button "Save and Continue"
 end
 
