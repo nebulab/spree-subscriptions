@@ -1,5 +1,7 @@
 module SpreeSubscriptions
   class Engine < Rails::Engine
+    isolate_namespace Spree
+
     engine_name 'spree_subscriptions'
 
     config.autoload_paths += %W(#{config.root}/lib)
