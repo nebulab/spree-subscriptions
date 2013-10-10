@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
       This spree extension lets an ecommerce owner manage subscriptions bought by
       users as a predetermined number of issues.
   """
-  s.required_ruby_version = '>= 1.9.2'
+  s.required_ruby_version = '>= 1.9.3'
 
   s.author    = 'NebuLab'
   s.email     = 'info@nebulab.it'
