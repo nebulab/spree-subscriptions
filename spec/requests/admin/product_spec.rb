@@ -24,7 +24,7 @@ describe "Products" do
     end
 
     it "should not let choose issues number for unsuscribable product" do
-      product = create(:simple_product)
+      product = create(:base_product)
 
       visit spree.admin_path
       click_link "Products"
@@ -33,7 +33,7 @@ describe "Products" do
     end
 
     it "should let choose the issues number" do
-      product = create(:simple_product, :subscribable => true)
+      product = create(:base_product, :subscribable => true)
 
       visit spree.admin_path
       click_link "Products"

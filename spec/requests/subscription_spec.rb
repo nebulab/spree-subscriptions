@@ -1,11 +1,15 @@
 require 'spec_helper'
 
 describe "Subscription" do
-  context "as_user" do
+  context "as_user", :js => true do
     before(:each) do
+
+      country = create(:country)
       reset_spree_preferences do |config|
-        config.default_country_id = create(:country).id
+        config.default_country_id = country.id
       end
+      create(:state, :country_id => country.id)
+
       create(:free_shipping_method)
       create(:payment_method)
       @product = create(:product, :name => 'sport magazine', :available_on => '2011-01-06 18:21:13:', :subscribable => true, :issues_number => 12)
@@ -50,7 +54,7 @@ describe "Subscription" do
 
       it "should not find an active subscription area in accont page if order is not paid" do
         visit spree.account_path
-        page.should_not have_content "sport magazine"                     
+        page.should_not have_content "sport magazine"
       end
 
       it "should find an active subscription after order is paid" do
@@ -74,7 +78,7 @@ describe "Subscription" do
         visit spree.account_path
         within("table.subscription-summary") do
           page.should have_content "sport magazine"
-          page.should have_content "14" # 2 (remaining) + 12 
+          page.should have_content "14" # 2 (remaining) + 12
           page.should have_content "Active"
         end
       end
@@ -85,7 +89,7 @@ describe "Subscription" do
         @variant1, @variant2 = create_variants_for(@product)
       end
 
-      it "should add variant issue number to subscription" do        
+      it "should add variant issue number to subscription" do
         add_to_cart("sport magazine", @variant2.options_text)
         complete_checkout_with_login("johnny@rocket.com", "secret")
         complete_payment

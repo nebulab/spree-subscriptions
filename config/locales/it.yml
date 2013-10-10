@@ -1,4 +1,5 @@
 it:
+  are_you_sure: "Sei sicuro?"
   subscription: "abbonamento"
   subscriptions: "abbonamenti"
 
@@ -8,6 +9,7 @@ it:
 
   creating_issue: "Crea edizione"
   creating_subscription: "Crea abbonamento"
+  customer_details_updated: "I dettagli del cliente sono stati aggiornati"
   editing_issue: "Modifica edizione"
   editing_subscription: "Modifica abbonamento"
   issue: "edizione"
@@ -18,7 +20,7 @@ it:
   issue_shipped: "Edizione spedita con successo"
   issue_updated: "Edizione aggiornata!"
   issues: "edizioni"
-  issues_number: "Numero edizioni" 
+  issues_number: "Numero edizioni"
   my_subscriptions: "I miei abbonamenti"
   new_issue: "Nuova edizione"
   new_subscription: "Nuovo abbonamento"
