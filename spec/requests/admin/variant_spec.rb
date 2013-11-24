@@ -26,7 +26,7 @@ describe "Variant" do
       create(:variant, :product => product)
       visit spree.admin_path
       click_link "Products"
-      within('table.index tbody tr:nth-child(2)') { click_link "Edit" }
+      within("table.index tbody tr#spree_product_#{product.id}") { click_link "Edit" }
       click_link "Variants"
       within('table.index tbody tr:nth-child(1)') { click_link "Edit" }
       page.should_not have_content "Issues number"
