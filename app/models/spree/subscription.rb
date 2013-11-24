@@ -8,11 +8,11 @@ class Spree::Subscription < ActiveRecord::Base
   alias_method :shipping_address, :ship_address
   alias_method :shipping_address=, :ship_address=
   accepts_nested_attributes_for :ship_address
-  
+
   validates_with SubscriptionValidator
 
   scope :eligible_for_shipping, where("remaining_issues >= 1")
-  
+
   state_machine :state, :initial => 'active' do
     event :cancel do
       transition :to => 'canceled', :if => :allow_cancel?

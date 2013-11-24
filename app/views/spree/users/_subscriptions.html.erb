@@ -1,5 +1,4 @@
 <div data-hook="account_my_subscriptions">
-
   <h3><%= t(:my_subscriptions) %></h3>
   <% if @subscriptions.present? %>
     <table class="subscription-summary">
@@ -11,6 +10,7 @@
           <th><%= t(:status) %></th>
         </tr>
       </thead>
+
       <tbody>
         <% @subscriptions.each do |subscription| %>
           <tr class="<%= cycle('even', 'odd') %>">
@@ -26,5 +26,4 @@
     <p><%= t(:you_have_no_subscriptions_yet) %></p>
   <% end %>
   <br />
-
 </div>

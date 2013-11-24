@@ -5,9 +5,9 @@ class Spree::Issue < ActiveRecord::Base
 
   attr_accessible :name, :published_at, :shipped_at, :magazine, :magazine_issue_id
 
-  delegate :subscriptions,:to => :magazine
+  delegate :subscriptions, :to => :magazine
 
-  validates :name, 
+  validates :name,
             :presence => true,
             :unless => "magazine_issue.present?"
 
@@ -23,5 +23,4 @@ class Spree::Issue < ActiveRecord::Base
   def shipped?
     !shipped_at.nil?
   end
-  
 end
