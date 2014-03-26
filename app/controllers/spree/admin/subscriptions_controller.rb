@@ -16,7 +16,7 @@ module Spree
       def create
         create_or_update t("subscription_successfully_created")
       end
-      
+
       def update
         create_or_update t("subscription_successfully_updated")
       end
@@ -36,6 +36,10 @@ module Spree
         else
           respond_with(@subscription)
         end
+      end
+
+      def subscription_params
+        params.require(:subscription).permit(:email, :magazine_id, :remaining_issues, :ship_address_attributes, :ship_address)
       end
     end
   end

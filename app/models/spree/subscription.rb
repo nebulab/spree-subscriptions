@@ -1,6 +1,4 @@
 class Spree::Subscription < ActiveRecord::Base
-  attr_accessible :email, :magazine_id, :remaining_issues, :ship_address_attributes, :ship_address
-
   belongs_to :magazine, :class_name => 'Spree::Product'
   belongs_to :ship_address, :class_name => 'Spree::Address'
   has_many :shipped_issues
@@ -13,9 +11,9 @@ class Spree::Subscription < ActiveRecord::Base
 
   scope :eligible_for_shipping, where("remaining_issues >= 1")
 
-  state_machine :state, :initial => 'active' do
+  state_machine :state, :initial => :active do
     event :cancel do
-      transition :to => 'canceled', :if => :allow_cancel?
+      transition :to => :canceled, :if => :allow_cancel?
     end
   end
 

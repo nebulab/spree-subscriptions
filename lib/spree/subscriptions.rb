@@ -1,0 +1,6 @@
+require 'spree/core'
+require 'spree/backend'
+require 'spree/frontend'
+require 'spree/subscriptions/engine'
+require 'spree/subscriptions/validators/subscription'
+require 'prawn/labels'

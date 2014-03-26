@@ -10,6 +10,9 @@ module SpreeSubscriptions
       module Spree::Subscriptions
         Config = Spree::SubscriptionsConfiguration.new
       end
+
+      [:subscribable, :issues_number, :issues_attributes].each { |attrib| Spree::PermittedAttributes.product_attributes << attrib }
+      [:subscribable, :issues_number].each { |attrib| Spree::PermittedAttributes.variant_attributes << attrib }
     end
 
     # use rspec for tests

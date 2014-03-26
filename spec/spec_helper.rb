@@ -8,6 +8,7 @@ require 'capybara/rspec'
 require 'database_cleaner'
 require 'ffaker'
 require 'coveralls'
+require 'spree/testing_support/url_helpers'
 
 # Code coverage
 Coveralls.wear!
@@ -18,7 +19,8 @@ Dir[File.join(File.dirname(__FILE__), 'support/**/*.rb')].each { |f| require f }
 
 # Requires factories defined in spree_core
 require 'spree/testing_support/factories'
-require 'spree/testing_support/url_helpers'
+require 'spree/testing_support/controller_requests'
+require 'spree/testing_support/authorization_helpers'
 require 'spree/testing_support/preferences'
 
 # include local factories
@@ -46,6 +48,10 @@ RSpec.configure do |config|
   # current_path.should eql(spree.products_path)
   config.include Spree::TestingSupport::UrlHelpers
   config.include Spree::TestingSupport::Preferences
+  config.include Spree::TestingSupport::ControllerRequests, :type => :controller
+  config.include Devise::TestHelpers, :type => :controller
+  config.include Rack::Test::Methods, :type => :feature
+
 
   # == Mock Framework
   #
