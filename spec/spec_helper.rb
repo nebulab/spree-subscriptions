@@ -50,7 +50,7 @@ RSpec.configure do |config|
   config.include Spree::TestingSupport::Preferences
   config.include Spree::TestingSupport::ControllerRequests, :type => :controller
   config.include Devise::TestHelpers, :type => :controller
-  config.include Rack::Test::Methods, :type => :feature
+  config.include Rack::Test::Methods, :type => :request
 
 
   # == Mock Framework

@@ -1,7 +1,5 @@
 module Spree
   Variant.class_eval do
-    #attr_accessible :issues_number
-
     before_save :set_default_isssues_number
 
     delegate :subscribable?, :to => :product
