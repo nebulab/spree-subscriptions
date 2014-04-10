@@ -1,7 +1,5 @@
 <% if @product.subscribable? %>
-  <%= hidden_field_tag (@product.variants_and_option_values.any? ? :quantity : "variants[#{@product.master.id}]"),
-              1, :class => 'title' %>
+  <%=  hidden_field_tag :quantity, 1, :class => 'title', :min => 1 %>
 <% else %>
-  <%= number_field_tag (@product.variants_and_option_values.any? ? :quantity : "variants[#{@product.master.id}]"),
-            1, :class => 'title', :min => 1 %>
+  <%=  number_field_tag :quantity, 1, :class => 'title', :min => 1 %>
 <% end %>
