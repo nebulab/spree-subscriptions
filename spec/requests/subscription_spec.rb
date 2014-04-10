@@ -11,7 +11,7 @@ describe "Subscription" do
       create(:state, :country_id => country.id)
 
       create(:free_shipping_method)
-      create(:payment_method)
+      create(:check_payment_method)
       @product = create(:product, :name => 'sport magazine', :available_on => '2011-01-06 18:21:13:', :subscribable => true, :issues_number => 12)
       @user = create(:user, :email => "johnny@rocket.com", :password => "secret", :password_confirmation => "secret")
     end
