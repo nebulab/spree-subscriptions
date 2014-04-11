@@ -30,7 +30,7 @@ module Spree
       private
 
       def create_or_update(flash_msg)
-        if @subscription.update_attributes(params[:subscription])
+        if @subscription.update_attributes(subscription_params)
           redirect_to edit_admin_subscription_path(@subscription)
           flash.notice = flash_msg
         else
