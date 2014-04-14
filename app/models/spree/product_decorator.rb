@@ -7,7 +7,7 @@ module Spree
 
     delegate_belongs_to :master, :issues_number
 
-    scope :subscribable, where(:subscribable => true)
-    scope :unsubscribable, where(:subscribable => false)
+    scope :subscribable, -> { where(:subscribable => true) }
+    scope :unsubscribable, -> { where(:subscribable => false) }
   end
 end

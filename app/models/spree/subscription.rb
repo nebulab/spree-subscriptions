@@ -9,7 +9,7 @@ class Spree::Subscription < ActiveRecord::Base
 
   validates_with SubscriptionValidator
 
-  scope :eligible_for_shipping, where("remaining_issues >= 1")
+  scope :eligible_for_shipping, -> { where("remaining_issues >= 1") }
 
   state_machine :state, :initial => :active do
     event :cancel do
