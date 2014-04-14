@@ -80,9 +80,9 @@ describe "Issue" do
         end
 
         it "should not let select subscribable product as associated product", js: true do
-          @product_issue = create(:base_product, :name => "Issue number 4")
           click_link "Issues"
           click_link "New issue"
+
           page.should have_xpath("//*[@id='issue_magazine_issue_id']/option", :count => 2)
         end
       end
