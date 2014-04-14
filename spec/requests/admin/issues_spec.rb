@@ -45,6 +45,7 @@ describe "Issue" do
 
     context "managing an issue" do
       before do
+        @product_issue = create(:product, :name => "Issue number 4")
         @magazine = create(:subscribable_product)
         visit spree.edit_admin_product_path @magazine
       end
@@ -63,9 +64,7 @@ describe "Issue" do
           within("[data-hook='admin_product_issue_header']") { page.should have_content "Magazine issue number 4" }
         end
 
-        # Marked as pending because it's passsing individually
-        xit "should create a new issue with an associated product", js: true do
-          @product_issue = create(:product, :name => "Issue number 4")
+        it "should create a new issue with an associated product", js: true do
 
           click_link "Issues"
           click_link "New issue"
@@ -80,8 +79,7 @@ describe "Issue" do
           find_field('Product').find('option[selected]').text.should == "Issue number 4"
         end
 
-        # Marked as pending because it's passsing individually
-        xit "should not let select subscribable product as associated product", js: true do
+        it "should not let select subscribable product as associated product", js: true do
           @product_issue = create(:base_product, :name => "Issue number 4")
           click_link "Issues"
           click_link "New issue"
@@ -148,8 +146,7 @@ describe "Issue" do
             page.should have_content "Subscribed"
           end
 
-          # Marked as pending because it's passsing individually
-          xit "should be markable as shipped" do
+          it "should be markable as shipped" do
             click_link "Issues"
             within('table.index#listing_issues tbody tr:nth-child(1)') { click_link @issue.name }
             click_link "Ship"
@@ -168,13 +165,11 @@ describe "Issue" do
               page.should_not have_content "ship"
             end
 
-            # Marked as pending because it's passsing individually
-            xit "should show listing as 'shipped to'" do
+            it "should show listing as 'shipped to'" do
               page.should have_content "Shipped to"
             end
 
-            # Marked as pending because it's passsing individually
-            xit "should display the list of user that received the issue" do
+            it "should display the list of user that received the issue" do
               page.should have_selector("table#subscriptions_listing tbody tr", :count =>  @issue.shipped_issues.count)
             end
           end
