@@ -1,15 +1,8 @@
 def add_to_cart(name, variant=nil)
   visit spree.root_path
   click_link name
-
   # in the product page
-  if variant
-    if variant == 'Duration: Biennal'
-      choose 'variant_id_3'
-    else
-      choose variant
-    end
-  end
+  choose variant if variant
   click_button "add-to-cart-button"
 end
 
