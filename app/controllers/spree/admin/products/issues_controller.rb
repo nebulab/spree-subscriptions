@@ -27,7 +27,7 @@ module Spree
         end
 
         def update
-          if @issue.update_attributes(params[:issue])
+          if @issue.update_attributes(issue_params)
             flash[:notice] = t('issue_updated')
             redirect_to admin_magazine_issue_path(@magazine, @issue)
           else
@@ -40,8 +40,8 @@ module Spree
           @issue = @magazine.issues.build
         end
 
-        def create          
-          if (new_issue = @magazine.issues.create(params[:issue]))
+        def create
+          if (new_issue = @magazine.issues.create(issue_params))
             flash[:notice] = t('issue_created')
             redirect_to admin_magazine_issue_path(@magazine, new_issue)
           else
@@ -63,7 +63,7 @@ module Spree
         private
 
         def load_magazine
-          @magazine = Product.find_by_permalink(params[:magazine_id])
+          @magazine = Product.find_by_slug(params[:magazine_id])
           @product = @magazine # useful to display product_tab menu
         end
 
@@ -74,8 +74,11 @@ module Spree
         def load_products
           @products = Product.unsubscribable.map { |product| [product.name, product.id] }
         end
+
+        def issue_params
+          params.require(:issue).permit(:name, :published_at, :shipped_at, :magazine, :magazine_issue_id)
+        end
       end
     end
   end
 end
-

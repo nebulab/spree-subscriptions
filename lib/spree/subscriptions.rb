@@ -1,0 +1,11 @@
+require 'spree/core'
+require 'spree/api'
+require 'spree/backend'
+require 'spree/frontend'
+require 'spree/auth/devise'
+require 'spree/authentication_helpers'
+require 'coffee_script'
+
+require 'spree/subscriptions/engine'
+require 'spree/subscriptions/validators/subscription'
+require 'prawn/labels'

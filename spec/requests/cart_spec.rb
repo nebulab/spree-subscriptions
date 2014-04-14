@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Cart" do
+describe "Cart", js: true do
   context "as_user" do
     let(:product){ create(:product) }
     let(:subscribable_product){ create(:subscribable_product, :name => "sport magazine") }
@@ -10,7 +10,7 @@ describe "Cart" do
 
       within(".add-to-cart") do
         page.should have_selector("input", :visible => false)
-        page.should have_content(I18n.t(:subscribe_call_to_action))
+        page.should have_content('Subscribe Call To Action')
       end
     end
 
@@ -36,7 +36,7 @@ describe "Cart" do
       visit spree.product_path(subscribable_product)
       add_to_cart("sport magazine")
 
-      page.should have_content("Cart: (1)")
+      page.should have_content("CART: (1)")
     end
   end
 end

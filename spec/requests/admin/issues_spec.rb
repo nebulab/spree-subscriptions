@@ -45,9 +45,9 @@ describe "Issue" do
 
     context "managing an issue" do
       before do
+        @product_issue = create(:product, :name => "Issue number 4")
         @magazine = create(:subscribable_product)
-        click_link "Products"
-        within('table.index tbody tr:nth-child(1)') { click_link "Edit" }
+        visit spree.edit_admin_product_path @magazine
       end
 
       context "creating an issue" do
@@ -64,18 +64,22 @@ describe "Issue" do
           within("[data-hook='admin_product_issue_header']") { page.should have_content "Magazine issue number 4" }
         end
 
-        it "should create a new issue with an associated product" do
-          @product_issue = create(:base_product, :name => "Issue number 4")
+        it "should create a new issue with an associated product", js: true do
+
           click_link "Issues"
           click_link "New issue"
-          select "Issue number 4", :from => "Product"
+
+          within('[data-hook=admin_product_issue_new_form]') do
+            select "Issue number 4", :from => "Product"
+          end
+
           click_button "Create"
           click_link "Issues"
           within('table.index#listing_issues tbody tr:nth-child(1)') { click_link "Edit" }
           find_field('Product').find('option[selected]').text.should == "Issue number 4"
         end
 
-        it "should not let select subscribable product as associated product" do
+        it "should not let select subscribable product as associated product", js: true do
           @product_issue = create(:base_product, :name => "Issue number 4")
           click_link "Issues"
           click_link "New issue"

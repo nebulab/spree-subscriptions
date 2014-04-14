@@ -16,7 +16,7 @@ module Spree
       def create
         create_or_update t("subscription_successfully_created")
       end
-      
+
       def update
         create_or_update t("subscription_successfully_updated")
       end
@@ -30,12 +30,16 @@ module Spree
       private
 
       def create_or_update(flash_msg)
-        if @subscription.update_attributes(params[:subscription])
+        if @subscription.update_attributes(subscription_params)
           redirect_to edit_admin_subscription_path(@subscription)
           flash.notice = flash_msg
         else
           respond_with(@subscription)
         end
+      end
+
+      def subscription_params
+        params.require(:subscription).permit(:email, :magazine_id, :remaining_issues, :ship_address_attributes, :ship_address)
       end
     end
   end
