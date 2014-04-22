@@ -36,7 +36,7 @@ bundle
 Run the generate and database migration:
 
 ```bash
-rails g spree_subscriptions:install
+bundle exec rails g spree:subscriptions:install
 rake db:migrate
 ```
 
