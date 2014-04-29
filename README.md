@@ -24,7 +24,7 @@ Installation
 Add the gem to your Gemfile:
 
 ```ruby
-gem 'spree_subscriptions', :git => 'git://github.com/nebulab/spree-subscriptions.git', :branch => '2-1-stable'
+gem 'spree_subscriptions', :git => 'git://github.com/nebulab/spree-subscriptions.git', :branch => 'spree-2-1'
 ```
 
 Run bundle:
