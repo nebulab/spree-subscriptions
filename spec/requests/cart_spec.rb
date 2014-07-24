@@ -10,7 +10,8 @@ describe "Cart", js: true do
 
       within(".add-to-cart") do
         page.should have_selector("input", :visible => false)
-        page.should have_content('Subscribe Call To Action')
+        page.should have_content('Subscribe')
+        page.should_not have_content('Subscribe Call To Action')
       end
     end
 
