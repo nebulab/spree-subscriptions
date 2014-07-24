@@ -42,7 +42,7 @@ en:
   subscription_ending_for: "Subscription for %{email} is ending!"
   subscription_successfully_created: "Subscription successfully created!"
   subscription_successfully_updated: "Subscription successfully updated!"
-  you_have_no_subscriptions_yet: "You have not subscriptions yet"
+  you_have_no_subscriptions_yet: "You have no subscriptions yet"
 
   activerecord:
     attributes:
