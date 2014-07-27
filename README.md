@@ -53,7 +53,7 @@ Spree::Subscriptions::Config.set(:default_issues_number, 24)
 Use delayed job for email notifications
 ---------------------------------------
 
-To use delyed_job to send notification mail just add delayed_job to your
+To use delayed_job to send notification mail just add delayed_job to your
 store Gemfile and run from rails console:
 
 ```ruby
