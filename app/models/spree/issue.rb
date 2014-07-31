@@ -21,4 +21,15 @@ class Spree::Issue < ActiveRecord::Base
   def shipped?
     !shipped_at.nil?
   end
+    
+  def magazine
+    # override getter method to include deleted products, as per https://github.com/radar/paranoia
+    Spree::Product.unscoped { super }
+  end
+  
+  def magazine_issue
+    # override getter method to include deleted products, as per https://github.com/radar/paranoia
+    Spree::Product.unscoped { super }
+  end
+
 end
