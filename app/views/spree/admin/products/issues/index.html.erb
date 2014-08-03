@@ -4,7 +4,7 @@
 
 <% content_for :page_actions do %>
   <li id="new_issue_link">
-    <%= button_link_to Spree.t(:new_issue), new_admin_magazine_issue_url(@magazine), { :icon => 'add', :id => 'admin_new_issue' } %>
+    <%= button_link_to Spree.t(:new_issue), new_admin_magazine_issue_url(@magazine), { :icon => 'plus', :id => 'admin_new_issue' } %>
   </li>
 <% end if can?(:create, Spree::Issue) %>
 
