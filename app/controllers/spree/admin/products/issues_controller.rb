@@ -63,7 +63,7 @@ module Spree
         private
 
         def load_magazine
-          @magazine = Product.find_by_slug(params[:magazine_id])
+          @magazine = Product.with_deleted.find_by_slug(params[:magazine_id])
           @product = @magazine # useful to display product_tab menu
         end
 
