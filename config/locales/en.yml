@@ -47,6 +47,9 @@ en:
 
     activerecord:
       attributes:
+        spree/address:
+          firstname: "First Name"
+          lastname: "Last Name"
         spree/issue:
           name: "Name"
           shipped_at: "Shipped at"
