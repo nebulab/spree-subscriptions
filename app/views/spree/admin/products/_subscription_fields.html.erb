@@ -1,5 +1,5 @@
 <%= f.field_container :subscribable do %>
-  <%= f.label :subscribable, t(:subscribable, :scope => 'activerecord.attributes.spree/subscription') %><br />
+  <%= f.label :subscribable, Spree.t(:subscribable, :scope => 'activerecord.attributes.spree/subscription') %><br />
   <%= f.check_box :subscribable %>
 <% end %>
 

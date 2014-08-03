@@ -1,7 +1,7 @@
  <fieldset>
-  <%= f.label :name, t(:name, :scope => 'activerecord.attributes.spree/subscription') %>
+  <%= f.label :name, Spree.t(:name, :scope => 'activerecord.attributes.spree/subscription') %>
   <%= f.text_field :name %>
 
-  <%= f.label :magazine_issue_id, t(:product) %>
+  <%= f.label :magazine_issue_id, Spree.t(:product) %>
   <%= f.select :magazine_issue_id, @products, :include_blank => true %>
 </fieldset>

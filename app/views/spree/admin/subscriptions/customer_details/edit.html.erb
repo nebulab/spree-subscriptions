@@ -3,7 +3,7 @@
 <%= render :partial => 'spree/admin/shared/subscription_tabs', :locals => { :current => 'Customer Details' } %>
 
 <div data-hook="admin_subscription_edit_header">
-  <h2><%= t("editing_subscription") %></h2>
+  <h2><%= Spree.t("editing_subscription") %></h2>
   <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @subscription } %>
 </div>
 

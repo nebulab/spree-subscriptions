@@ -15,7 +15,7 @@ module Spree
 
         def update
           if @subscription.update_attributes(customer_params)
-            flash[:notice] = t('customer_details_updated')
+            flash[:notice] = Spree.t('customer_details_updated')
             redirect_to edit_admin_subscription_path(@subscription)
           else
             render :action => :edit

@@ -1,7 +1,7 @@
 <%= csrf_meta_tags %>
 
 <div data-hook="admin_subscription_new_header">
-  <h2><%= t("creating_subscription") %></h2>
+  <h2><%= Spree.t("creating_subscription") %></h2>
   <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @subscription } %>
 </div>
 
@@ -10,7 +10,7 @@
     <%= form_for [:admin, @subscription] do |f| %>
       <%= render :partial => 'form', :locals => { :f => f } %>
       <p class="form-buttons">
-        <%= button t("create") %> <%= link_to t('cancel'), collection_url %>
+        <%= button Spree.t("create") %> <%= link_to Spree.t('cancel'), collection_url %>
       </p>
     <% end %>
   </div>
