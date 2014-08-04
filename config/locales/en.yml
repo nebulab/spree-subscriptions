@@ -16,7 +16,7 @@ en:
     issue: "issue"
     issue_created: "Issue created!"
     issue_not_created: "Issue not created!"
-    issue_not_shipped: "This issue has already been shipped"
+    issue_not_shipped: "Not yet shipped"
     issue_not_updated: "Issue not updated!"
     issue_shipped: "Issue successfully shipped"
     issue_updated: "Issue updated!"
