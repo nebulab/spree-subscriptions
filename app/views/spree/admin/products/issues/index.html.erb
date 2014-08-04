@@ -3,29 +3,29 @@
 <%= render :partial => 'spree/admin/shared/product_tabs', :locals => { :current => 'Issues' } %>
 
 <% content_for :page_actions do %>
-  <li id="new_product_link">
+  <li id="new_issue_link">
     <%= button_link_to Spree.t(:new_issue), new_admin_magazine_issue_url(@magazine), { :icon => 'add', :id => 'admin_new_issue' } %>
   </li>
 <% end if can?(:create, Spree::Issue) %>
 
-<h1><%= Spree.t("listing_issues") %></h1>
+<h1><%= Spree.t(:listing_issues) %></h1>
 
 <table class="index" id="listing_issues">
   <thead>
     <tr>
-      <th><%= Spree.t(:name, :scope => 'activerecord.attributes.spree/issue') %></th>
-      <th><%= Spree.t(:shipped_at, :scope => 'activerecord.attributes.spree/issue') %></th>
-      <th data-hook="admin_issues_index_header_actions"></th>
+      <th data-hook="admin_issues_index_header_name"><%= t(:name, :scope => 'activerecord.attributes.spree/issue') %></th>
+      <th data-hook="admin_issues_index_header_shipped_at"><%= t(:shipped_at, :scope => 'activerecord.attributes.spree/issue') %></th>
+      <th data-hook="admin_issues_index_header_actions" class="actions"></th>
     </tr>
   </thead>
   <tbody>
     <% @issues.each do |issue| %>
       <tr>
-        <td><%= link_to issue.name, admin_magazine_issue_url(@magazine, issue) %></td>
-        <td><%= issue.shipped? ? issue.shipped_at.to_s(:db) : Spree.t(:issue_not_shipped) %></td>
+        <td data-hook="admin_issues_index_row_name"><%= link_to issue.name, admin_magazine_issue_url(@magazine, issue) %></td>
+        <td data-hook="admin_issues_index_row_shipped_at"><%= issue.shipped? ? issue.shipped_at.to_s(:db) : Spree.t(:issue_not_shipped) %></td>
         <td class="actions" data-hook="admin_issues_index_row_actions">
-          <%= link_to_with_icon :accept, Spree.t(:ship).capitalize, admin_magazine_issue_ship_path(@magazine, issue), :confirm => Spree.t(:are_you_sure) if !issue.shipped? %>
-          <%= link_to_with_icon :edit,  Spree.t(:edit), edit_admin_magazine_issue_url(@magazine, issue), :class => 'edit' if !issue.shipped? %>
+          <%= link_to_with_icon :truck, Spree.t(:ship), admin_magazine_issue_ship_path(@magazine, issue), {no_text: true, confirm: Spree.t(:are_you_sure)} if !issue.shipped? %>
+          <%= link_to_with_icon :edit,  Spree.t(:edit), edit_admin_magazine_issue_url(@magazine, issue), no_text: true, class: 'edit' if !issue.shipped? %>
         </td>
       </tr>
     <% end %>
