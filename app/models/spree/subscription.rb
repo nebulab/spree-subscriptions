@@ -66,7 +66,7 @@ class Spree::Subscription < ActiveRecord::Base
   end
 
   def shipped?(issue)
-    !shipped_issues.where(:id => issue.id).empty?
+    shipped_issues.where(issue: issue).present?
   end
 
   def allow_cancel?
