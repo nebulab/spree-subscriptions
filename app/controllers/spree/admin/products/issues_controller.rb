@@ -72,7 +72,7 @@ module Spree
         end
 
         def load_products
-          @products = Product.unsubscribable.map { |product| [product.name, product.id] }
+          @products = Product.unsubscribable
         end
 
         def issue_params

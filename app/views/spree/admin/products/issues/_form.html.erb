@@ -1,3 +1,11 @@
-<h3><%= Spree.t(:issue).titleize %></h3>
+<fieldset>
+  <%= f.field_container :name do %>
+    <%= f.label :name, "Issue Name (Optional)" %>
+    <%= f.text_field :name, class: 'fullwidth' %>
+  <% end %>
 
-<%= render 'issue_fields', :f => f %>  
+  <%= f.field_container :magazine_issue_id do %>
+    <%= f.label :magazine_issue_id, Spree.t(:product) %>
+    <%= f.collection_select(:magazine_issue_id, @products, :id, :name, { :include_blank => true }, { :class => 'select2 fullwidth' }) %>
+  <% end %>
+</fieldset>
