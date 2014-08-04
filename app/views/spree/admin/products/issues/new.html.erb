@@ -5,7 +5,7 @@
 <%= csrf_meta_tags %>
 
 <div data-hook="admin_product_issue_new_header">
-  <h2><%= t("creating_issue") %></h2>
+  <h2><%= Spree.t("creating_issue") %></h2>
   <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @magazine } %>
 </div>
 
@@ -15,7 +15,7 @@
       <%= render 'form', :f => f  %>
 
       <p class="form-buttons" data-hook="buttons">
-        <%= button t(:create) %>
+        <%= button Spree.t(:create) %>
 		  </p>
     <% end %>
   </div>

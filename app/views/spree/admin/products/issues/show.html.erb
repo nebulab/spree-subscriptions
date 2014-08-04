@@ -11,24 +11,24 @@
 <% end %>
 
 <div class="toolbar" data-hook="admin_issue_show_buttons">
-  <%= button_link_to t(:ship), admin_magazine_issue_ship_path(@product, @issue), :icon => 'accept', :confirm => t(:are_you_sure) if !@issue.shipped? %>
-  <%= button_link_to t(:print), admin_magazine_issue_path(@product, @issue, :format => :pdf), :icon => 'pdf' %>
+  <%= button_link_to Spree.t(:ship), admin_magazine_issue_ship_path(@product, @issue), :icon => 'accept', :confirm => Spree.t(:are_you_sure) if !@issue.shipped? %>
+  <%= button_link_to Spree.t(:print), admin_magazine_issue_path(@product, @issue, :format => :pdf), :icon => 'pdf' %>
 </div>
 <br class="clear">
 <br>
 
-<h1><%= @issue.shipped? ? t(:shipped_to) : t(:subscribed) %></h1>
+<h1><%= @issue.shipped? ? Spree.t(:shipped_to) : Spree.t(:subscribed) %></h1>
 
 <table class="index" id="subscriptions_listing">
   <thead data-hook="admin_subscriptions_index_headers">
-    <th><%= t(:email) %></th>
-    <th><%= t(:first_name) %></th>
-    <th><%= t(:last_name) %></th>
-    <th><%= t(:street_address) %></th>
-    <th><%= t(:zip) %></th>
-    <th><%= t(:city) %></th>
-    <th><%= t(:state) %></th>
-    <th><%= t(:phone) %></th>
+    <th><%= Spree.t(:email) %></th>
+    <th><%= Spree.t(:first_name) %></th>
+    <th><%= Spree.t(:last_name) %></th>
+    <th><%= Spree.t(:street_address) %></th>
+    <th><%= Spree.t(:zip) %></th>
+    <th><%= Spree.t(:city) %></th>
+    <th><%= Spree.t(:state) %></th>
+    <th><%= Spree.t(:phone) %></th>
   </thead>
   <tbody>
     <% @product_subscriptions.each do |subscription|%>
