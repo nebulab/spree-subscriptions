@@ -11,7 +11,7 @@ describe Spree::SubscriptionMailer do
     end
 
     it "should have proper subject" do
-      email.subject.should == I18n.t(:subscription_ended)
+      email.subject.should == Spree.t(:subscription_ended)
     end
   end
 
@@ -23,7 +23,7 @@ describe Spree::SubscriptionMailer do
     end
 
     it "should have proper subject" do
-      email.subject.should == I18n.t(:subscription_ending)
+      email.subject.should == Spree.t(:subscription_ending)
     end
   end
 end

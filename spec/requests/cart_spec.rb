@@ -20,7 +20,7 @@ describe "Cart", js: true do
 
       within(".add-to-cart") do
         page.should have_selector("input[value='1']")
-        page.should have_content(I18n.t('spree.add_to_cart'))
+        page.should have_content(Spree.t(:add_to_cart))
       end
     end
 
