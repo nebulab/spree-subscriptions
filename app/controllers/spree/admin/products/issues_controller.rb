@@ -8,7 +8,7 @@ module Spree
 
         def show
           if @issue.shipped?
-            @product_subscriptions = @issue.shipped_issues.map { |shipped_issue| shipped_issue.subscription }.compact
+            @product_subscriptions = Subscription.where(id: @issue.shipped_issues.pluck(:subscription_id))
           else
             @product_subscriptions = Subscription.eligible_for_shipping.where(:magazine_id => @magazine.id)
           end
