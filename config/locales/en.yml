@@ -33,6 +33,7 @@ en:
     listing_issues: "Available issues"
     listing_subscriptions: "Available Subscriptions"
     print: "print"
+    ship: "Ship"
     shipped_to: "Shipped to"
     subscribe_call_to_action: "Subscribe Now"
     subscribed: "Subscribed"
