@@ -35,24 +35,27 @@
 <%= paginate @subscriptions %>
 
 
+<% content_for :sidebar_title do %>
+  <%= Spree.t(:search) %>
+<% end %>
+
 <% content_for :sidebar do %>
-  <div class="box" data-hook="admin_subscriptions_index_search">
-    <h3><%= t(:search) %></h3>
+  <div class="box align-center" data-hook="admin_subscriptions_index_search">
     <%= search_form_for [:admin, @search] do |f| %>
-      <p>
-        <%= label_tag nil, t(:email) %><br />
-        <%= f.text_field :email_cont, :size => 25 %>
-      </p>
-      <p>
-        <%= label_tag nil, t(:first_name_begins_with) %><br />
-        <%= f.text_field :ship_address_firstname_start, :size => 25 %>
-      </p>
-      <p>
-        <%= label_tag nil, t(:last_name_begins_with) %><br />
-        <%= f.text_field :ship_address_lastname_start, :size => 25 %>
-      </p>      
-      <div data-hook="admin_orders_index_search_buttons">
-        <p><%= button t(:search) %></p>
+      <div class="field">
+        <%= f.label Spree.t(:email) %> <br>
+        <%= f.text_field :email_cont, :class => 'fullwidth' %>
+      </div>
+      <div class="field">
+        <%= f.label Spree.t(:first_name_begins_with) %> <br>
+        <%= f.text_field :ship_address_firstname_start, :class => 'fullwidth' %>
+      </div>
+      <div class="field">
+        <%= f.label Spree.t(:last_name_begins_with) %> <br>
+        <%= f.text_field :ship_address_lastname_start, :class => 'fullwidth' %>
+      </div>
+      <div data-hook="admin_subscriptions_index_search_buttons">
+        <%= button Spree.t(:search), 'search' %>
       </div>
     <% end %>
   </div>
