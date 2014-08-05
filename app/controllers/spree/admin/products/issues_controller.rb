@@ -28,10 +28,10 @@ module Spree
 
         def update
           if @issue.update_attributes(issue_params)
-            flash[:notice] = t('issue_updated')
+            flash[:notice] = Spree.t('issue_updated')
             redirect_to admin_magazine_issue_path(@magazine, @issue)
           else
-            flash[:error] = t(:issue_not_updated)
+            flash[:error] = Spree.t(:issue_not_updated)
             render :action => :edit
           end
         end
@@ -42,20 +42,20 @@ module Spree
 
         def create
           if (new_issue = @magazine.issues.create(issue_params))
-            flash[:notice] = t('issue_created')
+            flash[:notice] = Spree.t('issue_created')
             redirect_to admin_magazine_issue_path(@magazine, new_issue)
           else
-            flash[:error] = t(:issue_not_created)
+            flash[:error] = Spree.t(:issue_not_created)
             render :new
           end
         end
 
         def ship
           if @issue.shipped?
-            flash[:error]  = t('issue_not_shipped')
+            flash[:error]  = Spree.t('issue_not_shipped')
           else
             @issue.ship!
-            flash[:notice]  = t('issue_shipped')
+            flash[:notice]  = Spree.t('issue_shipped')
           end
           redirect_to admin_magazine_issues_path(@magazine, @issue)
         end

@@ -1,7 +1,7 @@
 SpreeSubscriptions
 ==================
 
-[![Build Status](https://secure.travis-ci.org/nebulab/spree-subscriptions.png?branch=master)](http://travis-ci.org/nebulab/spree-subscriptions)
+[![Build Status](https://secure.travis-ci.org/nebulab/spree-subscriptions.png?branch=2-2-stable)](http://travis-ci.org/nebulab/spree-subscriptions)
 [![Coverage Status](https://coveralls.io/repos/nebulab/spree-subscriptions/badge.png)](https://coveralls.io/r/nebulab/spree-subscriptions)
 [![Code Climate](https://codeclimate.com/github/nebulab/spree-subscriptions.png)](https://codeclimate.com/github/nebulab/spree-subscriptions)
 This extension allows Spree to handle subscribable products with number-based subscriptions. This means that you can subscribe to N issues for a subscribable product (e.g., magazine). Once a new issue is created and shipped, every subscription decreases its remaining issues number. When this number decreases to 1, the associated user is notified via email that he has to renew his subscription. When it decreases to 0, the subscription becomes inactive.
@@ -24,7 +24,7 @@ Installation
 Add the gem to your Gemfile:
 
 ```ruby
-gem 'spree_subscriptions', :git => 'git://github.com/nebulab/spree-subscriptions.git'
+gem 'spree_subscriptions', :git => 'git://github.com/nebulab/spree-subscriptions.git', :branch => '2-2-stable'
 ```
 
 Run bundle:

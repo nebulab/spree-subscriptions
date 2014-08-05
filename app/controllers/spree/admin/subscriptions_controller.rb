@@ -14,11 +14,11 @@ module Spree
       end
 
       def create
-        create_or_update t("subscription_successfully_created")
+        create_or_update Spree.t("subscription_successfully_created")
       end
 
       def update
-        create_or_update t("subscription_successfully_updated")
+        create_or_update Spree.t("subscription_successfully_updated")
       end
 
       protected

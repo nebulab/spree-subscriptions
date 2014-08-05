@@ -1,63 +1,67 @@
 en:
-  are_you_sure: "Are you sure?"
-  subscription: "subscription"
-  subscriptions: "subscriptions"
+  spree:
+    are_you_sure: "Are you sure?"
+    subscription: "subscription"
+    subscriptions: "subscriptions"
 
-  subscription_state:
-    active: "active"
-    canceled: "canceled"
+    subscription_state:
+      active: "active"
+      canceled: "canceled"
 
-  creating_issue: "Create issue"
-  creating_subscription: "Create subscription"
-  customer_details_updated: "The customer's details have been updated"
-  editing_issue: "Edit issue"
-  editing_subscription: "Edit subscription"
-  issue: "issue"
-  issue_created: "Issue created!"
-  issue_not_created: "Issue not created!"
-  issue_not_shipped: "Not yet shipped"
-  issue_not_updated: "Issue not updated!"
-  issue_shipped: "Issue successfully shipped"
-  issue_updated: "Issue updated!"
-  issues: "issues"
-  issues_number: "Issues number"
+    creating_issue: "Create issue"
+    creating_subscription: "Create subscription"
+    customer_details_updated: "The customer's details have been updated"
+    editing_issue: "Edit issue"
+    editing_subscription: "Edit subscription"
+    issue: "issue"
+    issue_created: "Issue created!"
+    issue_not_created: "Issue not created!"
+    issue_not_shipped: "This issue has already been shipped"
+    issue_not_updated: "Issue not updated!"
+    issue_shipped: "Issue successfully shipped"
+    issue_updated: "Issue updated!"
+    issues: "issues"
+    issues_number: "Issues number"
 
-  # Hack due to this commit https://github.com/spree/spree_auth_devise/commit/ed5b04220dcf2cf9ff500f5a66a0bea7ae81d183
-  # still not pushed into a gem. remove when it's done (should be spree_auth_devise 1.2.1)
-  login: Login
+    # Hack due to this commit https://github.com/spree/spree_auth_devise/commit/ed5b04220dcf2cf9ff500f5a66a0bea7ae81d183
+    # still not pushed into a gem. remove when it's done (should be spree_auth_devise 1.2.1)
+    login: Login
 
-  my_subscriptions: "My subscriptions"
-  new_issue: "New issue"
-  new_subscription: "New subscription"
-  listing_issues: "Available issues"
-  listing_subscriptions: "Available subscriptions"
-  print: "print"
-  shipped_to: "Shipped to"
-  subscribe_call_to_action: "Subscribe"
-  subscribed: "Subscribed"
-  subscription_details: "Subscription Details"
-  subscription_ended: "Subscription ended"
-  subscription_ended_for: "Subscription for %{email} has ended!"
-  subscription_ending: "Subscription ending"
-  subscription_ending_for: "Subscription for %{email} is ending!"
-  subscription_successfully_created: "Subscription successfully created!"
-  subscription_successfully_updated: "Subscription successfully updated!"
-  you_have_no_subscriptions_yet: "You have no subscriptions yet"
+    my_subscriptions: "My subscriptions"
+    new_issue: "New issue"
+    new_subscription: "New subscription"
+    listing_issues: "Available issues"
+    listing_subscriptions: "Available Subscriptions"
+    print: "print"
+    shipped_to: "Shipped to"
+    subscribe_call_to_action: "Subscribe Now"
+    subscribed: "Subscribed"
+    subscription_details: "Subscription Details"
+    subscription_ended: "Subscription ended"
+    subscription_ended_for: "Subscription for %{email} has ended!"
+    subscription_ending: "Subscription ending"
+    subscription_ending_for: "Subscription for %{email} is ending!"
+    subscription_successfully_created: "Subscription successfully created!"
+    subscription_successfully_updated: "Subscription successfully updated!"
+    you_have_no_subscriptions_yet: "You have no subscriptions yet"
 
-  activerecord:
-    attributes:
-      spree/issue:
-        name: "Name"
-        shipped_at: "Shipped at"
-      spree/product:
-        issues_number: "Issues number"
-      spree/subscription:
-        created_at: "Created at"
-        email: "Email"
-        id: "Id"
-        name: "Name"
-        remaining_issues: "Remaining Issues"
-        state: "Status"
-        subscribable: "subscription"
-      spree/variant:
-        issues_number: "Issues number"
+    activerecord:
+      attributes:
+        spree/address:
+          firstname: "First Name"
+          lastname: "Last Name"
+        spree/issue:
+          name: "Name"
+          shipped_at: "Shipped at"
+        spree/product:
+          issues_number: "Issues number"
+        spree/subscription:
+          created_at: "Created at"
+          email: "Email"
+          id: "Id"
+          name: "Name"
+          remaining_issues: "Remaining Issues"
+          state: "Status"
+          subscribable: "subscription"
+        spree/variant:
+          issues_number: "Issues number"
