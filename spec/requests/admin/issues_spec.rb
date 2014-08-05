@@ -70,7 +70,6 @@ describe "Issue" do
           click_link "New issue"
 
           within('[data-hook=admin_product_issue_new_form]') do
-            #select "Issue number 4", :from => "Product"
             select2_search "Issue number 4", :from => "Product"
           end
 
