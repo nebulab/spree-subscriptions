@@ -10,7 +10,7 @@
       <th><%= sort_link @search, :email, t(:email, :scope => 'activerecord.attributes.spree/subscription') %></th>
       <th><%= t(:firstname, :scope => 'activerecord.attributes.spree/address') %></th>
       <th><%= t(:lastname, :scope => 'activerecord.attributes.spree/address') %></th>
-      <th data-hook="admin_subscriptions_index_header_actions"></th>
+      <th data-hook="admin_subscriptions_index_header_actions" class="actions"></th>
     </tr>
   </thead>
   <tbody>
@@ -24,9 +24,9 @@
         <td><%= subscription.ship_address.firstname %></td>
         <td><%= subscription.ship_address.lastname %></td>
         <td class="actions" data-hook="admin_subscriptions_index_row_actions">
-          <%= link_to_edit subscription, :class => 'edit'  %>
+          <%= link_to_edit subscription, :no_text => true, :class => 'edit' if can?(:edit, subscription)  %>
           &nbsp;
-          <%= link_to_delete subscription %>
+          <%= link_to_delete subscription, :no_text => true if can?(:delete, subscription) %>
         </td>
       </tr>
     <% end %>
