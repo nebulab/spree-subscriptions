@@ -8,9 +8,9 @@ module Spree
 
         def show
           if @issue.shipped?
-            @product_subscriptions = Subscription.where(id: @issue.shipped_issues.pluck(:subscription_id))
+            @product_subscriptions = Subscription.where(id: @issue.shipped_issues.pluck(:subscription_id)).includes(:ship_address)
           else
-            @product_subscriptions = Subscription.eligible_for_shipping.where(:magazine_id => @magazine.id)
+            @product_subscriptions = @magazine.subscriptions.eligible_for_shipping.includes(:ship_address)
           end
           respond_to do |format|
             format.html
