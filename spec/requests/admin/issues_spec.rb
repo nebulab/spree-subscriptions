@@ -70,13 +70,12 @@ describe "Issue" do
           click_link "New issue"
 
           within('[data-hook=admin_product_issue_new_form]') do
-            select "Issue number 4", :from => "Product"
+            #select "Issue number 4", :from => "Product"
+            select2_search "Issue number 4", :from => "Product"
           end
 
           click_button "Create"
-          click_link "Issues"
-          within('table.index#listing_issues tbody tr:nth-child(1)') { click_link "Edit" }
-          find_field('Product').find('option[selected]').text.should == "Issue number 4"
+          Spree::Issue.last.magazine_issue.name == "Issue number 4"
         end
 
         it "should not let select subscribable product as associated product", js: true do
