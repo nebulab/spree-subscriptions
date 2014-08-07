@@ -24,8 +24,10 @@
         <td data-hook="admin_issues_index_row_name"><%= link_to issue.name, admin_magazine_issue_url(@magazine, issue) %></td>
         <td data-hook="admin_issues_index_row_shipped_at"><%= issue.shipped? ? issue.shipped_at.to_s(:db) : Spree.t(:issue_not_shipped) %></td>
         <td class="actions" data-hook="admin_issues_index_row_actions">
-          <%= link_to_with_icon :truck, Spree.t(:ship), admin_magazine_issue_ship_path(@magazine, issue), {no_text: true, confirm: Spree.t(:are_you_sure)} if !issue.shipped? %>
+          <%= link_to_with_icon :truck, Spree.t(:ship), admin_magazine_issue_ship_path(@magazine, issue), {no_text: true, confirm: Spree.t(:confirm_ship)} if !issue.shipped? %>
+          <%= link_to_with_icon :history, Spree.t(:unship), admin_magazine_issue_unship_path(@magazine, issue), {no_text: true, confirm: Spree.t(:confirm_unship)} if issue == @issues.shipped.first %>
           <%= link_to_with_icon :edit,  Spree.t(:edit), edit_admin_magazine_issue_url(@magazine, issue), no_text: true, class: 'edit' if !issue.shipped? %>
+          <%= link_to_with_icon 'trash',  Spree.t(:delete), admin_magazine_issue_url(@magazine, issue), method: :delete, no_text: true if !issue.shipped? %>
         </td>
       </tr>
     <% end %>

@@ -8,6 +8,8 @@ en:
       active: "active"
       canceled: "canceled"
 
+    confirm_ship: "Ship this issue?"
+    confirm_unship: "Unship this issue?"
     creating_issue: "Create issue"
     creating_subscription: "Create subscription"
     customer_details_updated: "The customer's details have been updated"
@@ -19,6 +21,7 @@ en:
     issue_not_shipped: "Not yet shipped"
     issue_not_updated: "Issue not updated!"
     issue_shipped: "Issue successfully shipped"
+    issue_shipped: "Issue successfully unshipped"
     issue_updated: "Issue updated!"
     issues: "issues"
     issues_number: "Issues number"
@@ -44,6 +47,7 @@ en:
     subscription_ending_for: "Subscription for %{email} is ending!"
     subscription_successfully_created: "Subscription successfully created!"
     subscription_successfully_updated: "Subscription successfully updated!"
+    unship: "Unship"
     you_have_no_subscriptions_yet: "You have no subscriptions yet"
 
     activerecord:
