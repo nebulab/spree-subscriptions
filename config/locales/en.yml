@@ -21,7 +21,7 @@ en:
     issue_not_shipped: "Not yet shipped"
     issue_not_updated: "Issue not updated!"
     issue_shipped: "Issue successfully shipped"
-    issue_shipped: "Issue successfully unshipped"
+    issue_unshipped: "Issue successfully unshipped"
     issue_updated: "Issue updated!"
     issues: "issues"
     issues_number: "Issues number"
