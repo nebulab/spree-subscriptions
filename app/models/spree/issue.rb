@@ -9,6 +9,9 @@ class Spree::Issue < ActiveRecord::Base
             presence: true,
             unless: "magazine_issue.present?"
 
+  scope :shipped, -> { where("shipped_at IS NOT NULL") }
+  scope :unshipped, -> { where("shipped_at IS NULL") }
+
   def name
     magazine_issue.present? ? magazine_issue.name : read_attribute(:name)
   end
@@ -16,6 +19,11 @@ class Spree::Issue < ActiveRecord::Base
   def ship!
     subscriptions.eligible_for_shipping.each{ |s| s.ship!(self) }
     update_attribute(:shipped_at, Time.now)
+  end
+
+  def unship!
+    Spree::Subscription.where(id: self.shipped_issues.pluck(:subscription_id)).each{ |s| s.unship!(self) }
+    update_attribute(:shipped_at, nil)
   end
 
   def shipped?
