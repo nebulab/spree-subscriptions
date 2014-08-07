@@ -32,6 +32,7 @@ en:
     new_subscription: "New subscription"
     listing_issues: "Available issues"
     listing_subscriptions: "Available Subscriptions"
+    pdf: "PDF"
     print: "print"
     ship: "Ship"
     shipped_to: "Shipped to"
