@@ -3,8 +3,8 @@ module Spree
     module Products
       class IssuesController < Spree::Admin::BaseController
         before_filter :load_magazine
-        before_filter :load_issue, only: [:show, :edit, :update, :ship]
-        before_filter :load_products, except: [:show, :index]
+        before_filter :load_issue, :only => [:show, :edit, :update, :ship, :unship]
+        before_filter :load_products, :except => [:show, :index]
 
         def show
           if @issue.shipped?
@@ -50,6 +50,18 @@ module Spree
           end
         end
 
+        def destroy
+          @issue = Issue.find(params[:id])
+          @issue.destroy
+
+          flash[:success] = Spree.t('issue_deleted')
+
+          respond_with(@issue) do |format|
+            format.html { redirect_to admin_magazine_issues_path(@issue.magazine) }
+            format.js  { render_js_for_destroy }
+          end
+        end
+
         def ship
           if @issue.shipped?
             flash[:error]  = Spree.t('issue_not_shipped')
@@ -58,6 +70,16 @@ module Spree
             flash[:notice]  = Spree.t('issue_shipped')
           end
           redirect_to admin_magazine_issues_path(@magazine, @issue)
+        end
+
+        def unship
+          if @issue.shipped?
+            @issue.unship!
+            flash[:notice]  = Spree.t('issue_unshipped')
+          else
+            flash[:error]  = Spree.t('issue_not_shipped')
+          end
+          redirect_to admin_magazine_issues_path(@magazine)
         end
 
         private

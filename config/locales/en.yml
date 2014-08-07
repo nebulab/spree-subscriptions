@@ -3,7 +3,7 @@ en:
     admin:
       user:
         subscription_history: Subscription History
-        
+
     are_you_sure: Are you sure?
     subscription: subscription
     subscriptions: subscriptions
@@ -12,21 +12,23 @@ en:
       active: active
       canceled: canceled
 
-    creating_issue: Create issue
-    creating_subscription: Create subscription
-    customer_details_updated: The customer's details have been updated
-    editing_issue: Edit issue
-    editing_subscription: Edit subscription
-    issue: issue
-    issue_created: Issue created!
-    issue_not_created: Issue not created!
-    issue_not_shipped: Not yet shipped
-    issue_not_updated: Issue not updated!
-    issue_shipped: Issue successfully shipped
-    issue_updated: Issue updated!
-    issues: Issues
-    issues_number: Issues number
-
+    confirm_ship: "Ship this issue?"
+    confirm_unship: "Unship this issue?"
+    creating_issue: "Create issue"
+    creating_subscription: "Create subscription"
+    customer_details_updated: "The customer's details have been updated"
+    editing_issue: "Edit issue"
+    editing_subscription: "Edit subscription"
+    issue: "issue"
+    issue_created: "Issue created!"
+    issue_not_created: "Issue not created!"
+    issue_not_shipped: "Not yet shipped"
+    issue_not_updated: "Issue not updated!"
+    issue_shipped: "Issue successfully shipped"
+    issue_shipped: "Issue successfully unshipped"
+    issue_updated: "Issue updated!"
+    issues: "issues"
+    issues_number: "Issues number"
     my_subscriptions: My subscriptions
     new_issue: New issue
     new_subscription: New subscription
@@ -43,9 +45,10 @@ en:
     subscription_ended_for: "Subscription for %{email} has ended!"
     subscription_ending: Subscription ending
     subscription_ending_for: "Subscription for %{email} is ending!"
-    subscription_successfully_created: Subscription successfully created!
-    subscription_successfully_updated: Subscription successfully updated!
-    you_have_no_subscriptions_yet: You have no subscriptions yet
+    subscription_successfully_created: "Subscription successfully created!"
+    subscription_successfully_updated: "Subscription successfully updated!"
+    unship: "Unship"
+    you_have_no_subscriptions_yet: "You have no subscriptions yet"
 
     activerecord:
       attributes:
