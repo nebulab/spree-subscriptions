@@ -2,6 +2,7 @@ class Spree::Subscription < ActiveRecord::Base
   belongs_to :magazine, :class_name => 'Spree::Product'
   belongs_to :ship_address, :class_name => 'Spree::Address'
   has_many :shipped_issues
+  has_many :issues, through: :shipped_issues
 
   alias_method :shipping_address, :ship_address
   alias_method :shipping_address=, :ship_address=
