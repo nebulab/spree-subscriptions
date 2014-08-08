@@ -68,8 +68,9 @@ class Spree::Subscription < ActiveRecord::Base
   def unship!(issue)
     if self.shipped?(issue)
       transaction do
+        num_of_shipped_issues = shipped_issues.where(issue: issue).size
         shipped_issues.where(issue: issue).destroy_all
-        update_column(:remaining_issues, remaining_issues+1)
+        update_column(:remaining_issues, remaining_issues + num_of_shipped_issues)
       end
     end
   end
