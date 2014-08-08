@@ -10,6 +10,7 @@ class Spree::Subscription < ActiveRecord::Base
   validates_with SubscriptionValidator
 
   scope :eligible_for_shipping, -> { where("remaining_issues >= 1") }
+  scope :canceled, -> { where(state: :canceled) }
 
   state_machine :state, :initial => :active do
     event :cancel do
@@ -35,6 +36,10 @@ class Spree::Subscription < ActiveRecord::Base
 
   def ending?
     remaining_issues == 1
+  end
+  
+  def canceled?
+    return state.intern == :canceled
   end
 
   def notify_ended!
