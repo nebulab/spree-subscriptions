@@ -23,7 +23,7 @@ en:
     issue_shipped: "Issue successfully shipped"
     issue_unshipped: "Issue successfully unshipped"
     issue_updated: "Issue updated!"
-    issues: "issues"
+    issues: "Issues"
     issues_number: "Issues number"
 
     # Hack due to this commit https://github.com/spree/spree_auth_devise/commit/ed5b04220dcf2cf9ff500f5a66a0bea7ae81d183

@@ -143,12 +143,22 @@ describe "Issue" do
             within('table.index#listing_issues tbody tr:nth-child(1)') { click_link @issue.name }
             page.should have_content "Subscribed"
           end
+          
+          it "should see the delete button" do
+            click_link "Issues"
+            page.should have_css('a[title="Delete"]')
+          end
 
           it "should be markable as shipped" do
             click_link "Issues"
+            page.should have_css('a[title="Ship"]')
+            page.should_not have_css('a[title="Unship"]')
             within('table.index#listing_issues tbody tr:nth-child(1)') { click_link @issue.name }
-            click_link "ship"
+            page.should have_link "Ship"
+            click_link "Ship"
             page.should have_content "successfully shipped"
+            page.should_not have_css('a[title="Ship"]')
+            page.should have_css('a[title="Unship"]')
           end
 
           context "after issue is shipped" do
@@ -160,7 +170,13 @@ describe "Issue" do
             end
 
             it "should not see the ship button" do
-              page.should_not have_content "ship"
+              click_link "Issues"
+              page.should_not have_link "Ship"
+            end
+
+            it "should not see the delete button" do
+              click_link "Issues"
+              page.should_not have_css('a[title="Delete"]')
             end
 
             it "should show listing as 'shipped to'" do
@@ -169,6 +185,30 @@ describe "Issue" do
 
             it "should display the list of user that received the issue" do
               page.should have_selector("table#subscriptions_listing tbody tr", :count =>  @issue.shipped_issues.count)
+            end
+            
+            context "unshipping an issue" do
+              it "should display the unship button" do
+                page.should have_link "Unship"
+              end
+              
+              it "should show listing as 'subscribed'" do
+                click_link "Issues"
+                within('table.index#listing_issues tbody tr:nth-child(1)') { click_link @issue.name }
+                page.should have_link "Unship"
+                click_link "Unship"
+                page.should have_content "successfully unshipped"
+              
+                within('table.index#listing_issues tbody tr:nth-child(1)') { click_link @issue.name }
+                page.should_not have_link "Unship"
+                page.should have_link "Ship"
+                page.should_not have_content "Shipped to"
+                page.should have_content "Subscribed"
+                page.should have_button "Delete"
+                
+                click_button "Delete"
+                page.should have_content "Issue Deleted"
+              end
             end
           end
         end
