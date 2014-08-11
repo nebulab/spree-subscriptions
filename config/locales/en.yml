@@ -23,10 +23,6 @@ en:
     issues: "issues"
     issues_number: "Issues number"
 
-    # Hack due to this commit https://github.com/spree/spree_auth_devise/commit/ed5b04220dcf2cf9ff500f5a66a0bea7ae81d183
-    # still not pushed into a gem. remove when it's done (should be spree_auth_devise 1.2.1)
-    login: Login
-
     my_subscriptions: "My subscriptions"
     new_issue: "New issue"
     new_subscription: "New subscription"
