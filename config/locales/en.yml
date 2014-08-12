@@ -1,5 +1,9 @@
 en:
   spree:
+    admin:
+      user:
+        subscription_history: Subscription History
+        
     are_you_sure: "Are you sure?"
     subscription: "subscription"
     subscriptions: "subscriptions"

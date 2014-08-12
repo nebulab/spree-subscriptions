@@ -8,5 +8,11 @@ Spree::Core::Engine.routes.draw do
       resources :issues, :controller => "products/issues"
       match "issues/:id/ship", :to => "products/issues#ship", :via => :get, :as => :issue_ship
     end
+    
+    resources :users do
+      member do
+        get :subscriptions
+      end
+    end    
   end
 end
