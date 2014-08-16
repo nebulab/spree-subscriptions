@@ -160,7 +160,7 @@ describe "Issue" do
             end
 
             it "should not see the ship button" do
-              page.should_not have_content "Ship"
+              page.should_not have_link "Ship"
             end
 
             it "should show listing as 'shipped to'" do
