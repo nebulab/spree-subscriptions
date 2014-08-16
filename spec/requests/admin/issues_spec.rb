@@ -147,7 +147,7 @@ describe "Issue" do
           it "should be markable as shipped" do
             click_link "Issues"
             within('table.index#listing_issues tbody tr:nth-child(1)') { click_link @issue.name }
-            click_link "ship"
+            click_link "Ship"
             page.should have_content "successfully shipped"
           end
 
@@ -160,7 +160,7 @@ describe "Issue" do
             end
 
             it "should not see the ship button" do
-              page.should_not have_content "ship"
+              page.should_not have_content "Ship"
             end
 
             it "should show listing as 'shipped to'" do
