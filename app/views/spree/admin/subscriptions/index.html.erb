@@ -21,14 +21,14 @@
         <td><%= subscription.created_at.to_date %></td>
         <td><%= link_to subscription.id, edit_object_url(subscription) %></td>
         <td><%= subscription.remaining_issues %></td>
-        <td><%= t(subscription.state, :scope => 'subscription_state').downcase %></td>
+        <td><%= t(subscription.state, scope: 'subscription_state').downcase %></td>
         <td><%= subscription.email %></td>
         <td><%= subscription.ship_address.firstname %></td>
         <td><%= subscription.ship_address.lastname %></td>
         <td class="actions" data-hook="admin_subscriptions_index_row_actions">
-          <%= link_to_edit subscription, :no_text => true, :class => 'edit' if can?(:edit, subscription)  %>
+          <%= link_to_edit subscription, no_text: true, class: 'edit' if can?(:edit, subscription)  %>
           &nbsp;
-          <%= link_to_delete subscription, :no_text => true if can?(:delete, subscription) %>
+          <%= link_to_delete subscription, no_text: true if can?(:delete, subscription) %>
         </td>
       </tr>
     <% end %>
@@ -47,15 +47,15 @@
     <%= search_form_for [:admin, @search] do |f| %>
       <p>
         <%= label_tag nil, Spree.t(:email) %><br />
-        <%= f.text_field :email_cont, :size => 25 %>
+        <%= f.text_field :email_cont, size: 25 %>
       </p>
       <p>
         <%= label_tag nil, Spree.t(:first_name_begins_with) %><br />
-        <%= f.text_field :ship_address_firstname_start, :size => 25 %>
+        <%= f.text_field :ship_address_firstname_start, size: 25 %>
       </p>
       <p>
         <%= label_tag nil, Spree.t(:last_name_begins_with) %><br />
-        <%= f.text_field :ship_address_lastname_start, :size => 25 %>
+        <%= f.text_field :ship_address_lastname_start, size: 25 %>
       </p>
       <div data-hook="admin_orders_index_search_buttons">
         <p><%= button Spree.t(:search) %></p>

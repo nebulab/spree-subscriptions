@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "Issue" do
   context "as_admin_user" do
     before do
-      user = create(:admin_user, :email => "test@example.com")
+      user = create(:admin_user, email: "test@example.com")
       sign_in_as!(user)
     end
 
@@ -33,7 +33,7 @@ describe "Issue" do
         end
 
         it "should let view product issues" do
-          issue = create(:issue, :magazine => @magazine)
+          issue = create(:issue, magazine: @magazine)
           other_issue = create(:issue)
           click_link "Issues"
           page.should have_content("Available issues")
@@ -45,7 +45,7 @@ describe "Issue" do
 
     context "managing an issue" do
       before do
-        @product_issue = create(:product, :name => "Issue number 4")
+        @product_issue = create(:product, name: "Issue number 4")
         @magazine = create(:subscribable_product)
         visit spree.edit_admin_product_path @magazine
       end
@@ -59,7 +59,7 @@ describe "Issue" do
         it "should create a new issue without associated product" do
           click_link "Issues"
           click_link "New issue"
-          fill_in "Name", :with => "Magazine issue number 4"
+          fill_in "Name", with: "Magazine issue number 4"
           click_button "Create"
           within("[data-hook='admin_product_issue_header']") { page.should have_content "Magazine issue number 4" }
         end
@@ -70,7 +70,7 @@ describe "Issue" do
           click_link "New issue"
 
           within('[data-hook=admin_product_issue_new_form]') do
-            select2_search "Issue number 4", :from => "Product"
+            select2_search "Issue number 4", from: "Product"
           end
 
           click_button "Create"
@@ -81,13 +81,13 @@ describe "Issue" do
           click_link "Issues"
           click_link "New issue"
 
-          page.should have_xpath("//*[@id='issue_magazine_issue_id']/option", :count => 2)
+          page.should have_xpath("//*[@id='issue_magazine_issue_id']/option", count: 2)
         end
       end
 
       context "editing a product issue" do
         before do
-          @issue = create(:issue, :magazine => @magazine)
+          @issue = create(:issue, magazine: @magazine)
           click_link "Issues"
         end
 
@@ -98,7 +98,7 @@ describe "Issue" do
 
         it "should let update an issue" do
           within('table.index#listing_issues tbody tr:nth-child(1)') { click_link "Edit" }
-          fill_in "Name", :with => "Magazine issue number 4"
+          fill_in "Name", with: "Magazine issue number 4"
           click_button "Update"
           page.should have_content "Issue updated!"
           page.should have_content "Magazine issue number 4"
@@ -107,8 +107,8 @@ describe "Issue" do
 
       context "showing a product issue" do
         before do
-          @issue = create(:issue, :magazine => @magazine)
-          @subscription = create(:ending_subscription, :magazine => @magazine)
+          @issue = create(:issue, magazine: @magazine)
+          @subscription = create(:ending_subscription, magazine: @magazine)
         end
 
         it "should display the list of subscribers" do
@@ -119,14 +119,14 @@ describe "Issue" do
 
         it "should display only users subscribed to that issue" do
           @other_magazine = create(:subscribable_product)
-          @other_subscription = create(:ending_subscription, :magazine => @other_magazine, :email => "other@email.com")
+          @other_subscription = create(:ending_subscription, magazine: @other_magazine, email: "other@email.com")
           click_link "Issues"
           within('table.index#listing_issues tbody tr:nth-child(1)') { click_link @issue.name }
           page.should_not have_content @other_subscription.email
         end
 
         it "should display only users that have remaining issues" do
-          @other_subscription = create(:ended_subscription, :magazine => @magazine, :email => "other@email.com")
+          @other_subscription = create(:ended_subscription, magazine: @magazine, email: "other@email.com")
           click_link "Issues"
           within('table.index#listing_issues tbody tr:nth-child(1)') { click_link @issue.name }
           page.should_not have_content @other_subscription.email
@@ -135,7 +135,7 @@ describe "Issue" do
         context "shipping an issue" do
           before do
             Spree::Subscriptions::Config.use_delayed_job = false
-            (0..5).each { |i| create(:ending_subscription, :magazine => @magazine) }
+            (0..5).each { |i| create(:ending_subscription, magazine: @magazine) }
           end
 
           it "should show listing as 'subscribed'" do
@@ -154,7 +154,7 @@ describe "Issue" do
           context "after issue is shipped" do
             before do
               @issue.ship!
-              (0..5).each { |i| create(:ending_subscription, :magazine => @magazine) }
+              (0..5).each { |i| create(:ending_subscription, magazine: @magazine) }
               click_link "Issues"
               within('table.index#listing_issues tbody tr:nth-child(1)') { click_link @issue.name }
             end
@@ -168,7 +168,7 @@ describe "Issue" do
             end
 
             it "should display the list of user that received the issue" do
-              page.should have_selector("table#subscriptions_listing tbody tr", :count =>  @issue.shipped_issues.count)
+              page.should have_selector("table#subscriptions_listing tbody tr", count:  @issue.shipped_issues.count)
             end
           end
         end

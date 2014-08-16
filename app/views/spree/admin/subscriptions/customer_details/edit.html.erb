@@ -1,16 +1,16 @@
 <%= csrf_meta_tags %>
 
-<%= render :partial => 'spree/admin/shared/subscription_tabs', :locals => { :current => 'Customer Details' } %>
+<%= render partial: 'spree/admin/shared/subscription_tabs', locals: { current: 'Customer Details' } %>
 
 <div data-hook="admin_subscription_edit_header">
   <h2><%= Spree.t("editing_subscription") %></h2>
-  <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @subscription } %>
+  <%= render partial: 'spree/shared/error_messages', locals: { target: @subscription } %>
 </div>
 
 <div data-hook="admin_subscription_edit_form">
   <div id="subscription-form-wrapper">
-    <%= form_for @subscription, :url => admin_subscription_customer_url(@subscription) do |f| %>
-      <%= render 'form', :f => f  %>
+    <%= form_for @subscription, url: admin_subscription_customer_url(@subscription) do |f| %>
+      <%= render 'form', f: f  %>
     <% end %>
   </div>
 </div>

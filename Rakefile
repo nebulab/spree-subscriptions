@@ -11,7 +11,7 @@ Bundler::GemHelper.install_tasks
 
 RSpec::Core::RakeTask.new
 
-task :default => :spec
+task default: :spec
 
 spec = eval(File.read('spree_subscriptions.gemspec'))
 

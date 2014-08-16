@@ -1,5 +1,5 @@
 <h3><%= Spree.t(:customer_details) %></h3>
-<h3><%= Spree::Address.model_name.human(:count => 1) %></h3>
+<h3><%= Spree::Address.model_name.human(count: 1) %></h3>
 
 <%= f.field_container :email do %>
   <%= f.label :email, Spree.t(:email) %><br />
@@ -7,7 +7,7 @@
   <%= f.error_message_on :email %>
 <% end %>
 <%= f.fields_for :ship_address do |sa_form| %>
-  <%= render :partial => 'spree/admin/shared/subscription_address_form', :locals => { :f => sa_form, :name => Spree.t(:shipping_address) } %>
+  <%= render partial: 'spree/admin/shared/subscription_address_form', locals: { f: sa_form, name: Spree.t(:shipping_address) } %>
 <% end %>
 
 <p class="form-buttons" data-hook="buttons">

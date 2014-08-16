@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe Spree::SubscriptionMailer do
-  let(:subscription) { mock_model(Spree::Subscription, :email => 'subsriber@fake.web') }
+  let(:subscription) { mock_model(Spree::Subscription, email: 'subsriber@fake.web') }
 
   context "subscription ended" do
     let(:email) { Spree::SubscriptionMailer.subscription_ended_email(subscription) }

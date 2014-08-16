@@ -1,5 +1,5 @@
 <% if @product.subscribable? %>
-  <%=  hidden_field_tag :quantity, 1, :class => 'title', :min => 1 %>
+  <%=  hidden_field_tag :quantity, 1, class: 'title', min: 1 %>
 <% else %>
-  <%=  number_field_tag :quantity, 1, :class => 'title', :min => 1 %>
+  <%=  number_field_tag :quantity, 1, class: 'title', min: 1 %>
 <% end %>

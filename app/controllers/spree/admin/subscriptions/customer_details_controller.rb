@@ -6,11 +6,11 @@ module Spree
 
         def show
           edit
-          render :action => :edit
+          render action: :edit
         end
 
         def edit
-          @subscription.build_ship_address(:country_id => Spree::Config[:default_country_id]) if @subscription.ship_address.nil?
+          @subscription.build_ship_address(country_id: Spree::Config[:default_country_id]) if @subscription.ship_address.nil?
         end
 
         def update
@@ -18,7 +18,7 @@ module Spree
             flash[:notice] = Spree.t('customer_details_updated')
             redirect_to edit_admin_subscription_path(@subscription)
           else
-            render :action => :edit
+            render action: :edit
           end
         end
 

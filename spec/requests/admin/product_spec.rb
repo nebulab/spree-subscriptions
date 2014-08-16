@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "Products" do
   context "setting a product as subscribabale" do
     before do
-      user = create(:admin_user, :email => "test@example.com")
+      user = create(:admin_user, email: "test@example.com")
       sign_in_as!(user)
     end
 
@@ -11,7 +11,7 @@ describe "Products" do
       product = create(:product_with_option_types)
 
       product.options.each do |option|
-        create(:option_value, :option_type => option.option_type)
+        create(:option_value, option_type: option.option_type)
       end
 
       visit spree.admin_path
@@ -33,12 +33,12 @@ describe "Products" do
     end
 
     it "should let choose the issues number" do
-      product = create(:base_product, :subscribable => true)
+      product = create(:base_product, subscribable: true)
 
       visit spree.admin_path
       click_link "Products"
       within('table.index tbody tr:nth-child(1)') { click_link "Edit" }
-      fill_in "Issues number", :with => "4"
+      fill_in "Issues number", with: "4"
       click_button "Update"
       page.should have_content("successfully updated!")
       find_field("Issues number").value.should == "4"

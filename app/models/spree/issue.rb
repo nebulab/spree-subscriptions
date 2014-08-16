@@ -1,13 +1,13 @@
 class Spree::Issue < ActiveRecord::Base
-  belongs_to :magazine, :class_name => "Spree::Product"
-  belongs_to :magazine_issue, :class_name => "Spree::Product"
+  belongs_to :magazine, class_name: "Spree::Product"
+  belongs_to :magazine_issue, class_name: "Spree::Product"
   has_many :shipped_issues
 
-  delegate :subscriptions, :to => :magazine
+  delegate :subscriptions, to: :magazine
 
   validates :name,
-            :presence => true,
-            :unless => "magazine_issue.present?"
+            presence: true,
+            unless: "magazine_issue.present?"
 
   def name
     magazine_issue.present? ? magazine_issue.name : read_attribute(:name)

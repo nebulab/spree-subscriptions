@@ -1,6 +1,6 @@
 class Spree::Subscription < ActiveRecord::Base
-  belongs_to :magazine, :class_name => 'Spree::Product'
-  belongs_to :ship_address, :class_name => 'Spree::Address'
+  belongs_to :magazine, class_name: 'Spree::Product'
+  belongs_to :ship_address, class_name: 'Spree::Address'
   has_many :shipped_issues
   has_many :issues, through: :shipped_issues
 
@@ -13,16 +13,16 @@ class Spree::Subscription < ActiveRecord::Base
   scope :eligible_for_shipping, -> { where("remaining_issues >= 1") }
   scope :canceled, -> { where(state: :canceled) }
 
-  state_machine :state, :initial => :active do
+  state_machine :state, initial: :active do
     event :cancel do
-      transition :to => :canceled, :if => :allow_cancel?
+      transition to: :canceled, if: :allow_cancel?
     end
   end
 
   def self.subscribe!(opts)
     opts.to_options!.assert_valid_keys(:email, :ship_address, :magazine, :remaining_issues)
 
-    existing_subscription = self.where(:email => opts[:email], :magazine_id => opts[:magazine].id).first
+    existing_subscription = self.where(email: opts[:email], magazine_id: opts[:magazine].id).first
 
     if existing_subscription
       self.renew_subscription(existing_subscription, opts[:remaining_issues], opts[:ship_address])
@@ -62,7 +62,7 @@ class Spree::Subscription < ActiveRecord::Base
   def ship!(issue)
     if !ended? && !shipped?(issue)
       transaction do
-        shipped_issues.create(:issue => issue)
+        shipped_issues.create(issue: issue)
         update_column(:remaining_issues, remaining_issues-1)
 
         notify_ending! if ending?

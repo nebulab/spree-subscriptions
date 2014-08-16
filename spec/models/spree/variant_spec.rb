@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Spree::Variant do
   let(:variant) { create(:subscribable_variant) }
-  let(:variant_without_issue_number) { create(:subscribable_variant, :issues_number => "")}
+  let(:variant_without_issue_number) { create(:subscribable_variant, issues_number: "")}
   let(:base_product_variant) { create(:variant) }
 
   it "should respond to issues_number" do

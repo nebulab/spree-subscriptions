@@ -6,7 +6,7 @@
         <tr>
           <th><%= Spree.t(:subscription) %></th>
           <th><%= Spree.t(:shipped_to) %></th>
-          <th><%= Spree.t(:remaining_issues, :scope => 'activerecord.attributes.spree/subscription') %></th>
+          <th><%= Spree.t(:remaining_issues, scope: 'activerecord.attributes.spree/subscription') %></th>
           <th><%= Spree.t(:status) %></th>
         </tr>
       </thead>
@@ -17,7 +17,7 @@
             <td><%= subscription.magazine.name %></td>
             <td><%= subscription.ship_address.full_name %></td>
             <td><%= subscription.remaining_issues %></td>
-            <td><%= Spree.t(subscription.state, :scope => 'subscription_state').titleize %></td>
+            <td><%= Spree.t(subscription.state, scope: 'subscription_state').titleize %></td>
           </tr>
         <% end %>
       </tbody>

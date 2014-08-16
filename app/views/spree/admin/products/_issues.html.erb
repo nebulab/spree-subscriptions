@@ -1,5 +1,5 @@
 <% if @product.subscribable? %>
-  <%= content_tag :li, :class => ('active' if current == 'Issues') do %>
+  <%= content_tag :li, class: ('active' if current == 'Issues') do %>
     <%= link_to_with_icon 'calendar', Spree.t(:issues), admin_magazine_issues_url(@product) %>
   <% end %>
 <% end %>

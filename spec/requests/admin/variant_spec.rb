@@ -3,9 +3,9 @@ require 'spec_helper'
 describe "Variant" do
   context "setting issues number" do
     before do
-      @subscribable_product = create(:product, :subscribable => true)
+      @subscribable_product = create(:product, subscribable: true)
       @variant1, @variant2 = create_variants_for(@subscribable_product)
-      user = create(:admin_user, :email => "test@example.com")
+      user = create(:admin_user, email: "test@example.com")
       sign_in_as!(user)
     end
 
@@ -15,15 +15,15 @@ describe "Variant" do
       within('table.index tbody tr:nth-child(1)') { click_link "Edit" }
       click_link "Variants"
       within('table.index tbody tr:nth-child(1)') { click_link "Edit" }
-      fill_in "Issues number", :with => "24"
+      fill_in "Issues number", with: "24"
       click_button "Update"
       page.should have_content "successfully updated"
     end
 
     it "should not have issue number field if not subscribable" do
       product = create(:product)
-      create(:variant, :product => product)
-      create(:variant, :product => product)
+      create(:variant, product: product)
+      create(:variant, product: product)
       visit spree.admin_path
       click_link "Products"
       within("table.index tbody tr#spree_product_#{product.id}") { click_link "Edit" }

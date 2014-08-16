@@ -1,6 +1,6 @@
 class IssuePdf < Prawn::Labels
   def initialize(list, view)
-    super(list, { :type => "Avery5160" }, &address_layout)
+    super(list, { type: "Avery5160" }, &address_layout)
     @view = view
   end
 
