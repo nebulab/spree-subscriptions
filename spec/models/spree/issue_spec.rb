@@ -43,11 +43,26 @@ describe Spree::Issue do
     issue.shipped_at.should be_nil
   end
 
-
-  # Peding, it pass individually
-  it "should have shipped_at field not nil wlen shipped" do
+  it "should have shipped_at field not nil when shipped" do
     subscription = create(:paid_subscription)
     issue = create(:issue, magazine: subscription.magazine)
     expect{ issue.ship! }.to change{issue.shipped_at}
   end
+  
+  it "should destroy its shipped issue and shipped_at when unshipping issue" do
+    subscription = create(:paid_subscription)
+    issue = create(:issue, :magazine => subscription.magazine)
+    expect{ issue.ship! }.to change(issue.shipped_issues, :count).by(1)
+    issue.shipped_at.should_not be_nil
+    expect{ issue.unship! }.to change(issue.shipped_issues, :count).by(-1)
+    issue.shipped_at.should be_nil
+  end
+  
+  it "should do nothing unshipping an already unshipped issue" do
+    subscription = create(:paid_subscription)
+    issue = create(:issue, :magazine => subscription.magazine)
+    expect{ issue.unship! }.to change(issue.shipped_issues, :count).by(0)
+    issue.shipped_at.should be_nil
+  end
+  
 end
