@@ -1,6 +1,6 @@
 class SubscriptionValidator < ActiveModel::Validator 
-  def validate(record) 
-    unless Spree::Product.find_by_id(record.magazine_id).subscribable?
+  def validate(record)
+    unless record.magazine.subscribable?
       record.errors[:magazine] << 'Should be a subscribable product'
     end
   end
