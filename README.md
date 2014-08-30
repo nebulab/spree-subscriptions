@@ -12,7 +12,7 @@ Features
 --------
 
 - Admin can mark products as subscribable
-- Admin can set the number of issues that compose a subscription for each product and variant (default => 12)
+- Admin can set the number of issues that compose a subscription for each product and variant (default: 12)
 - Admin can create issues in each subscribable item (with the ability to associate issue with existing products, useful to link issue with backlog products of the same magazine)
 - Admin can view, print and mark as shipped the list of subscribed users (which have to receive new issue)
 - Keep track of shipped issues for each subscription
@@ -25,7 +25,7 @@ Installation
 Add the gem to your Gemfile:
 
 ```ruby
-gem 'spree_subscriptions', :git => 'git://github.com/nebulab/spree-subscriptions.git', :branch => '2-2-stable'
+gem 'spree_subscriptions', github: 'nebulab/spree-subscriptions', branch: '2-2-stable'
 ```
 
 Run bundle:

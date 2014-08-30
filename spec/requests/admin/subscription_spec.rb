@@ -3,26 +3,26 @@ require 'spec_helper'
 describe "Subscription" do
   context "as_admin_user" do
     before do
-      user = create(:admin_user, :email => "test@example.com")
+      user = create(:admin_user, email: "test@example.com")
       sign_in_as!(user)
       reset_spree_preferences do |config|
         config.default_country_id = create(:country).id
       end
-      create(:state, :country_id => 1)
+      create(:state, country_id: 1)
       visit spree.admin_path
     end
 
     context "editing a subscription" do
       before(:each) do
-        create(:product, :name => 'sport magazine', :available_on => '2011-01-06 18:21:13:', :subscribable => true)
-        create(:product, :name => 'web magazine', :available_on => '2011-01-06 18:21:13:', :subscribable => true)
+        create(:product, name: 'sport magazine', available_on: '2011-01-06 18:21:13:', subscribable: true)
+        create(:product, name: 'web magazine', available_on: '2011-01-06 18:21:13:', subscribable: true)
         create(:subscription)
         click_link "Subscriptions"
       end
 
       it "should be edited correctly" do
         within('table#listing_subscriptions tbody tr:nth-child(1)') { click_link("Edit") }
-        select "web magazine", :from => "Product"
+        select "web magazine", from: "Product"
         click_button "Update"
         page.should have_content("successfully updated!")
         find_field('Product').find('option[selected]').text.should == "web magazine"
@@ -36,15 +36,15 @@ describe "Subscription" do
         end
 
         it "should be have customer details editable" do
-          fill_in "Email", :with => "johnnyrocket@stardustcompany.com"
+          fill_in "Email", with: "johnnyrocket@stardustcompany.com"
           within('#shipping') do
-            fill_in 'First Name', :with => "Johnny"
-            fill_in 'Last Name', :with => "Rocket"
-            fill_in 'subscription_ship_address_attributes_address1', :with => "Stardust Street"
-            fill_in 'City', :with => "Omega"
-            fill_in 'Zip', :with => "66100"
-            fill_in 'Phone', :with => "0871540143"
-            select "United States of America", :from => "Country"
+            fill_in 'First Name', with: "Johnny"
+            fill_in 'Last Name', with: "Rocket"
+            fill_in 'subscription_ship_address_attributes_address1', with: "Stardust Street"
+            fill_in 'City', with: "Omega"
+            fill_in 'Zip', with: "66100"
+            fill_in 'Phone', with: "0871540143"
+            select "United States of America", from: "Country"
 
             all('#subscription_ship_address_attributes_state_id option')[1].select_option
           end

@@ -1,13 +1,16 @@
 class Spree::Issue < ActiveRecord::Base
-  belongs_to :magazine, :class_name => "Spree::Product"
-  belongs_to :magazine_issue, :class_name => "Spree::Product"
+  belongs_to :magazine, class_name: "Spree::Product"
+  belongs_to :magazine_issue, class_name: "Spree::Product"
   has_many :shipped_issues
 
-  delegate :subscriptions, :to => :magazine
+  delegate :subscriptions, to: :magazine
 
   validates :name,
-            :presence => true,
-            :unless => "magazine_issue.present?"
+            presence: true,
+            unless: "magazine_issue.present?"
+
+  scope :shipped, -> { where("shipped_at IS NOT NULL") }
+  scope :unshipped, -> { where("shipped_at IS NULL") }
 
   scope :shipped, -> { where("shipped_at IS NOT NULL") }
   scope :unshipped, -> { where("shipped_at IS NULL") }

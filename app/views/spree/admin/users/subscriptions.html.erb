@@ -1,0 +1,51 @@
+<% content_for :page_title do %>
+  <%= link_to "#{Spree.t(:"admin.user.subscription_history")} #{@user.email}", edit_admin_user_url(@user) %>
+<% end %>
+
+<%= render partial: 'spree/admin/users/sidebar', locals: { current: :subscriptions } %>
+<%= render partial: 'spree/admin/users/user_page_actions' %>
+
+<fieldset data-hook="admin_user_subscription_history" class="alpha twelve columns">
+  <legend><%= Spree.t(:"admin.user.subscription_history") %></legend>
+
+  <%= paginate @subscriptions %>
+
+  <% if @subscriptions.any? %>
+    <%# TODO add search interface %>
+    
+    
+    <table class="index responsive" id="listing_subscriptions" data-hook>
+      <thead>
+        <tr data-hook="admin_subscriptions_index_headers">
+          <th><%= sort_link @search, :user, Spree.t(:user, scope: 'activerecord.attributes.spree/subscription') %></th>
+          <th><%= sort_link @search, :subscription, Spree.t(:subscription, scope: 'activerecord.attributes.spree/subscription') %></th>
+          <th><%= sort_link @search, :remaining_issues, Spree.t(:remaining_issues, scope: 'activerecord.attributes.spree/subscription') %></th>
+          <th><%= sort_link @search, :status, Spree.t(:status, scope: 'activerecord.attributes.spree/subscription') %></th>
+          <th data-hook="admin_subscriptions_index_header_actions" class="actions"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @subscriptions.each do |subscription| %>
+          <tr id="<%= spree_dom_id subscription %>" data-hook="admin_subscriptions_index_rows" class="<%= cycle('odd', 'even') %>">
+            <td class="align-center spree_subscriptions_table"><% if subscription.user %><%= link_to subscription.user.try(:email), admin_user_path(subscription.user) %><% end %></td>
+            <td class="align-center spree_subscriptions_table"><%= link_to subscription.magazine.name, admin_magazine_issues_path(subscription.magazine) %></td>
+            <td class="align-center spree_subscriptions_table"><%= subscription.remaining_issues %></td>
+            <td class="align-center spree_subscriptions_table"><%= Spree.t(subscription.state, scope: 'subscription_state').downcase %></td>
+            <td class="actions" data-hook="admin_subscriptions_index_row_actions">
+                <%= link_to_edit subscription, url: edit_admin_subscription_url(subscription), no_text: true, class: 'edit' if can?(:edit, subscription) %>
+              &nbsp;
+              <%= link_to_delete subscription, url: admin_subscription_url(subscription), no_text: true if can?(:delete, subscription) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <div class="alpha twelve columns no-objects-found">
+      <%= Spree.t(:no_resource_found, resource: I18n.t(:other, scope: 'activerecord.models.spree/order')) %>,
+      <%= link_to Spree.t(:add_one), spree.new_admin_order_path %>!
+    </div>
+  <% end %>
+
+  <%= paginate @subscriptions %>
+</fieldset>

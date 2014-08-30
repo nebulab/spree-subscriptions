@@ -17,35 +17,35 @@ describe Spree::Issue do
   end
 
   it "should not be valid if no magazine issue and no name is specified" do
-    issue = build(:issue, :name => "", :magazine_issue => nil)
+    issue = build(:issue, name: "", magazine_issue: nil)
     issue.should_not be_valid
   end
 
   it "should have a name like the name of the magazine issue" do
-    issue = create(:issue, :magazine_issue => create(:base_product))
+    issue = create(:issue, magazine_issue: create(:base_product))
     issue.name.should equal(issue.magazine_issue.name)
   end
 
   it "should have the name attribute if no magazine issue is present" do
-    issue = create(:issue, :name => "New Issue")
+    issue = create(:issue, name: "New Issue")
     issue.name.should == "New Issue"
   end
 
   it "should create a shipped issue when shipping issue" do
     subscription = create(:paid_subscription)
-    issue = create(:issue, :magazine => subscription.magazine)
+    issue = create(:issue, magazine: subscription.magazine)
     expect{ issue.ship! }.to change(issue.shipped_issues, :count).by(1)
   end
 
   it "should have shipped_at field to nil when not shipped" do
     subscription = create(:paid_subscription)
-    issue = create(:issue, :magazine => subscription.magazine)
+    issue = create(:issue, magazine: subscription.magazine)
     issue.shipped_at.should be_nil
   end
 
   it "should have shipped_at field not nil when shipped" do
     subscription = create(:paid_subscription)
-    issue = create(:issue, :magazine => subscription.magazine)
+    issue = create(:issue, magazine: subscription.magazine)
     expect{ issue.ship! }.to change{issue.shipped_at}
   end
   

@@ -1,12 +1,16 @@
 en:
   spree:
-    are_you_sure: "Are you sure?"
-    subscription: "subscription"
-    subscriptions: "subscriptions"
+    admin:
+      user:
+        subscription_history: Subscription History
+
+    are_you_sure: Are you sure?
+    subscription: subscription
+    subscriptions: subscriptions
 
     subscription_state:
-      active: "active"
-      canceled: "canceled"
+      active: active
+      canceled: canceled
 
     confirm_ship: "Ship this issue?"
     confirm_unship: "Unship this issue?"
@@ -25,25 +29,21 @@ en:
     issue_updated: "Issue updated!"
     issues: "Issues"
     issues_number: "Issues number"
-
-    # Hack due to this commit https://github.com/spree/spree_auth_devise/commit/ed5b04220dcf2cf9ff500f5a66a0bea7ae81d183
-    # still not pushed into a gem. remove when it's done (should be spree_auth_devise 1.2.1)
-    login: Login
-
-    my_subscriptions: "My subscriptions"
-    new_issue: "New issue"
-    new_subscription: "New subscription"
-    listing_issues: "Available issues"
-    listing_subscriptions: "Available Subscriptions"
-    print: "print"
-    ship: "Ship"
-    shipped_to: "Shipped to"
-    subscribe_call_to_action: "Subscribe Now"
-    subscribed: "Subscribed"
-    subscription_details: "Subscription Details"
-    subscription_ended: "Subscription ended"
+    my_subscriptions: My subscriptions
+    new_issue: New issue
+    new_subscription: New subscription
+    listing_issues: Available issues
+    listing_subscriptions: Available Subscriptions
+    pdf: PDF
+    print: print
+    ship: Ship
+    shipped_to: Shipped to
+    subscribe_call_to_action: Subscribe Now
+    subscribed: Subscribed
+    subscription_details: Subscription Details
+    subscription_ended: Subscription ended
     subscription_ended_for: "Subscription for %{email} has ended!"
-    subscription_ending: "Subscription ending"
+    subscription_ending: Subscription ending
     subscription_ending_for: "Subscription for %{email} is ending!"
     subscription_successfully_created: "Subscription successfully created!"
     subscription_successfully_updated: "Subscription successfully updated!"
@@ -53,20 +53,20 @@ en:
     activerecord:
       attributes:
         spree/address:
-          firstname: "First Name"
-          lastname: "Last Name"
+          firstname: First Name
+          lastname: Last Name
         spree/issue:
-          name: "Name"
-          shipped_at: "Shipped at"
+          name: Name
+          shipped_at: Shipped at
         spree/product:
-          issues_number: "Issues number"
+          issues_number: Issues number
         spree/subscription:
-          created_at: "Created at"
-          email: "Email"
-          id: "Id"
-          name: "Name"
-          remaining_issues: "Remaining Issues"
-          state: "Status"
-          subscribable: "subscription"
+          created_at: Created at
+          email: Email
+          id: Id
+          name: Name
+          remaining_issues: Remaining Issues
+          state: Status
+          subscribable: subscription
         spree/variant:
-          issues_number: "Issues number"
+          issues_number: Issues number

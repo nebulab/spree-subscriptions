@@ -1,10 +1,10 @@
 module Spree
   module Admin
     class SubscriptionsController < ResourceController
-      before_filter :load_data, :except => :index
+      before_filter :load_data, except: :index
 
       def show
-        redirect_to( :action => :edit )
+        redirect_to( action: :edit )
       end
 
       def index

@@ -31,15 +31,15 @@ end
 
 def login_step(email, password)
   within("#password-credentials") do
-    fill_in "Email", :with => email
-    fill_in "Password", :with => password
+    fill_in "Email", with: email
+    fill_in "Password", with: password
   end
   click_button "Login"
 end
 
 def guest_step(email)
   within("#guest_checkout") do
-    fill_in "Email", :with => email
+    fill_in "Email", with: email
   end
   click_button "Continue"
 end
@@ -48,12 +48,12 @@ def address_step
   addr = FactoryGirl.attributes_for(:customer_address)
   str_addr = "bill_address"
   within("#billing") do
-    fill_in "order_#{str_addr}_attributes_firstname", :with => addr[:firstname]
-    fill_in "order_#{str_addr}_attributes_lastname", :with => addr[:lastname]
-    fill_in "order_#{str_addr}_attributes_address1", :with => addr[:address1]
-    fill_in "order_#{str_addr}_attributes_city", :with => addr[:city]
-    fill_in "order_#{str_addr}_attributes_phone", :with => addr[:phone]
-    fill_in "order_#{str_addr}_attributes_zipcode", :with => addr[:zipcode]
+    fill_in "order_#{str_addr}_attributes_firstname", with: addr[:firstname]
+    fill_in "order_#{str_addr}_attributes_lastname", with: addr[:lastname]
+    fill_in "order_#{str_addr}_attributes_address1", with: addr[:address1]
+    fill_in "order_#{str_addr}_attributes_city", with: addr[:city]
+    fill_in "order_#{str_addr}_attributes_phone", with: addr[:phone]
+    fill_in "order_#{str_addr}_attributes_zipcode", with: addr[:zipcode]
 
     all("#order_#{str_addr}_attributes_country_id option")[0].select_option
     all("#order_#{str_addr}_attributes_state_id option")[1].select_option
@@ -80,7 +80,7 @@ def confirm_step
 end
 
 def complete_payment
-  order = Spree::Order.where(:user_id => Spree.user_class.where(:email => "johnny@rocket.com").first.id).first
+  order = Spree::Order.where(user_id: Spree.user_class.where(email: "johnny@rocket.com").first.id).first
   order.payments.first.complete!
 end
 
@@ -90,9 +90,9 @@ end
 
 def create_existing_subscription_for(email, product, remaining)
   FactoryGirl.create(:subscription,
-    :email => email,
-    :magazine => product,
-    :ship_address => create(:customer_address),
-    :remaining_issues => remaining
+    email: email,
+    magazine: product,
+    ship_address: create(:customer_address),
+    remaining_issues: remaining
   )
 end

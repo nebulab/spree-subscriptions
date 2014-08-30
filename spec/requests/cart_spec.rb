@@ -3,13 +3,13 @@ require 'spec_helper'
 describe "Cart", js: true do
   context "as_user" do
     let(:product){ create(:product) }
-    let(:subscribable_product){ create(:subscribable_product, :name => "sport magazine") }
+    let(:subscribable_product){ create(:subscribable_product, name: "sport magazine") }
 
     it "has add to cart specific for subscribable products" do
       visit spree.product_path(subscribable_product)
 
       within(".add-to-cart") do
-        page.should have_selector("input", :visible => false)
+        page.should have_selector("input", visible: false)
         page.should have_content('Subscribe')
         page.should_not have_content('Subscribe Now')
       end
@@ -27,7 +27,7 @@ describe "Cart", js: true do
     it "has a disabled field for quantity in cart" do
       visit spree.product_path(subscribable_product)
       add_to_cart("sport magazine")
-      page.should have_selector("#cart-detail input.line_item_quantity", :visible => false)
+      page.should have_selector("#cart-detail input.line_item_quantity", visible: false)
     end
 
     it "doesn't re-add subscribable products already in cart" do

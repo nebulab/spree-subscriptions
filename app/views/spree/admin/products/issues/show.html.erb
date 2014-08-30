@@ -1,13 +1,13 @@
-<%= render :partial => 'spree/admin/shared/product_sub_menu' %>
+<%= render partial: 'spree/admin/shared/product_sub_menu' %>
 
-<%= render :partial => 'spree/admin/shared/product_tabs', :locals => { :current => 'Issues' } %>
+<%= render partial: 'spree/admin/shared/product_tabs', locals: { current: 'Issues' } %>
 
 <div data-hook="admin_product_issue_header">
   <h2><%= @issue.name %></h2>
 </div>
 
 <% if @issue.magazine_issue %>
-  <%= render 'magazine_issue', :product => @issue.magazine_issue %>
+  <%= render 'magazine_issue', product: @issue.magazine_issue %>
 <% end %>
 
 <div class="toolbar" data-hook="admin_issue_show_buttons">

@@ -2,7 +2,7 @@
   <%= f.label :magazine_id, Spree.t(:product) %><br />
   <%= f.select :magazine_id, @products %>
 
-  <%= f.label :remaining_issues, Spree.t(:remaining_issues, :scope => 'activerecord.attributes.spree/subscription') %><br />
+  <%= f.label :remaining_issues, Spree.t(:remaining_issues, scope: 'activerecord.attributes.spree/subscription') %><br />
   <%= f.number_field :remaining_issues %>
   <%= f.error_message_on :magazine %>
 <% end %>

@@ -17,13 +17,13 @@ module Spree
             format.pdf do
               addresses_list = @product_subscriptions.map { |s| s.ship_address }
               labels = IssuePdf.new(addresses_list, view_context)
-              send_data labels.document.render, :filename => "#{@issue.name}.pdf", :type => "application/pdf", disposition: "inline"
+              send_data labels.document.render, filename: "#{@issue.name}.pdf", type: "application/pdf", disposition: "inline"
             end
           end
         end
 
         def index
-          @issues = Issue.where(:magazine_id => @magazine.id)
+          @issues = Issue.where(magazine_id: @magazine.id)
         end
 
         def update
@@ -32,7 +32,7 @@ module Spree
             redirect_to admin_magazine_issue_path(@magazine, @issue)
           else
             flash[:error] = Spree.t(:issue_not_updated)
-            render :action => :edit
+            render action: :edit
           end
         end
 
@@ -72,6 +72,16 @@ module Spree
           redirect_to admin_magazine_issues_path(@magazine, @issue)
         end
         
+        def unship
+          if @issue.shipped?
+            @issue.unship!
+            flash[:notice]  = Spree.t('issue_unshipped')
+          else
+            flash[:error]  = Spree.t('issue_not_shipped')
+          end
+          redirect_to admin_magazine_issues_path(@magazine)
+        end
+
         def unship
           if @issue.shipped?
             @issue.unship!

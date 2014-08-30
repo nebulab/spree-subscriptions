@@ -10,8 +10,8 @@ module Spree
         end
 
         def add_stylesheets
-          inject_into_file "vendor/assets/stylesheets/spree/frontend/all.css", " *= require spree/frontend/spree_subscriptions\n", :before => /\*\//, :verbose => true
-          inject_into_file "vendor/assets/stylesheets/spree/backend/all.css", " *= require spree/backend/spree_subscriptions\n", :before => /\*\//, :verbose => true
+          inject_into_file "vendor/assets/stylesheets/spree/frontend/all.css", " *= require spree/frontend/spree_subscriptions\n", before: /\*\//, verbose: true
+          inject_into_file "vendor/assets/stylesheets/spree/backend/all.css", " *= require spree/backend/spree_subscriptions\n", before: /\*\//, verbose: true
         end
 
         def add_migrations
