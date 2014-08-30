@@ -8,6 +8,8 @@ en:
       active: "active"
       canceled: "canceled"
 
+    confirm_ship: "Ship this issue?"
+    confirm_unship: "Unship this issue?"
     creating_issue: "Create issue"
     creating_subscription: "Create subscription"
     customer_details_updated: "The customer's details have been updated"
@@ -19,8 +21,9 @@ en:
     issue_not_shipped: "Not yet shipped"
     issue_not_updated: "Issue not updated!"
     issue_shipped: "Issue successfully shipped"
+    issue_unshipped: "Issue successfully unshipped"
     issue_updated: "Issue updated!"
-    issues: "issues"
+    issues: "Issues"
     issues_number: "Issues number"
 
     # Hack due to this commit https://github.com/spree/spree_auth_devise/commit/ed5b04220dcf2cf9ff500f5a66a0bea7ae81d183
@@ -44,6 +47,7 @@ en:
     subscription_ending_for: "Subscription for %{email} is ending!"
     subscription_successfully_created: "Subscription successfully created!"
     subscription_successfully_updated: "Subscription successfully updated!"
+    unship: "Unship"
     you_have_no_subscriptions_yet: "You have no subscriptions yet"
 
     activerecord:
