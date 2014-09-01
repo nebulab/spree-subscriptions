@@ -82,16 +82,6 @@ module Spree
           redirect_to admin_magazine_issues_path(@magazine)
         end
 
-        def unship
-          if @issue.shipped?
-            @issue.unship!
-            flash[:notice]  = Spree.t('issue_unshipped')
-          else
-            flash[:error]  = Spree.t('issue_not_shipped')
-          end
-          redirect_to admin_magazine_issues_path(@magazine)
-        end
-
         private
 
         def load_magazine
