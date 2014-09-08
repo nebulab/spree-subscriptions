@@ -2,7 +2,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_subscriptions'
-  s.version     = '2.2.0'
+  s.version     = '2.3.0'
   s.summary     = 'A spree extension to manage recurring subscriptions'
   s.description = """
       This spree extension lets an ecommerce owner manage subscriptions bought by
@@ -19,12 +19,12 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'spree', '~> 2.2.0'
+  s.add_dependency 'spree', '~> 2.3.0'
   s.add_dependency 'prawn', '~> 0.12.0'
   s.add_dependency 'prawn-labels', '~> 0.11.3'
 
   s.add_development_dependency 'capybara', '2.2.1'
-  s.add_development_dependency 'rspec-rails',  '~> 2.13'
+  s.add_development_dependency 'rspec-rails',  '~> 2.14'
   s.add_development_dependency 'factory_girl', '~> 4.4'
   s.add_development_dependency 'selenium-webdriver', '~> 2.35'
   s.add_development_dependency 'database_cleaner', '~> 1.2'
