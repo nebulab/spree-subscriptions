@@ -5,7 +5,6 @@
 <table class="index" id="listing_subscriptions">
   <thead>
     <tr>
-      <th data-hook="admin_subscriptions_index_header_actions"></th>
       <th><%= sort_link @search, :created_at, Spree.t(:created_at, scope: 'activerecord.attributes.spree/subscription') %></th>
       <th><%= sort_link @search, :id, Spree.t(:id, scope: 'activerecord.attributes.spree/subscription') %></th>
       <th><%= sort_link @search, :remaining_issues, Spree.t(:remaining_issues, scope: 'activerecord.attributes.spree/subscription') %></th>
@@ -13,6 +12,7 @@
       <th><%= sort_link @search, :email, Spree.t(:email, scope: 'activerecord.attributes.spree/subscription') %></th>
       <th><%= Spree.t(:firstname, scope: 'activerecord.attributes.spree/address') %></th>
       <th><%= Spree.t(:lastname, scope: 'activerecord.attributes.spree/address') %></th>
+      <th data-hook="admin_subscriptions_index_header_actions"></th>
     </tr>
   </thead>
   <tbody>
