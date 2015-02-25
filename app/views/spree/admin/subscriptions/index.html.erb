@@ -21,7 +21,7 @@
         <td><%= subscription.created_at.to_date %></td>
         <td><%= link_to subscription.id, edit_object_url(subscription) %></td>
         <td><%= subscription.remaining_issues %></td>
-        <td><%= t(subscription.state, scope: 'subscription_state').downcase %></td>
+        <td><%= Spree.t(subscription.state, scope: 'subscription_state').downcase %></td>
         <td><%= subscription.email %></td>
         <td><%= subscription.ship_address.firstname %></td>
         <td><%= subscription.ship_address.lastname %></td>
