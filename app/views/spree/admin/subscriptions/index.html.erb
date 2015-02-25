@@ -5,7 +5,6 @@
 <table class="index" id="listing_subscriptions">
   <thead>
     <tr>
-      <th data-hook="admin_subscriptions_index_header_actions"></th>
       <th><%= sort_link @search, :created_at, Spree.t(:created_at, scope: 'activerecord.attributes.spree/subscription') %></th>
       <th><%= sort_link @search, :id, Spree.t(:id, scope: 'activerecord.attributes.spree/subscription') %></th>
       <th><%= sort_link @search, :remaining_issues, Spree.t(:remaining_issues, scope: 'activerecord.attributes.spree/subscription') %></th>
@@ -13,6 +12,7 @@
       <th><%= sort_link @search, :email, Spree.t(:email, scope: 'activerecord.attributes.spree/subscription') %></th>
       <th><%= Spree.t(:firstname, scope: 'activerecord.attributes.spree/address') %></th>
       <th><%= Spree.t(:lastname, scope: 'activerecord.attributes.spree/address') %></th>
+      <th data-hook="admin_subscriptions_index_header_actions"></th>
     </tr>
   </thead>
   <tbody>
@@ -21,7 +21,7 @@
         <td><%= subscription.created_at.to_date %></td>
         <td><%= link_to subscription.id, edit_object_url(subscription) %></td>
         <td><%= subscription.remaining_issues %></td>
-        <td><%= t(subscription.state, scope: 'subscription_state').downcase %></td>
+        <td><%= Spree.t(subscription.state, scope: 'subscription_state').downcase %></td>
         <td><%= subscription.email %></td>
         <td><%= subscription.ship_address.firstname %></td>
         <td><%= subscription.ship_address.lastname %></td>
