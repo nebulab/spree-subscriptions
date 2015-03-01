@@ -2,7 +2,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_subscriptions'
-  s.version     = '2.3.0'
+  s.version     = '2.4.0'
   s.summary     = 'A spree extension to manage recurring subscriptions'
   s.description = """
       This spree extension lets an ecommerce owner manage subscriptions bought by
