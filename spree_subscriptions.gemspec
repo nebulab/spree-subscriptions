@@ -26,7 +26,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'capybara', '2.2.1'
   s.add_development_dependency 'rspec-rails',  '~> 2.14'
   s.add_development_dependency 'factory_girl', '~> 4.4'
-  s.add_development_dependency 'selenium-webdriver', '~> 2.35'
+  s.add_development_dependency 'poltergeist', '~> 1.6'
   s.add_development_dependency 'database_cleaner', '~> 1.2'
   s.add_development_dependency 'email_spec', '~> 1.5.0'
   s.add_development_dependency 'ffaker'

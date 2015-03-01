@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Cart", js: true do
+describe "Cart" do
   context "as_user" do
     let(:product){ create(:product) }
     let(:subscribable_product){ create(:subscribable_product, name: "sport magazine") }
@@ -10,8 +10,7 @@ describe "Cart", js: true do
 
       within(".add-to-cart") do
         page.should have_selector("input", visible: false)
-        page.should have_content('Subscribe')
-        page.should_not have_content('Subscribe Now')
+        page.should have_content('Subscribe Now')
       end
     end
 
