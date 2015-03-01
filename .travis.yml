@@ -9,6 +9,6 @@ notifications:
     - kennyadsl@gmail.com
 branches:
   only:
-    - master
+    - 2-4-stable
 rvm:
   - 1.9.3
