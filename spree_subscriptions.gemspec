@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'spree', '~> 2.3.0'
+  s.add_dependency 'spree', '~> 2.4.4'
   s.add_dependency 'prawn', '~> 0.12.0'
   s.add_dependency 'prawn-labels', '~> 0.11.3'
 

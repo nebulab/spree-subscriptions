@@ -7,9 +7,8 @@ script: "DISPLAY=:99.0 bundle exec rspec spec"
 notifications:
   email:
     - kennyadsl@gmail.com
-    - mtylty@gmail.com
 branches:
   only:
-    - 2-2-stable
+    - master
 rvm:
   - 1.9.3

@@ -25,7 +25,7 @@ FactoryGirl.define do
     address1 'Sturdust Street'
     city 'Nebula'
     phone '01010101'
-    zipcode 1111
+    zipcode '11111'
     state_name 'Galaxy'
     country
   end
