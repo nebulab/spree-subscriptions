@@ -21,7 +21,7 @@ describe "Subscription" do
       end
 
       it "should be edited correctly" do
-        within('table#listing_subscriptions tbody tr:nth-child(1)') { click_link("Edit") }
+        within('table#listing_subscriptions tbody tr:nth-child(1)') { click_icon('edit') }
         select "web magazine", from: "Product"
         click_button "Update"
         page.should have_content("successfully updated!")
@@ -31,7 +31,7 @@ describe "Subscription" do
       context "editing customer details" do
         before(:each) do
           # Go to customer details page
-          within('table#listing_subscriptions tbody tr:nth-child(1)') { click_link("Edit") }
+          within('table#listing_subscriptions tbody tr:nth-child(1)') { click_icon('edit') }
           within('.sidebar') { click_link("Customer Details") }
         end
 
@@ -50,7 +50,6 @@ describe "Subscription" do
           end
           click_button "Update"
           page.should have_content("The customer's details have been updated")
-          page.should have_content("Product")
           within('.sidebar') { click_link("Customer Details") }
           find_field("subscription_email").value.should == "johnnyrocket@stardustcompany.com"
           within('#shipping') do

@@ -5,6 +5,7 @@ require File.expand_path('../dummy/config/environment.rb',  __FILE__)
 
 require 'rspec/rails'
 require 'capybara/rspec'
+require 'capybara/poltergeist'
 require 'database_cleaner'
 require 'ffaker'
 require 'coveralls'
@@ -30,8 +31,12 @@ Dir["#{File.dirname(__FILE__)}/factories/**/*.rb"].each do |f|
   require fp
 end
 
+Capybara.default_driver = :poltergeist
+
 RSpec.configure do |config|
   # Silence Warning
+  config.expose_current_running_example_as :example
+  config.infer_spec_type_from_file_location!
   ::ActiveSupport::Deprecation.silenced = true
 
   ActionMailer::Base.perform_deliveries = true
@@ -52,7 +57,7 @@ RSpec.configure do |config|
   config.include Spree::TestingSupport::ControllerRequests, type: :controller
   config.include Devise::TestHelpers, type: :controller
   config.include Rack::Test::Methods, type: :request
-
+  config.include CapybaraExt, type: :request
 
   # == Mock Framework
   #
@@ -71,11 +76,7 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = false
   config.before(:each) do
-    if example.metadata[:js]
-      DatabaseCleaner.strategy = :truncation
-    else
-      DatabaseCleaner.strategy = :transaction
-    end
+    DatabaseCleaner.strategy = :truncation
   end
 
   config.before(:each) do
