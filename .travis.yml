@@ -11,4 +11,4 @@ branches:
   only:
     - 3-0-stable
 rvm:
-  - 1.9.3
+  - 2.1
