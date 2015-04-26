@@ -3,6 +3,7 @@ require 'spec_helper'
 describe "Subscription" do
   context "as_user" do
     before(:each) do
+      create(:store)
       country = create(:country)
       reset_spree_preferences do |config|
         config.default_country_id = country.id

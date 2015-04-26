@@ -36,7 +36,7 @@ describe "Cart" do
       visit spree.product_path(subscribable_product)
       add_to_cart("sport magazine")
 
-      page.should have_content("CART: (1)")
+      page.should have_content("Cart: (1) $19.99")
     end
   end
 end

@@ -1,6 +1,6 @@
 module AdminHelpers
   def have_icon(type)
-    have_css(".fa-#{type}")
+    have_css(".action-#{type}")
   end
 end
 

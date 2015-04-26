@@ -30,6 +30,7 @@ def begin_checkout
 end
 
 def login_step(email, password)
+  click_link 'Login as Existing Customer'
   within("#password-credentials") do
     fill_in "Email", with: email
     fill_in "Password", with: password
@@ -66,12 +67,12 @@ def address_step
 end
 
 def delivery_step
-  page.should have_content("package from NY Warehouse".upcase)
+  page.should have_content("package from NY Warehouse")
   click_button "Save and Continue"
 end
 
 def payment_step
-  page.should have_content("Payment Information".upcase)
+  page.should have_content("Payment Information")
   click_button "Save and Continue"
 end
 

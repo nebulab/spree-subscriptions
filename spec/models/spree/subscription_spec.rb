@@ -46,6 +46,7 @@ describe Spree::Subscription do
       end
 
       before(:each) do
+        create(:store)
         ActionMailer::Base.deliveries = []
       end
 

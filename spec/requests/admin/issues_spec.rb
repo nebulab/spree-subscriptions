@@ -5,6 +5,7 @@ describe 'Issue' do
     let!(:user) { create(:admin_user, email: 'test@example.com') }
 
     before do
+      create(:store)
       sign_in_as!(user)
       visit spree.admin_path
     end
@@ -15,7 +16,12 @@ describe 'Issue' do
 
         it 'should not have issue tab' do
           click_link 'Products'
-          within('table.index tbody tr:nth-child(1)') do
+
+          within('[data-hook="admin_product_sub_tabs"]') do
+            click_link 'Products'
+          end
+
+          within('table#listing_products tbody tr:nth-child(1)') do
             click_link base_product.name
           end
 
@@ -28,7 +34,12 @@ describe 'Issue' do
 
         before(:each) do
           click_link 'Products'
-          within('table.index tbody tr:nth-child(1)') do
+
+          within('[data-hook="admin_product_sub_tabs"]') do
+            click_link 'Products'
+          end
+
+          within('table#listing_products tbody tr:nth-child(1)') do
             click_link magazine.name
           end
         end
@@ -188,7 +199,7 @@ describe 'Issue' do
               click_link issue.name
             end
 
-            click_icon('truck')
+            click_link Spree.t(:ship)
 
             page.should have_content 'successfully shipped'
             page.should_not have_icon('trash')

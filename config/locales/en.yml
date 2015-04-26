@@ -1,6 +1,8 @@
 en:
   spree:
     admin:
+      tab:
+        subscriptions: Subscriptions
       user:
         subscription_history: Subscription History
 
@@ -70,3 +72,10 @@ en:
           subscribable: subscription
         spree/variant:
           issues_number: Issues number
+      models:
+        spree/issue:
+          one: Issue
+          other: Issues
+        spree/subscription:
+          one: Subscription
+          other: Subscriptions

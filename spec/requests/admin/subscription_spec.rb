@@ -32,7 +32,7 @@ describe "Subscription" do
         before(:each) do
           # Go to customer details page
           within('table#listing_subscriptions tbody tr:nth-child(1)') { click_icon('edit') }
-          within('.sidebar') { click_link("Customer Details") }
+          within('.main-right-sidebar') { click_link("Customer Details") }
         end
 
         it "should be have customer details editable" do
@@ -50,7 +50,7 @@ describe "Subscription" do
           end
           click_button "Update"
           page.should have_content("The customer's details have been updated")
-          within('.sidebar') { click_link("Customer Details") }
+          within('.main-right-sidebar') { click_link("Customer Details") }
           find_field("subscription_email").value.should == "johnnyrocket@stardustcompany.com"
           within('#shipping') do
             find_field("subscription_ship_address_attributes_firstname").value.should == "Johnny"
