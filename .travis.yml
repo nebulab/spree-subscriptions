@@ -11,4 +11,4 @@ branches:
   only:
     - master
 rvm:
-  - 1.9.3
+  - 2.1
