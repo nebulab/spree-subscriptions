@@ -1,7 +1,7 @@
 SpreeSubscriptions
 ==================
 
-[![Build Status](https://secure.travis-ci.org/nebulab/spree-subscriptions.png?branch=master)](http://travis-ci.org/nebulab/spree-subscriptions)
+[![Build Status](https://secure.travis-ci.org/nebulab/spree-subscriptions.png?branch=3-0-stable)](http://travis-ci.org/nebulab/spree-subscriptions)
 [![Coverage Status](https://coveralls.io/repos/nebulab/spree-subscriptions/badge.png)](https://coveralls.io/r/nebulab/spree-subscriptions)
 [![Code Climate](https://codeclimate.com/github/nebulab/spree-subscriptions.png)](https://codeclimate.com/github/nebulab/spree-subscriptions)
 [![Gitter chat](https://badges.gitter.im/nebulab/spree-subscriptions.png)](https://gitter.im/nebulab/spree-subscriptions)
@@ -25,7 +25,7 @@ Installation
 Add the gem to your Gemfile:
 
 ```ruby
-gem 'spree_subscriptions', github: 'nebulab/spree-subscriptions', branch: 'master'
+gem 'spree_subscriptions', github: 'nebulab/spree-subscriptions', branch: '3-0-stable'
 ```
 
 Run bundle:
