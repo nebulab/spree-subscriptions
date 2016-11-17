@@ -1,5 +1,5 @@
 source 'http://rubygems.org'
 gemspec
 
-gem 'spree', github: 'spree/spree', branch: '3-0-stable'
-gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: '3-0-stable'
+gem 'solidus'
+gem 'solidus_auth_devise'
