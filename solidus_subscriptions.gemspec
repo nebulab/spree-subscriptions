@@ -1,11 +1,11 @@
 # encoding: UTF-8
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
-  s.name        = 'spree_subscriptions'
+  s.name        = 'solidus_subscriptions'
   s.version     = '3.0.0'
-  s.summary     = 'A spree extension to manage recurring subscriptions'
+  s.summary     = 'A solidus extension to manage recurring subscriptions'
   s.description = """
-      This spree extension lets an ecommerce owner manage subscriptions bought by
+      This solidus extension lets an ecommerce owner manage subscriptions bought by
       users as a predetermined number of issues.
   """
   s.required_ruby_version = '>= 2.1'
@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'spree', '~> 3.0'
+  s.add_dependency 'solidus', '~> 2.2.0'
   s.add_dependency 'prawn', '~> 0.12.0'
   s.add_dependency 'prawn-labels', '~> 0.11.3'
 
